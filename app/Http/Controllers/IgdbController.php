@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\ResultadoBuscaDadosJogo;
 use MarcReichel\IGDBLaravel\Models\Game;
 use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\InvolvedCompany;
@@ -28,18 +29,18 @@ class IgdbController extends Controller {
         $resultado = [];
 
         $games = Game::search($request['titulo'])
-                        ->select(['name', 'cover', 'platforms'])
+                        ->select(['name', 'cover'])
                         ->whereIn('platforms', $this->plataformas)
                         ->where('category', '!=', 1)
                             ->take(50)
                                 ->get();
 
         foreach ($games as $game) {
-            $cover = null;
-            if ($game->cover != null) {
-                $cover = Cover::find($game->cover);
-            }
-            $resultado[] = new ResultadoBuscaJogo($game->id, $game->name, $this->buscarUrlImagem('cover_small', @$cover->image_id));
+            $resultado[] = [
+                'id' => $game->id,
+                'name' => $game->name,
+                'cover' => ['cloudinary_id' => @$game->cover]
+            ];
         }
 
         return $resultado;
@@ -48,23 +49,18 @@ class IgdbController extends Controller {
     public function buscarDadosJogo($id) {
         $game = Game::find($id);
 
-        $cover = null;
-        if ($game->cover != null) {
-            $cover = Cover::find($game->cover);
-        }
-
-        $developers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('developer', true)->get()->pluck('company')->toArray())->get()->pluck('name');
-        $publishers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('publisher', true)->get()->pluck('company')->toArray())->get()->pluck('name');
-        $genres = Genre::whereIn('id', $game->genres)->get()->pluck('name');
+        $developers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('developer', true)->get()->pluck('company')->toArray())->get()->pluck('id');
+        $publishers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('publisher', true)->get()->pluck('company')->toArray())->get()->pluck('id');
+        $genres = Genre::whereIn('id', $game->genres)->get()->pluck('id');
 
         return [
             'id' => $game->id,
-            'titulo' => $game->name,
-            'descricao' => $game->summary,
-            'id_imagem' => @$cover->image_id,
-            'lista_developer' => $developers,
-            'lista_publisher' => $publishers,
-            'genres' => $genres
+            'name' => $game->name,
+            'summary' => $game->summary,
+            'developers' => $developers,
+            'publishers' => $publishers,
+            'genres' => $genres,
+            'cover' => ['cloudinary_id' => @$game->cover],
         ];
     }
 
