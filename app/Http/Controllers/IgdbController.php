@@ -53,7 +53,7 @@ class IgdbController extends Controller {
         $publishers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('publisher', true)->get()->pluck('company')->toArray())->get()->pluck('id');
         $genres = Genre::whereIn('id', $game->genres)->get()->pluck('id');
 
-        return [
+        return [[
             'id' => $game->id,
             'name' => $game->name,
             'summary' => $game->summary,
@@ -61,7 +61,7 @@ class IgdbController extends Controller {
             'publishers' => $publishers,
             'genres' => $genres,
             'cover' => ['cloudinary_id' => @$game->cover],
-        ];
+        ]];
     }
 
     public function buscarUrlImagem($tamanho, $hash) {
