@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/buscar_jogos/{titulo}', 'IgdbController@buscarJogos')->name('buscar_jogos');
+Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogo')->name('buscar_dados_jogo');
 Route::get('/', function () {
     return view('colecao');
 });
