@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/buscar_jogos/{titulo}', 'IgdbController@buscarJogos')->name('buscar_jogos');
-Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogo')->name('buscar_dados_jogo');
+Route::prefix('/legado')->group(function () {
+    Route::get('/buscar_jogos/{titulo}', 'IgdbController@buscarJogos')->name('buscar_jogos');
+    Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogo')->name('buscar_dados_jogo');
+    Route::get('/buscar_dados_empresas/{ids}', 'IgdbController@buscarDadosEmpresas')->name('buscar_dados_empresas');
+});
+
 Route::get('/', function () {
     return view('colecao');
 });
