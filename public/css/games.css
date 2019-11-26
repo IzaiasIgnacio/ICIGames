@@ -1,0 +1,10 @@
+.is-topo {
+    background-color: #0c1b93;
+    border-color: #ddd;
+}
+.container_topo {
+    padding-left: 200px !important;
+}
+.navbar-item {
+    color: #eee !important;
+}
