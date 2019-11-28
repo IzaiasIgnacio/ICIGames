@@ -8,3 +8,22 @@
 .navbar-item {
     color: #eee !important;
 }
+.stripe {
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 1.2rem;
+    text-align: center;
+    color: #fff;
+}
+.coluna_thumb {
+    margin-left: -5px;
+}
+.coluna_menu {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+.coluna_menu ul {
+    margin-left: -13px;
+}
