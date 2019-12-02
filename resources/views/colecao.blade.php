@@ -9,31 +9,53 @@
         <link rel="stylesheet" href="{{URL::asset('public/css/font-awesome.css')}}">
     </head>
     <body>
-        <nav class="navbar is-topo" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-topo  is-transparent" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="#">Games</a>
             </div>
             <div class="container is-fluid container_topo">
-                <div id="" class="navbar-menu">
+                <div class="navbar-menu">
                     <div class="navbar-start">
-                        <a class="navbar-item">Dashboard<i class="fas fa-accusoft"></i></a>
-                        <a class="navbar-item">Coleção</a>
-                        <a class="navbar-item">Wishlist</a>
-                        <a class="navbar-item">Watchlist</a>
-                        <a class="navbar-item">Game Pass</a>
-                        <a class="navbar-item">Plus</a>
-                    </div>
-                </div>
-            </div>
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-info">
-                            <span class="icon is-small">
-                                <i class="fas fa-accusoft"></i>
+                        <a class="navbar-item navbar-dashboard">Dashboard</a>
+                        <a class="navbar-item">Coleção
+                            <span class="fa-stack">
+                                <i class="fa fa-circle fa-stack-1x circulo"></i>
+                                <span class="fa-stack-1x icon-text">2</span>
                             </span>
-                            <strong>Adicionar</strong>
                         </a>
+                        <a class="navbar-item">Wishlist
+                            <span class="fa-stack">
+                                <i class="fa fa-circle fa-stack-1x circulo"></i>
+                                <span class="fa-stack-1x icon-text">2</span>
+                            </span>
+                        </a>
+                        <a class="navbar-item">Watchlist
+                            <span class="fa-stack">
+                                <i class="fa fa-circle fa-stack-1x circulo"></i>
+                                <span class="fa-stack-1x icon-text">2</span>
+                            </span>
+                        </a>
+                        <a class="navbar-item">Game Pass
+                            <span class="fa-stack">
+                                <i class="fa fa-circle fa-stack-1x circulo"></i>
+                                <span class="fa-stack-1x icon-text">2</span>
+                            </span>
+                        </a>
+                        <a class="navbar-item">Plus
+                            <span class="fa-stack">
+                                <i class="fa fa-circle fa-stack-1x circulo"></i>
+                                <span class="fa-stack-1x icon-text">2</span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <a class="button is-info">
+                                    <strong>Adicionar</strong>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -43,8 +65,24 @@
                 <aside class="menu">
                     <p class="menu-label">Plataformas</p>
                     <ul class="menu-list">
-                        <li><a>Todas</a></li>
-                        <li><a>Xxxxxxxxxxx X</a></li>
+                        <li>
+                            <a>
+                                Todas
+                                <span class="fa-stack">
+                                    <i class="fa fa-circle fa-stack-1x circulo-sidebar"></i>
+                                    <span class="fa-stack-1x icon-text">2</span>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                Xx X
+                                <span class="fa-stack">
+                                    <i class="fa fa-circle fa-stack-1x circulo-sidebar"></i>
+                                    <span class="fa-stack-1x icon-text">2</span>
+                                </span>
+                            </a>
+                        </li>
                     </ul>
                 </aside>
             </div>

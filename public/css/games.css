@@ -3,10 +3,17 @@
     border-color: #ddd;
 }
 .container_topo {
-    padding-left: 200px !important;
+    padding-left: 4% !important;
 }
-.navbar-item {
+.navbar-brand > .navbar-item {
     color: #eee !important;
+}
+.navbar-start > .navbar-item {
+    color: #eee !important;
+    margin-right: -10px;
+}
+.navbar-start >.navbar-dashboard {
+    margin-right: 30px;
 }
 .stripe {
     background-color: rgba(0,0,0,0.7);
@@ -26,4 +33,26 @@
 }
 .coluna_menu ul {
     margin-left: -13px;
+}
+.circulo-sidebar > .icon-text {
+    color: #000;
+}
+.icon-text {
+    font-size: 10px;
+    font-weight: bold;
+    color: #fff;
+}
+.circulo {
+    color: #000;
+}
+.menu-list > li > a > .fa-stack {
+    float: right;
+    margin-top: -4px;
+}
+.container_topo .fa-stack {
+    margin-top: 3px;
+    margin-left: -9px;
+}
+.menu-list a {
+    padding-right: 0;
 }
