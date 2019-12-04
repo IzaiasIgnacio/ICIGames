@@ -5,15 +5,19 @@
 .container_topo {
     padding-left: 4% !important;
 }
+.container_topo .navbar-item {
+    text-align: center;
+    line-height: 18px;
+}
 .navbar-brand > .navbar-item {
     color: #eee !important;
 }
 .navbar-start > .navbar-item {
     color: #eee !important;
-    margin-right: -10px;
+    margin-right: 25px;
 }
 .navbar-start >.navbar-dashboard {
-    margin-right: 30px;
+    margin-right: 40px;
 }
 .stripe {
     background-color: rgba(0,0,0,0.7);
@@ -30,6 +34,15 @@
 .coluna_menu {
     margin-left: 10px;
     margin-top: 5px;
+    background-color: #464545;
+    min-height: 800px;
+    padding-right: 0;
+}
+.coluna_menu .menu-label {
+    font-weight: bold;
+}
+.coluna_menu .menu-label, .coluna_menu .menu-list a {
+    color: #fff;
 }
 .coluna_menu ul {
     margin-left: -13px;
@@ -37,21 +50,31 @@
 .circulo-sidebar > .icon-text {
     color: #000;
 }
-.icon-text {
+.coluna_menu .icon-text {
     font-size: 10px;
     font-weight: bold;
-    color: #fff;
+    color: #000;
 }
 .circulo {
     color: #000;
+    font-size: 1.3em;
 }
 .menu-list > li > a > .fa-stack {
     float: right;
     margin-top: -4px;
 }
+.menu-list {
+    border-top: 1px solid #fff;
+}
+.menu-list > li {
+    border-bottom: 1px solid #fff;
+}
+.menu-list a:hover, .container_topo a.navbar-item:hover {
+    background-color: #a59696;
+}
 .container_topo .fa-stack {
     margin-top: 3px;
-    margin-left: -9px;
+    margin-left: -7px;
 }
 .menu-list a {
     padding-right: 0;

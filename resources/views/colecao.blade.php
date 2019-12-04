@@ -17,42 +17,17 @@
                 <div class="navbar-menu">
                     <div class="navbar-start">
                         <a class="navbar-item navbar-dashboard">Dashboard</a>
-                        <a class="navbar-item">Coleção
-                            <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-1x circulo"></i>
-                                <span class="fa-stack-1x icon-text">2</span>
-                            </span>
-                        </a>
-                        <a class="navbar-item">Wishlist
-                            <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-1x circulo"></i>
-                                <span class="fa-stack-1x icon-text">2</span>
-                            </span>
-                        </a>
-                        <a class="navbar-item">Watchlist
-                            <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-1x circulo"></i>
-                                <span class="fa-stack-1x icon-text">2</span>
-                            </span>
-                        </a>
-                        <a class="navbar-item">Game Pass
-                            <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-1x circulo"></i>
-                                <span class="fa-stack-1x icon-text">2</span>
-                            </span>
-                        </a>
-                        <a class="navbar-item">Plus
-                            <span class="fa-stack">
-                                <i class="fa fa-circle fa-stack-1x circulo"></i>
-                                <span class="fa-stack-1x icon-text">2</span>
-                            </span>
-                        </a>
+                        <a class="navbar-item">Coleção<br>222</a>
+                        <a class="navbar-item">Wishlist<br>222</a>
+                        <a class="navbar-item">Watchlist<br>222</a>
+                        <a class="navbar-item">Game Pass<br>222</a>
+                        <a class="navbar-item">Plus<br>222</a>
                     </div>
                     <div class="navbar-end">
                         <div class="navbar-item">
                             <div class="buttons">
-                                <a class="button is-info">
-                                    <strong>Adicionar</strong>
+                                <a class="button is-info is-small">
+                                    <strong><i class="fa fa-plus"></i></strong>
                                 </a>
                             </div>
                         </div>
@@ -70,7 +45,7 @@
                                 Todas
                                 <span class="fa-stack">
                                     <i class="fa fa-circle fa-stack-1x circulo-sidebar"></i>
-                                    <span class="fa-stack-1x icon-text">2</span>
+                                    <span class="fa-stack-1x icon-text">222</span>
                                 </span>
                             </a>
                         </li>
@@ -79,7 +54,7 @@
                                 Xx X
                                 <span class="fa-stack">
                                     <i class="fa fa-circle fa-stack-1x circulo-sidebar"></i>
-                                    <span class="fa-stack-1x icon-text">2</span>
+                                    <span class="fa-stack-1x icon-text">222</span>
                                 </span>
                             </a>
                         </li>
@@ -88,7 +63,8 @@
             </div>
             <div class="column is-11">
                 <br>
-                <div class="columns">
+                <div class="columns is-multiline is-centered">
+                    @for ($i=0;$i<=110;$i++)
                     <div class="column is-2 coluna_thumb">
                         <div class="card">
                             <div class="card-image">
@@ -99,56 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-2 coluna_thumb">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-2by3">
-                                    <img src="https://versions.bulma.io/0.7.1/images/placeholders/1280x960.png">
-                                </figure>
-                                <div class="stripe">Red trousers</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-2 coluna_thumb">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-2by3">
-                                    <img src="https://versions.bulma.io/0.7.1/images/placeholders/1280x960.png">
-                                </figure>
-                                <div class="stripe">Red trousers</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-2 coluna_thumb">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-2by3">
-                                    <img src="https://versions.bulma.io/0.7.1/images/placeholders/1280x960.png">
-                                </figure>
-                                <div class="stripe">Red trousers</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-2 coluna_thumb">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-2by3">
-                                    <img src="https://versions.bulma.io/0.7.1/images/placeholders/1280x960.png">
-                                </figure>
-                                <div class="stripe">Red trousers</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column is-2 coluna_thumb">
-                        <div class="card">
-                            <div class="card-image">
-                                <figure class="image is-2by3">
-                                    <img src="https://versions.bulma.io/0.7.1/images/placeholders/1280x960.png">
-                                </figure>
-                                <div class="stripe">Red trousers</div>
-                            </div>
-                        </div>
-                    </div>
+                    @endfor
                 </div>
             </div>
         </div>
