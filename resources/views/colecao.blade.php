@@ -17,11 +17,11 @@
                 <div class="navbar-menu">
                     <div class="navbar-start">
                         <a class="navbar-item navbar-dashboard">Dashboard</a>
-                        <a class="navbar-item">Coleção<br>222</a>
-                        <a class="navbar-item">Wishlist<br>222</a>
-                        <a class="navbar-item">Watchlist<br>222</a>
-                        <a class="navbar-item">Game Pass<br>222</a>
-                        <a class="navbar-item">Plus<br>222</a>
+                        <a class="navbar-item"><label class='categoria'>Coleção<br><span>222</span></label></a>
+                        <a class="navbar-item"><label class='categoria'>Wishlist<br><span>222</span></label></a>
+                        <a class="navbar-item"><label class='categoria'>Watchlist<br><span>222</span></label></a>
+                        <a class="navbar-item"><label class='categoria'>Game Pass<br><span>222</span></label></a>
+                        <a class="navbar-item"><label class='categoria'>Plus<br><span>222</span></label></a>
                     </div>
                     <div class="navbar-end">
                         <div class="navbar-item">
@@ -42,20 +42,12 @@
                     <ul class="menu-list">
                         <li>
                             <a>
-                                Todas
-                                <span class="fa-stack">
-                                    <i class="fa fa-circle fa-stack-1x circulo-sidebar"></i>
-                                    <span class="fa-stack-1x icon-text">222</span>
-                                </span>
+                                Todas <span class="qtd">222</span>
                             </a>
                         </li>
                         <li>
                             <a>
-                                Xx X
-                                <span class="fa-stack">
-                                    <i class="fa fa-circle fa-stack-1x circulo-sidebar"></i>
-                                    <span class="fa-stack-1x icon-text">222</span>
-                                </span>
+                                Xx X <span class="qtd">222</span>
                             </a>
                         </li>
                     </ul>

@@ -7,7 +7,7 @@
 }
 .container_topo .navbar-item {
     text-align: center;
-    line-height: 18px;
+    line-height: 15px;
 }
 .navbar-brand > .navbar-item {
     color: #eee !important;
@@ -60,9 +60,14 @@
     color: #000;
     font-size: 1.3em;
 }
-.menu-list > li > a > .fa-stack {
+.menu-list > li > a > .qtd {
     float: right;
-    margin-top: -4px;
+    padding-right: 5px;
+    font-size: 12px;
+    margin-top: 4px;
+}
+.categoria span {
+    font-size: 12px;
 }
 .menu-list {
     border-top: 1px solid #fff;
