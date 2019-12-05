@@ -18,6 +18,7 @@
 }
 .navbar-start >.navbar-dashboard {
     margin-right: 40px;
+    margin-left: 20px;
 }
 .stripe {
     background-color: rgba(0,0,0,0.7);
