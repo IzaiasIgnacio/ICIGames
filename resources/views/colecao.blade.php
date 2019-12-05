@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{URL::asset('public/css/font-awesome.css')}}">
     </head>
     <body>
-        <nav class="navbar is-topo  is-transparent" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-topo" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="#">Games</a>
             </div>
