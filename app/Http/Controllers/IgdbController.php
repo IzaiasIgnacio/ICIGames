@@ -8,6 +8,7 @@ use MarcReichel\IGDBLaravel\Models\InvolvedCompany;
 use MarcReichel\IGDBLaravel\Models\Company;
 use MarcReichel\IGDBLaravel\Models\Genre;
 use MarcReichel\IGDBLaravel\Models\ReleaseDate;
+use MarcReichel\IGDBLaravel\Models\Cover;
 
 class IgdbController extends Controller {
 
@@ -36,7 +37,7 @@ class IgdbController extends Controller {
             $resultado[] = [
                 'id' => $game->id,
                 'name' => $game->name,
-                'cover' => ['cloudinary_id' => @$game->cover]
+                'cover' => ['cloudinary_id' => $this->getCloudnaryId($game)]
             ];
         }
 
@@ -45,11 +46,21 @@ class IgdbController extends Controller {
 
     public function buscarDadosJogo($id) {
         $game = Game::find($id);
+        $developers = null;
+        $publishers = null;
+        $lancamentos = null;
+        $genres = null;
 
-        $developers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('developer', true)->get()->pluck('company')->toArray())->get()->pluck('id');
-        $publishers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('publisher', true)->get()->pluck('company')->toArray())->get()->pluck('id');
-        $lancamentos = ReleaseDate::whereIn('id', $game->release_dates)->get();
-        $genres = Genre::whereIn('id', $game->genres)->get()->pluck('id');
+        if ($game->involved_companies != null) {
+            $developers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('developer', true)->get()->pluck('company')->toArray())->get()->pluck('id');
+            $publishers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('publisher', true)->get()->pluck('company')->toArray())->get()->pluck('id');
+        }
+        if ($game->release_dates != null) {
+            $lancamentos = ReleaseDate::whereIn('id', $game->release_dates)->get();
+        }
+        if ($game->genres != null) {
+            $genres = Genre::whereIn('id', $game->genres)->get()->pluck('id');
+        }
 
         $releases = [];
         foreach ($lancamentos as $lancamento) {
@@ -73,7 +84,7 @@ class IgdbController extends Controller {
             'publishers' => $publishers,
             'genres' => $genres,
             'release_dates' => $releases,
-            'cover' => ['cloudinary_id' => @$game->cover],
+            'cover' => ['cloudinary_id' => $this->getCloudnaryId($game)],
         ]];
     }
 
@@ -106,6 +117,15 @@ class IgdbController extends Controller {
             return null;
         }
         return "https://images.igdb.com/igdb/image/upload/t_".$tamanho."/".$hash.".jpg";
+    }
+
+    private function getCloudnaryId($game) {
+        $cloudinary_id = null;
+        if ($game->cover != null) {
+            $cloudinary_id = Cover::find($game->cover)->image_id;
+        }
+
+        return $cloudinary_id;
     }
 
 }
