@@ -84,7 +84,7 @@ class IgdbController extends Controller {
             'publishers' => $publishers,
             'genres' => $genres,
             'release_dates' => $releases,
-            'cover' => ['cloudinary_id' => $this->getCloudnaryId($game)],
+            'cover' => ['cloudinary_id' => $this->getCloudnaryId($game)]
         ]];
     }
 
@@ -95,7 +95,21 @@ class IgdbController extends Controller {
         foreach ($empresas as $empresa) {
             $resultado[] = [
                 'id' => $empresa->id,
-                'name' => $empresa->name,
+                'name' => $empresa->name
+            ];
+        }
+
+        return $resultado;
+    }
+
+    public function buscarDadosGeneros($ids) {
+        $resultado = [];
+        $generos = Genre::whereIn('id', explode(',', $ids))->get();
+
+        foreach ($generos as $genero) {
+            $resultado[] = [
+                'id' => $genero->id,
+                'name' => $genero->name
             ];
         }
 
