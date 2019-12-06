@@ -18,6 +18,4 @@ Route::prefix('/legado')->group(function () {
     Route::get('/buscar_dados_generos/{ids}', 'IgdbController@buscarDadosGeneros')->name('buscar_dados_generos');
 });
 
-Route::get('/', function () {
-    return view('colecao');
-});
+Route::get('/{pagina?}', 'IndexController@exibirJogos')->name('exibir_jogos');

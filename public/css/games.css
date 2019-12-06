@@ -79,6 +79,9 @@
 .coluna_menu ul {
     margin-left: -13px;
 }
+.div_grid {
+    margin-left: 0px !important;
+}
 .circulo-sidebar > .icon-text {
     color: #000;
 }
