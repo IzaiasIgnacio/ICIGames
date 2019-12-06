@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>ICIGames</title>
         <link rel="stylesheet" href="{{URL::asset('public/css/bulma.min.css')}}" />
+        <link rel="stylesheet" href="{{URL::asset('public/css/bulma-badge.min.css')}}" />
         <link rel="stylesheet" href="{{URL::asset('public/css/games.css')}}" />
         <link rel="stylesheet" href="{{URL::asset('public/css/font-awesome.css')}}">
     </head>
@@ -17,11 +18,11 @@
                 <div class="navbar-menu">
                     <div class="navbar-start">
                         <a class="navbar-item navbar-dashboard">Dashboard</a>
-                        <a class="navbar-item"><label class='categoria'>Coleção<br><span>222</span></label></a>
-                        <a class="navbar-item"><label class='categoria'>Wishlist<br><span>222</span></label></a>
-                        <a class="navbar-item"><label class='categoria'>Watchlist<br><span>222</span></label></a>
-                        <a class="navbar-item"><label class='categoria'>Game Pass<br><span>222</span></label></a>
-                        <a class="navbar-item"><label class='categoria'>Plus<br><span>222</span></label></a>
+                        <a class="navbar-item"><span class="has-badge-rounded has-badge-small" data-badge="222">Coleção</span></a>
+                        <a class="navbar-item"><span class="has-badge-rounded has-badge-small" data-badge="222">Wishlist</span></a>
+                        <a class="navbar-item"><span class="has-badge-rounded has-badge-small" data-badge="222">Watchlist</span></a>
+                        <a class="navbar-item"><span class="has-badge-rounded has-badge-small" data-badge="222">Game Pass</span></a>
+                        <a class="navbar-item"><span class="has-badge-rounded has-badge-small" data-badge="222">PS Plus</span></a>
                     </div>
                     <div class="navbar-end">
                         <div class="navbar-item">
@@ -42,12 +43,12 @@
                     <ul class="menu-list">
                         <li>
                             <a>
-                                Todas <span class="qtd">222</span>
+                            Todas <span class="qtd">222</span>
                             </a>
                         </li>
                         <li>
                             <a>
-                                Xx X <span class="qtd">222</span>
+                                Xxxxxxxxxxx X <span class="qtd">222</span>
                             </a>
                         </li>
                     </ul>

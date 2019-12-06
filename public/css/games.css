@@ -1,6 +1,7 @@
 .is-topo {
     background-color: #0c1b93;
     border-color: #ddd;
+    box-shadow: 1px 0px 10px #000;
 }
 .container_topo {
     padding-left: 4% !important;
@@ -12,8 +13,12 @@
 .navbar-brand > .navbar-item {
     color: #fff;
 }
+.navbar-brand > .navbar-item:hover {
+    color: #fff;
+}
 .navbar, .container_topo {
     min-height: 1rem;
+    max-height: 3.25rem;
 }
 .navbar-start > :nth-child(2) {
     border-left: 1px solid #fff;
@@ -22,8 +27,8 @@
     color: #eee !important;
     text-align: center;
     display: block;
-    padding-top: 12px;
-    min-width: 100px;
+    padding-top: 20px;
+    min-width: 120px;
     border-right: 1px solid #fff;
 }
 .navbar-start > .navbar-dashboard {
@@ -32,6 +37,16 @@
     display: flex;
     margin-right: 40px;
     margin-left: 20px;
+}
+.navbar-start > .navbar-dashboard:hover {
+    background-color: #0c1b93 !important;
+}
+.navbar-item span {
+    padding-right: 2px;
+    padding-top: 1.5px;
+}
+[data-badge]::after {
+    background-color: #000;
 }
 .stripe {
     background-color: rgba(0,0,0,0.7);
@@ -48,12 +63,15 @@
 .coluna_menu {
     margin-left: 10px;
     margin-top: 5px;
-    background-color: #464545;
+    background-color: #000;
     min-height: 800px;
     padding-right: 0;
+    min-width: 150px;
+    box-shadow: 1px 0px 5px #000;
 }
 .coluna_menu .menu-label {
     font-weight: bold;
+    margin-bottom: 3px;
 }
 .coluna_menu .menu-label, .coluna_menu .menu-list a {
     color: #fff;
@@ -95,7 +113,7 @@
     background-color: #a59696 !important;
 }
 .navbar-start > .navbar-item:hover {
-    background-color: #0859dc !important;
+    background-color: #0859dc;
 }
 .menu-list a {
     padding-right: 0;
