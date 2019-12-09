@@ -5,7 +5,7 @@
     </head>
     <body>
         @include('topo')
-        <div class="columns">
+        <div class="columns div_menu">
             @include('menu')
             <div class="column is-11">
                 <br>

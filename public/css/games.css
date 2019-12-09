@@ -1,7 +1,13 @@
+html, body, .div_menu {
+    height: 100%;
+}
+body {
+    background-color: #252830;
+}
 .is-topo {
     background-color: #0c1b93;
     border-color: #ddd;
-    box-shadow: 1px 0px 10px #000;
+    border-bottom: 1px solid #fff;
 }
 .container_topo {
     padding-left: 4% !important;
@@ -39,7 +45,7 @@
     margin-left: 20px;
 }
 .navbar-start > .navbar-dashboard:hover {
-    background-color: #0c1b93 !important;
+    background-color: transparent !important;
 }
 .navbar-item span {
     padding-right: 2px;
@@ -64,10 +70,9 @@
     margin-left: 10px;
     margin-top: 5px;
     background-color: #000;
-    min-height: 800px;
     padding-right: 0;
     min-width: 150px;
-    box-shadow: 1px 0px 5px #000;
+    box-shadow: 1px 0px 5px #fff;
 }
 .coluna_menu .menu-label {
     font-weight: bold;
@@ -123,4 +128,5 @@
 }
 .card {
     cursor: pointer;
+    box-shadow: 3px 3px 5px #fff;
 }

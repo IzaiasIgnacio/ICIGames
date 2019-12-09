@@ -6,7 +6,11 @@ use App\Http\Controllers\Controller;
 
 class IndexController extends Controller {
 
-    public function exibirJogos($pagina) {
+    public function exibirJogos($pagina=null) {
+        if ($pagina == null) {
+            return view('index');
+        }
+        
         $tipo = null;
         switch ($pagina) {
             case 'colecao':
