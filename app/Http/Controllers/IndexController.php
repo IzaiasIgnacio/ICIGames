@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Jogo;
 
 class IndexController extends Controller {
 
@@ -18,28 +19,29 @@ class IndexController extends Controller {
             break;
         }
 
-        $games = \MarcReichel\IGDBLaravel\Models\Game::search('tomb raider')
-                        ->select(['name', 'cover'])
-                        ->whereIn('platforms', ['6','7','8','9','38','46','48','167'])
-                        ->where('category', '!=', 1)
-                            ->take(50)
-                                ->get();
+        $games = Jogo::orderBy('titulo')->get();
 
-        foreach ($games as $game) {
-            $cloudinary_id = null;
-            if ($game->cover != null) {
-                $cloudinary_id = \MarcReichel\IGDBLaravel\Models\Cover::find($game->cover)->image_id;
-            }
+        // $games = \MarcReichel\IGDBLaravel\Models\Game::search('tomb raider')
+        //                 ->select(['name', 'cover'])
+        //                 ->whereIn('platforms', ['6','7','8','9','38','46','48','167'])
+        //                 ->where('category', '!=', 1)
+        //                     ->take(50)
+        //                         ->get();
 
-            $resultado[] = [
-                'id' => $game->id,
-                'name' => $game->name,
-                'cover' => $cloudinary_id
-            ];
-        }
+        // foreach ($games as $game) {
+            // $cloudinary_id = null;
+            // if ($game->cover != null) {
+            //     $cloudinary_id = \MarcReichel\IGDBLaravel\Models\Cover::find($game->cover)->image_id;
+            // }
+
+        //     $resultado[] = [
+        //         'id' => $game->id,
+        //         'titulo' => $game->titulo
+        //     ];
+        // }
 
         return view('index', [
-            'games' => $resultado,
+            'games' => $games,
             'pagina' => $tipo
         ]);
     }
