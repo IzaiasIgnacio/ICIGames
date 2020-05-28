@@ -175,7 +175,8 @@ html, body {
     font-style: italic;
 }
 .capa_formulario > img {
-    max-height: 380px;
+    max-height: 431px;
+    max-width: 323px;
 }
 .screenshots_formulario > img {
     max-height: 150px;
@@ -212,10 +213,36 @@ fieldset legend {
     padding-top: 5px;
     padding-left: 40px;
 }
-
-.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
-.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
-.autocomplete-selected { background: #F0F0F0; }
-.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
-.autocomplete-group { padding: 2px 5px; }
-.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+.div_busca_igdb .column {
+    border-bottom: 1px solid #000;
+}
+.div_busca_igdb .is-10 {
+    margin-top: 3px !important;
+}
+.eac-item {
+    background-color: #fff;
+    cursor: pointer;
+}
+.eac-item:hover {
+    background-color: #ddd !important;
+}
+.easy-autocomplete-container {
+    position: absolute;
+    z-index: 9999;
+    width: 100%;
+}
+.table td input, .table td select {
+    height: 2.1em !important;
+    padding-top: 3px !important;
+    font-size: 15px !important;
+}
+.select:not(.is-multiple):not(.is-loading)::after {
+    margin-top: -0.7em !important;
+}
+.table td {
+    padding-top: 7px !important;
+    padding-bottom: 0 !important;
+}
+#eac-container-campo_busca > ul > li.selected > .eac-item {
+    background-color: #ddd !important;
+}

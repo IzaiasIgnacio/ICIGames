@@ -67,22 +67,84 @@ $().ready(function() {
 
     var options = {
         url: function(phrase) {
-            return "/ICIGames/public/ajax/buscar_jogos_igdb/"+phrase;
+            return "/ICIGames/public/igdb/buscar_jogos/"+phrase;
         },
-        getValue: "name",
+        getValue: "id",
+        template: {
+            type: "custom",
+            method: function(value, item) {
+                var html = '';
+                html += "<div class='columns is-gapless div_busca_igdb'>";
+                html += "   <div class='column is-narrow is-2'>";
+                html += "       <figure class='image is-square'>";
+                html +=             "<img src='"+item.cover+"'/>";
+                html += "       </figure>";
+                html += "   </div>";
+                html += "   <div class='column is-narrow is-10'>";
+                html +=         "&nbsp;"+item.name+"<br>&nbsp;"+item.year+"<br>&nbsp;"+item.platforms;
+                html += "   </div>";
+                html += "</div>";
+                
+                return html;
+            }
+        },
+        highlightPhrase: false,
         list: {
             onKeyEnterEvent: function() {
                 $(".icon").css('display', 'inline-flex');
             },
+            onSelectItemEvent: function() {
+                $("#campo_busca").val($("#campo_busca").getSelectedItemData().name);
+                var atual = $("#campo_busca").getSelectedItemIndex();
+                $("#eac-container-campo_busca ul li.eac-item").each(function(i, e) {
+                    if (i == atual) {
+                        $(this).addClass('item_selecionado');
+                    }
+                    else {
+                        $(this).removeClass('item_selecionado');
+                    }
+                });
+            },
             onChooseEvent: function() {
+                $(".coluna_igdb").fadeOut();
                 $(".icon").fadeOut();
                 $("#campo_busca").blur();
+                $("#campo_busca").val('');
+                $("#descricao").html('');
+                preencherFormularioIgdb($("#campo_busca").getSelectedItemData().id);
             },
-            onHideListEvent: function() {
-                $(".icon").fadeOut();
-            }
+            showAnimation: {
+                type: "slide", //normal|slide|fade
+                time: 400,
+                callback: function() {
+                    $(".icon").fadeOut();
+                }
+            },
+            hideAnimation: {
+                type: "slide", //normal|slide|fade
+                time: 400
+            },
+            maxNumberOfElements: 10
         }
     };
     
     $("#campo_busca").easyAutocomplete(options);
 });
+
+function preencherFormularioIgdb(id_igdb) {
+    $.get('/ICIGames/public/igdb/buscar_dados_jogo/'+id_igdb, function(dados) {
+        $('#campo_busca').val(dados.name);
+        $('#descricao').html(dados.summary);
+        $('#desenvolvedores').html(dados.developers.join(", "));
+        $('#distribuidores').html(dados.publishers.join(", "));
+        $('#generos').html(dados.genres.join(", "));
+        $('#capa').attr('src', dados.cover);
+        $('#screen_1').attr('src', dados.screenshots[0]);
+        $('#screen_2').attr('src', dados.screenshots[1]);
+        $('#screen_3').attr('src', dados.screenshots[2]);
+        $('#screen_4').attr('src', dados.screenshots[3]);
+        $('#screen_5').attr('src', dados.screenshots[4]);
+        $('#screen_6').attr('src', dados.screenshots[5]);
+        $(".coluna_igdb").fadeIn();
+    });
+}

@@ -1,6 +1,6 @@
 <tr>
     <td>
-        <div class="select is-small">
+        <div class="select is-fullwidth">
             <select name='plataforma[]'>
                 <option>Plataforma</option>
                 @foreach ($plataformas as $plataforma)
@@ -10,7 +10,7 @@
         </div>
     </td>
     <td>
-        <div class="select is-small">
+        <div class="select is-fullwidth">
             <select name='situacao[]'>
                 <option>Situação</option>
                 @foreach ($situacoes as $situacao)
@@ -19,10 +19,10 @@
             </select>
         </div>
     </td>
-    <td><input class="input is-small" type="text" placeholder="Lançamento"></td>
-    <td><input class="input is-small" type="text" placeholder="Compra"></td>
+    <td><input class="input is-fullwidth" type="text" placeholder="Lançamento"></td>
+    <td><input class="input is-fullwidth" type="text" placeholder="Compra"></td>
     <td>
-        <div class="select is-small">
+        <div class="select is-fullwidth">
             <select name='Regiao[]'>
                 <option>Regiao</option>
                 @foreach ($regioes as $regiao)
@@ -32,7 +32,7 @@
         </div>
     </td>
     <td>
-        <div class="select is-small">
+        <div class="select is-fullwidth">
             <select name='classificacao[]'>
                 <option>Classificação</option>
                 @foreach ($classificacoes as $classificacao)
@@ -41,11 +41,11 @@
             </select>
         </div>
     </td>
-    <td><input class="input is-small" type="text" placeholder="Metacritic"></td>
-    <td><input class="input is-small" type="text" placeholder="Preço"></td>
-    <td><input class="input is-small" type="text" placeholder="Tamanho"></td>
+    <td><input class="input is-fullwidth" type="text" placeholder="Metacritic"></td>
+    <td><input class="input is-fullwidth" type="text" placeholder="Preço"></td>
+    <td><input class="input is-fullwidth" type="text" placeholder="Tamanho"></td>
     <td>
-        <div class="select is-small">
+        <div class="select is-fullwidth">
             <select name='formata[]'>
                 <option>Formato</option>
                 @foreach ($formatos as $formato)
@@ -55,7 +55,7 @@
         </div>
     </td>
     <td>
-        <div class="select is-small">
+        <div class="select is-fullwidth">
             <select name='loja[]'>
                 <option>Loja</option>
                 @foreach ($lojas as $loja)

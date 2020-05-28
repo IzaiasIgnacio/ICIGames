@@ -27,5 +27,9 @@ Route::get('/{pagina?}', 'IndexController@exibirJogos')->name('exibir_jogos');
 
 Route::prefix('/ajax')->group(function () {
     Route::get('/html', 'AjaxController@buscarHtml')->name('buscar_html');
-    Route::get('/buscar_jogos_igdb/{busca}', 'AjaxController@buscarJogosIgdb')->name('buscar_jogos_igdb');
+});
+
+Route::prefix('/igdb')->group(function () {
+    Route::get('/buscar_jogos/{busca}', 'IgdbController@buscarJogosIgdb')->name('buscar_jogos_igdb');
+    Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogo')->name('buscar_dados_jogo');
 });

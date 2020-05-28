@@ -12,7 +12,7 @@
                     <label class="label">Título</label>
                         <div class="field">
                             <div class="control has-icons-right">
-                                <input class="input" type="text" id="campo_busca" placeholder="Título">
+                                <input class="input" type="text" id="campo_busca" placeholder="Título" name='titulo' value='tomb'>
                                 <span class="icon is-small is-right" style='display:none'>
                                     <i class="fas fa-spin fa-circle-notch"></i>
                                 </span>
@@ -21,55 +21,75 @@
                         <div class="field">
                             <label class="label">Descrição</label>
                             <div class="control">
-                                <textarea class="textarea" placeholder="Descrição"></textarea>
+                                <textarea class="textarea" name='descricao' id='descricao' placeholder="Descrição"></textarea>
                             </div>
                         </div>
                         <div class="field">
                             <label class="label">Nota</label>
                             <div class="control input_nota">
-                                <input class="input" type="number" placeholder="Nota" step="0.1">
+                                <input class="input" type="number" name='nota' id='nota' placeholder="Nota" step="0.1">
                             </div>
                         </div>
                         <label class="checkbox label">
-                        <input type="checkbox"> Completo</label>
+                        <input type="checkbox" name='completo' id='completo'> Completo</label>
                     </div>
-                    <div class="column is-2">
+                    <div class="column is-2 coluna_igdb" style="display:none">
                         <div class="field">
                             <label class="label">Desenvolvedores</label>
                             <div class="control">
-                                <label class='dados_igdb'>adnndiaundua nsauiohaidh</label>
+                                <label class='dados_igdb' name='desenvolvedores' id='desenvolvedores'>adnndiaundua nsauiohaidh</label>
                             </div>
                         </div>
                         <div class="field">
                             <label class="label">Distribuidores</label>
                             <div class="control">
-                                <label class='dados_igdb'>adnndiaundua nsauiohaidh</label>
+                                <label class='dados_igdb' name='distribuidores' id='distribuidores'>adnndiaundua nsauiohaidh</label>
                             </div>
                         </div>
                         <div class="field">
                             <label class="label">Gênero</label>
                             <div class="control">
-                                <label class='dados_igdb'>adnndiaundua nsauiohaidh</label>
+                                <label class='dados_igdb' name='generos' id='generos'>adnndiaundua nsauiohaidh</label>
                             </div>
                         </div>
                     </div>
-                    <div class="column is-3">
+                    <div class="column is-3 coluna_igdb" style="display:none">
                     <label class="label">Capa</label>
                         <figure class="image capa_formulario">
-                            <img src="https://bulma.io/images/placeholders/128x128.png">
+                            <img src="" name='capa' id='capa'>
                         </figure>
                     </div>
-                    <div class="column is-4">
+                    <div class="column is-4 coluna_igdb" style="display:none">
                         <label class="label">Screenshots</label>
-                        <div class="columns">
+                        <div class="columns is-gapless is-multiline">
                             <div class="column is-6">
                                 <figure class="image screenshots_formulario">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                                    <img src="" id='screen_1'>
                                 </figure>
                             </div>
                             <div class="column is-6">
                                 <figure class="image screenshots_formulario">
-                                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                                    <img src="" id='screen_2'>
+                                </figure>
+                            </div>
+                            <div class="column is-6">
+                                <figure class="image screenshots_formulario">
+                                    <img src="" id='screen_3'>
+                                </figure>
+                            </div>
+                            <div class="column is-6">
+                                <figure class="image screenshots_formulario">
+                                    <img src="" id='screen_4'>
+                                </figure>
+                            </div>
+                            <div class="column is-6">
+                                <figure class="image screenshots_formulario">
+                                    <img src="" id='screen_5'>
+                                </figure>
+                            </div>
+                            <div class="column is-6">
+                                <figure class="image screenshots_formulario">
+                                    <img src="" id='screen_6'>
                                 </figure>
                             </div>
                         </div>

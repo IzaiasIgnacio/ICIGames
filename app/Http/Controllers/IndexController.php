@@ -35,9 +35,10 @@ class IndexController extends Controller {
 
     public function exibirJogos($pagina=null) {
         if ($pagina == null) {
-            return view('dashboard',[
-                'aba' => 'dashboard'
-            ]);
+            return view('dashboard',\array_merge([
+                'aba' => 'dashboard'],
+                Helper::getDadosFormulario()
+            ));
         }
         
         $busca = Jogo::select('jogo.id', 'jogo.id_igdb_cover', 'jogo.titulo', DB::connection('icigames')->raw('group_concat(plataforma.sigla) as siglas'))
