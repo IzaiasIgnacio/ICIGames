@@ -2,16 +2,18 @@
     <aside class="menu">
         <p class="menu-label">Plataformas</p>
         <ul class="menu-list">
-            <li>
+            <li class='exibir_plataforma selecionado' sigla='todas'>
                 <a>
-                Todas <span class="qtd">222</span>
+                Todas<span class="qtd">222</span>
                 </a>
             </li>
-            <li>
+            @foreach ($plataformas_menu as $plataforma)
+            <li class='exibir_plataforma' sigla='{{$plataforma->sigla}}'>
                 <a>
-                    Xxxxxxxxxxx X <span class="qtd">222</span>
+                    {{$plataforma->nome}}<span class="qtd">{{$plataforma->total}}</span>
                 </a>
             </li>
+            @endforeach
         </ul>
     </aside>
 </div>

@@ -23,7 +23,7 @@ class IgdbController extends Controller {
         '167', // PlayStation 5
     ];
     
-    public function buscarJogos($titulo) {
+    public function buscarJogosLegado($titulo) {
         $resultado = [];
 
         $games = Game::search($titulo)
@@ -44,7 +44,7 @@ class IgdbController extends Controller {
         return $resultado;
     }
 
-    public function buscarDadosJogo($id) {
+    public function buscarDadosJogoLegado($id) {
         $game = Game::find($id);
         $developers = null;
         $publishers = null;
@@ -88,7 +88,7 @@ class IgdbController extends Controller {
         ]];
     }
 
-    public function buscarDadosEmpresas($ids) {
+    public function buscarDadosEmpresasLegado($ids) {
         $resultado = [];
         $empresas = Company::whereIn('id', explode(',', $ids))->get();
 
@@ -102,7 +102,7 @@ class IgdbController extends Controller {
         return $resultado;
     }
 
-    public function buscarDadosGeneros($ids) {
+    public function buscarDadosGenerosLegado($ids) {
         $resultado = [];
         $generos = Genre::whereIn('id', explode(',', $ids))->get();
 
@@ -116,7 +116,7 @@ class IgdbController extends Controller {
         return $resultado;
     }
 
-    public function buscarUrlImagem($tamanho, $hash) {
+    public static function buscarUrlImagem($tamanho, $hash) {
         // cover_small	    90 x 128	Fit
         // screenshot_med	569 x 320	Lfill, Center gravity
         // cover_big	    264 x 374	Fit

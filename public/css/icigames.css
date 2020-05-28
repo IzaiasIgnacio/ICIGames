@@ -1,7 +1,8 @@
-html, body, .div_menu {
+html, body {
     height: 100%;
 }
-body {
+.div_menu, .div_dashboard {
+    min-height: 100%;
     background-color: #252830;
 }
 .is-topo {
@@ -16,6 +17,9 @@ body {
     text-align: center;
     line-height: 15px;
 }
+.navbar-brand {
+    margin-right: 28px;
+}
 .navbar-brand > .navbar-item {
     color: #fff;
 }
@@ -26,7 +30,7 @@ body {
     min-height: 1rem;
     max-height: 3.25rem;
 }
-.navbar-start > :nth-child(2) {
+.navbar-start > :nth-child(1) {
     border-left: 1px solid #fff;
 }
 .navbar-start > .navbar-item {
@@ -36,6 +40,9 @@ body {
     padding-top: 20px;
     min-width: 120px;
     border-right: 1px solid #fff;
+}
+.selecionado {
+    background-color: #940808;
 }
 .navbar-start > .navbar-dashboard {
     border: none;
@@ -53,6 +60,9 @@ body {
 }
 [data-badge]::after {
     background-color: #000;
+}
+.navbar-end {
+    margin-right: 25px;
 }
 .stripe {
     background-color: rgba(0,0,0,0.7);
@@ -130,3 +140,82 @@ body {
     cursor: pointer;
     box-shadow: 3px 3px 5px #fff;
 }
+.input.is-rounded {
+    border-radius: 5px;
+}
+.divisor {
+    margin-right: 20px;
+}
+.modal_jogo > .modal-card {
+    height: 80%;
+    width: 80%;
+    margin-top: -150px;
+}
+.modal-card-head {
+    background-color: #0c1b93;
+}
+.modal-card-body {
+    background-color: #252830;
+}
+.modal-card-foot {
+    background-color: #000;
+    justify-content: space-between;
+}
+.modal-card-title {
+    color: #fff;
+}
+.modal-card-body form .label {
+    color: #fff;
+}
+.input_nota {
+    width: 75px !important;
+}
+.dados_igdb {
+    color: #ddd;
+    font-style: italic;
+}
+.capa_formulario > img {
+    max-height: 380px;
+}
+.screenshots_formulario > img {
+    max-height: 150px;
+}
+fieldset legend {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    font-size: large;
+}
+.tabela_acervo {
+    background-color: #252830;
+}
+.tabela_acervo th, .tabela_acervo td {
+    text-align: center !important;
+    color: #fff !important;
+}
+.icone_centralizado {
+    text-align: center !important;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #fff;
+}
+.icone_centralizado .button {
+    max-height: 24px !important;
+    max-width: 30px !important;
+}
+.acervo_centralizado {
+    text-align: center !important;
+}
+.acervo_linhas {
+    padding-top: 5px;
+    padding-left: 40px;
+}
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
