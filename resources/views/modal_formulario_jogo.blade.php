@@ -1,4 +1,4 @@
-<div class="modal modal_jogo is-active" id='modal_formulario_jogo'>
+<div class="modal modal_jogo" id='modal_formulario_jogo'>
     <div class="modal-background"></div>
     <div class="modal-card">
         <header class="modal-card-head">
@@ -6,13 +6,15 @@
             <button class="delete fechar_modal" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <form>
+            <form id='form_jogo'>
+                <input type='hidden' name='id_jogo' id='id_jogo'>
+                <input type='hidden' name='id_igdb' id='id_igdb'>
                 <div class="columns">
                     <div class="column is-3">
                     <label class="label">Título</label>
                         <div class="field">
                             <div class="control has-icons-right">
-                                <input class="input" type="text" id="campo_busca" placeholder="Título" name='titulo' value='nier'>
+                                <input class="input" type="text" id="campo_busca" placeholder="Título" name='titulo'>
                                 <span class="icon is-small is-right" style='display:none'>
                                     <i class="fas fa-spin fa-circle-notch"></i>
                                 </span>
@@ -95,13 +97,13 @@
                         </div>
                     </div>
                 </div>
-                <fieldset class='coluna_igdb' style='display: none'>
+                <fieldset class='coluna_igdb'>
                     <legend>Acervo</legend>
                     <table class='table is-narrow is-fullwidth tabela_acervo'>
                         <thead>
                             <tr>
                                 <th><i class="fas fa-gamepad"></i></th>
-                                <th><i class="fas fa-list"></i></th>
+                                <th><i class="fas fa-clipboard-check"></i></th>
                                 <th>
                                     <span class="fa-stack">
                                         <i class="fas fa-calendar fa-stack-2x"></i>
@@ -125,7 +127,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+                            @include('linha_acervo')
                         </tbody>
                         <tfoot>
                             <tr>
@@ -143,8 +145,9 @@
         </section>
         <footer class="modal-card-foot">
             <div>
-                <button class="button is-link">Salvar</button>
+                <button class="button is-link btn_salvar">Salvar</button>
                 <button class="button is-light btn_cancelar">Cancelar</button>
+                <label class='label_progresso'></label>
             </div>
             <button class="button is-pulled-right is-danger btn_excluir" style="display:none">Excluir</button>
         </footer>

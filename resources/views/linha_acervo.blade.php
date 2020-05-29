@@ -19,7 +19,7 @@
             </select>
         </div>
     </td>
-    <td><input class="input is-fullwidth" type="text" placeholder="Data de Lançamento" value="{{$data_lancamento}}"></td>
+    <td><input class="input is-fullwidth" type="text" placeholder="Data de Lançamento" value="{{$data_lancamento ?? '' }}"></td>
     <td><input class="input is-fullwidth" type="text" placeholder="Data de Compra"></td>
     <td>
         <div class="select is-fullwidth">

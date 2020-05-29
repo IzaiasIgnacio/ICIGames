@@ -7,8 +7,7 @@
         @include('topo')
         <div class="columns div_menu">
             @include('menu')
-            <div class="column is-11">
-                <br>
+            <div class="column is-11 div_jogos_index">
                 @if (isset($pagina))
                     @include($pagina)
                 @endif

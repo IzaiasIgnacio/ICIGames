@@ -1,5 +1,13 @@
 $().ready(function() {
 
+    $(".icone_exibir_grid").click(function() {
+        exibir_jogos('grid');
+    });
+
+    $(".icone_exibir_lista").click(function() {
+        exibir_jogos('lista');
+    });
+
     $('.exibir_plataforma').click(function() {
         var sigla = $(this).attr('sigla');
 
@@ -130,11 +138,25 @@ $().ready(function() {
     };
     
     $("#campo_busca").easyAutocomplete(options);
+
+    $(".btn_salvar").click(function() {
+        $.post('/ICIGames/public/ajax/salvar_jogo', {dados: $("#form_jogo").serialize()},
+        function(resposta) {
+            if (resposta == 'ok') {
+                exibir_jogos('grid');
+                $("#modal_formulario_jogo").removeClass('is-active');
+            }
+            else {
+                $(".label_progresso").html(resposta);
+            }
+        });
+    });
 });
 
 function preencherFormularioIgdb(id_igdb) {
     $.get('/ICIGames/public/igdb/buscar_dados_jogo/'+id_igdb, function(dados) {
         $(".tabela_acervo tbody").html(dados.acervo.html);
+        $("#id_igdb").val(id_igdb);
         $('#campo_busca').val(dados.name);
         $('#descricao').html(dados.summary);
         $('#desenvolvedores').html(dados.developers.join(", "));
@@ -148,5 +170,12 @@ function preencherFormularioIgdb(id_igdb) {
         $('#screen_5').attr('src', dados.screenshots[4]);
         $('#screen_6').attr('src', dados.screenshots[5]);
         $(".coluna_igdb").fadeIn();
+    });
+}
+
+function exibir_jogos(tipo) {
+    $.post('/ICIGames/public/ajax/exibir_jogos', {situacao: location.href.split('/').pop(), tipo: tipo},
+    function(resposta) {
+        $(".div_jogos_index").html(resposta.html);
     });
 }

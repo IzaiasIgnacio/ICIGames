@@ -9,7 +9,7 @@ class Helper {
     public static function getDadosFormulario() {
         return [
             'plataformas' => Models\Plataforma::orderBy('ordem')->get(),
-            'situacoes' => Models\Situacao::get(),
+            'situacoes' => Models\Situacao::orderBy('ordem')->get(),
             'regioes' => Models\Regiao::get(),
             'classificacoes' => Models\Classificacao::get(),
             'formatos' => Models\Formato::get(),

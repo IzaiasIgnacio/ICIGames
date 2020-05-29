@@ -252,7 +252,7 @@ fieldset legend {
     background-color: #ddd !important;
 }
 .tabela_acervo .fa-stack {
-    font-size: 10px !important;
+    font-size: 9px !important;
     padding-top: 4px !important;
     vertical-align: top !important;
 }
@@ -260,4 +260,20 @@ fieldset legend {
     color: #000 !important;
     padding-top: 4px !important;
     font-size: 11px !important;
+}
+.div_jogos_index {
+    margin-top: 15px;
+}
+.icone_exibir_grid, .icone_exibir_lista, .icone_exibir_grid:hover, .icone_exibir_lista:hover {
+    font-size: 30px;
+    color: #aaa !important;
+}
+.icone_exibir_grid {
+    margin-right: 10px;
+}
+.easy-autocomplete {
+    width: 100% !important;
+}
+.label_progresso {
+    color: #fff;
 }

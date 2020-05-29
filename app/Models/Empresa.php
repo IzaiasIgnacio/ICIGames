@@ -11,4 +11,8 @@ class Empresa extends Model {
 	public $timestamps = false;
 	protected $guarded = [];
 	
+	public static function buscarEmpresa($dados_igdb) {
+		return Empresa::firstOrCreate(['id_igdb' => $dados_igdb['id'], 'nome' => $dados_igdb['name']]);
+	}
+
 }

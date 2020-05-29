@@ -10,5 +10,9 @@ class Genero extends Model {
 	protected $connection = 'icigames';
 	public $timestamps = false;
 	protected $guarded = [];
+
+	public static function buscarGenero($dados_igdb) {
+		return Genero::firstOrCreate(['id_igdb' => $dados_igdb['id'], 'nome' => $dados_igdb['name']]);
+	}
 	
 }
