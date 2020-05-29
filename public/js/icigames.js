@@ -112,6 +112,7 @@ $().ready(function() {
                 $("#campo_busca").val('');
                 $("#descricao").html('');
                 preencherFormularioIgdb($("#campo_busca").getSelectedItemData().id);
+                // $(".coluna_igdb").fadeIn();
             },
             showAnimation: {
                 type: "slide", //normal|slide|fade
@@ -133,6 +134,7 @@ $().ready(function() {
 
 function preencherFormularioIgdb(id_igdb) {
     $.get('/ICIGames/public/igdb/buscar_dados_jogo/'+id_igdb, function(dados) {
+        $(".tabela_acervo tbody").html(dados.acervo.html);
         $('#campo_busca').val(dados.name);
         $('#descricao').html(dados.summary);
         $('#desenvolvedores').html(dados.developers.join(", "));

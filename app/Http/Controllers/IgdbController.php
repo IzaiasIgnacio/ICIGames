@@ -11,6 +11,7 @@ use MarcReichel\IGDBLaravel\Models\ReleaseDate;
 use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\PLatform;
 use MarcReichel\IGDBLaravel\Models\Screenshot;
+use App\Models\Plataforma;
 
 class IgdbController extends Controller {
 
@@ -88,6 +89,7 @@ class IgdbController extends Controller {
                 'date' => $lancamento->date,
                 'region' => $lancamento->region
             ];
+
         }
 
         $cover = Cover::find($game->cover)->image_id;
@@ -101,8 +103,22 @@ class IgdbController extends Controller {
             'publishers' => $publishers,
             'genres' => $genres,
             'release_dates' => $releases,
+            'acervo' => $this->getHtmlAcervo($releases),
             'cover' => empty($cover) ? null : $this->buscarUrlImagem('cover_big', $cover)
         ];
+    }
+
+    private function getHtmlAcervo($releases) {
+        $html = null;
+        foreach ($releases as $release) {
+            $html .= view('linha_acervo',\array_merge([
+                'plataforma_selecionada' => Plataforma::where('id_igdb', $release['platform'])->first()->id,
+                'data_lancamento' => \date('d/m/Y', $release['date']),
+                'regiao_selecionada' => $release['region']],
+                \App\Util\Helper::getDadosFormulario()))->render();
+        }
+
+        return ['html' => $html];
     }
 
     public function buscarUrlScreenshots($screenshots) {

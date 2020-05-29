@@ -12,7 +12,7 @@
                     <label class="label">Título</label>
                         <div class="field">
                             <div class="control has-icons-right">
-                                <input class="input" type="text" id="campo_busca" placeholder="Título" name='titulo' value='tomb'>
+                                <input class="input" type="text" id="campo_busca" placeholder="Título" name='titulo' value='nier'>
                                 <span class="icon is-small is-right" style='display:none'>
                                     <i class="fas fa-spin fa-circle-notch"></i>
                                 </span>
@@ -21,7 +21,7 @@
                         <div class="field">
                             <label class="label">Descrição</label>
                             <div class="control">
-                                <textarea class="textarea" name='descricao' id='descricao' placeholder="Descrição"></textarea>
+                                <textarea class="textarea" name='descricao' id='descricao' placeholder="Descrição" style='height: 250px'></textarea>
                             </div>
                         </div>
                         <div class="field">
@@ -37,19 +37,19 @@
                         <div class="field">
                             <label class="label">Desenvolvedores</label>
                             <div class="control">
-                                <label class='dados_igdb' name='desenvolvedores' id='desenvolvedores'>adnndiaundua nsauiohaidh</label>
+                                <label class='dados_igdb' name='desenvolvedores' id='desenvolvedores'></label>
                             </div>
                         </div>
                         <div class="field">
                             <label class="label">Distribuidores</label>
                             <div class="control">
-                                <label class='dados_igdb' name='distribuidores' id='distribuidores'>adnndiaundua nsauiohaidh</label>
+                                <label class='dados_igdb' name='distribuidores' id='distribuidores'></label>
                             </div>
                         </div>
                         <div class="field">
                             <label class="label">Gênero</label>
                             <div class="control">
-                                <label class='dados_igdb' name='generos' id='generos'>adnndiaundua nsauiohaidh</label>
+                                <label class='dados_igdb' name='generos' id='generos'></label>
                             </div>
                         </div>
                     </div>
@@ -95,15 +95,25 @@
                         </div>
                     </div>
                 </div>
-                <fieldset>
+                <fieldset class='coluna_igdb' style='display: none'>
                     <legend>Acervo</legend>
                     <table class='table is-narrow is-fullwidth tabela_acervo'>
                         <thead>
                             <tr>
                                 <th><i class="fas fa-gamepad"></i></th>
                                 <th><i class="fas fa-list"></i></th>
-                                <th><i class="fas fa-calendar"></i></th>
-                                <th><i class="fas fa-calendar"></i></th>
+                                <th>
+                                    <span class="fa-stack">
+                                        <i class="fas fa-calendar fa-stack-2x"></i>
+                                        <i class="fa fa-shipping-fast fa-stack-1x"></i>
+                                    </span>
+                                </th>
+                                <th>
+                                    <span class="fa-stack">
+                                        <i class="fas fa-calendar fa-stack-2x"></i>
+                                        <i class="fa fa-shopping-cart fa-stack-1x"></i>
+                                    </span>
+                                </th>
                                 <th><i class="fas fa-globe"></i></th>
                                 <th><i class="fas fa-filter"></i></th>
                                 <th><i class="fas fa-star"></i></th>
@@ -114,9 +124,8 @@
                                 <th>&nbsp;</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            @include('linha_acervo')
+                            
                         </tbody>
                         <tfoot>
                             <tr>
