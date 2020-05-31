@@ -10,5 +10,11 @@ class JogoGenero extends Model {
 	protected $connection = 'icigames';
 	public $timestamps = false;
 	protected $guarded = [];
+
+	public static function buscarGeneros($id_jogo) {
+		return JogoGenero::join('genero', 'genero.id', 'jogo_genero.id_genero')
+								->where('jogo_genero.id_jogo', $id_jogo)
+									->get();
+	}
 	
 }

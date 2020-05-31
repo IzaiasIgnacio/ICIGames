@@ -151,7 +151,42 @@ $().ready(function() {
             }
         });
     });
+
+    // $('#sortable').sortable();
+    sortable('#sortable', {
+        forcePlaceholderSize: true,
+        // placeholderClass: 'ph-class',
+        // hoverClass: 'bg-maroon yellow'
+        // handle: 'h2'
+        // placeholder: '<tr><td colspan="7">&nbsp;</td></tr>'
+    });
+    // sortable('.sortable')[0].addEventListener('sortupdate', function(e) {
+    //     console.log(e.detail);
+
+    $(".div_jogos_index").on('click', '.li_jogo', function() {
+        $.post('/ICIGames/public/ajax/exibir_dados_jogo', {jogo: $(this).attr('jogo'), 'tipo': 'lista'},
+        function(resposta) {
+            $(".coluna_dados_jogo").html(resposta.html);
+            $(".coluna_dados_jogo").fadeIn();
+        });
+    });
+
+    $(".div_jogos_index").on('click', ".div_grid .coluna_thumb", function() {
+        $.post('/ICIGames/public/ajax/exibir_dados_jogo', {jogo: $(this).attr('jogo'), 'tipo': 'grid'},
+        function(resposta) {
+            $(".div_jogos_index").fadeOut(function() {
+                $(".div_jogos_index").html(resposta.html);
+                $(".div_jogos_index").fadeIn();
+            });
+        });
+    });
 });
+
+window.onkeydown = function(e) {
+    if (e.keyCode == 8 && e.target == document.body) {
+        e.preventDefault();
+    }
+}
 
 function preencherFormularioIgdb(id_igdb) {
     $.get('/ICIGames/public/igdb/buscar_dados_jogo/'+id_igdb, function(dados) {

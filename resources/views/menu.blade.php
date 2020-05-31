@@ -4,7 +4,7 @@
         <ul class="menu-list">
             <li class='exibir_plataforma selecionado' sigla='todas'>
                 <a>
-                Todas<span class="qtd">222</span>
+                Todas<span class="qtd">{{$total_menu}}</span>
                 </a>
             </li>
             @foreach ($plataformas_menu as $plataforma)

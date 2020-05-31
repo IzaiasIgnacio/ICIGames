@@ -18,7 +18,7 @@ html, body {
     line-height: 15px;
 }
 .navbar-brand {
-    margin-right: 28px;
+    margin-right: 17px;
 }
 .navbar-brand > .navbar-item {
     color: #fff;
@@ -73,7 +73,7 @@ html, body {
     text-align: center;
     color: #fff;
 }
-.coluna_thumb {
+.div_grid .coluna_thumb {
     margin-left: -5px;
 }
 .coluna_menu {
@@ -263,17 +263,80 @@ fieldset legend {
 }
 .div_jogos_index {
     margin-top: 15px;
+    margin-right: 11px;
 }
 .icone_exibir_grid, .icone_exibir_lista, .icone_exibir_grid:hover, .icone_exibir_lista:hover {
     font-size: 30px;
-    color: #aaa !important;
-}
-.icone_exibir_grid {
-    margin-right: 10px;
 }
 .easy-autocomplete {
     width: 100% !important;
 }
 .label_progresso {
     color: #fff;
+}
+.div_lista {
+    margin-left: -8px;
+}
+.div_lista .coluna_capa {
+    border-right: 2px solid #aaa;
+}
+.div_lista .coluna_texto {
+    margin-left: 4px !important;
+}
+.div_lista li {
+    color: #fff;
+    border: 1px solid #aaa;
+    margin-bottom: 2px;
+}
+.navbar-brand a {
+    cursor: default;
+}
+.navbar-dashboard i:hover, .navbar-dashboard .icone_selecionado {
+    color: red;
+}
+.level .heading, .level .title {
+    color: #fff;
+}
+.div_lista li {
+    cursor: pointer;
+}
+.titulo_dados_jogo {
+    text-align: center;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 2px;
+}
+.container_dados_jogo_grid {
+    min-width: 100%;
+}
+.container_dados_jogo_lista {
+    min-width: 75%;
+    position: fixed;
+}
+.coluna_dados_jogo {
+    margin-top: -10px;
+}
+.container_dados_jogo .coluna_texto {
+    margin-left: 8px !important;
+}
+.categoria_dados_jogo, .valor_dados_jogo {
+    color: #fff;
+    display: block;
+}
+.categoria_dados_jogo {
+    font-weight: bold;
+}
+.valor_dados_jogo {
+    font-style: italic;
+}
+.tabela_dados_jogo th, .tabela_dados_jogo td {
+    padding: 0 !important;
+}
+.dados_jogo_lista_acervo_container {
+    min-width: 99.3%;
+    float: left;
+}
+.dados_jogo_grid_acervo_container {
+    min-width: 99.4%;
+    float: left;
 }

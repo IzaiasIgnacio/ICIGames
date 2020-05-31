@@ -19,11 +19,11 @@
             </select>
         </div>
     </td>
-    <td><input class="input is-fullwidth" type="text" placeholder="Data de Lançamento" value="{{$data_lancamento ?? '' }}"></td>
-    <td><input class="input is-fullwidth" type="text" placeholder="Data de Compra"></td>
+    <td><input class="input is-fullwidth" type="text" name='data_lancamento[]' placeholder="Data de Lançamento" value="{{$data_lancamento ?? '' }}"></td>
+    <td><input class="input is-fullwidth" type="text" name='data_compra[]' placeholder="Data de Compra"></td>
     <td>
         <div class="select is-fullwidth">
-            <select name='Regiao[]'>
+            <select name='regiao[]'>
                 <option>Regiao</option>
                 @foreach ($regioes as $regiao)
                     <option value="{{$regiao['id']}}" @if (isset($regiao_selecionada) && $regiao_selecionada == $regiao['id']) selected @endif>{{$regiao['nome']}}</option>
@@ -41,12 +41,12 @@
             </select>
         </div>
     </td>
-    <td><input class="input is-fullwidth" type="text" placeholder="Metacritic"></td>
-    <td><input class="input is-fullwidth" type="text" placeholder="Preço"></td>
-    <td><input class="input is-fullwidth" type="text" placeholder="Tamanho"></td>
+    <td><input class="input is-fullwidth" name='metacritic[]' type="text" placeholder="Metacritic"></td>
+    <td><input class="input is-fullwidth" name='preco[]' type="text" placeholder="Preço"></td>
+    <td><input class="input is-fullwidth" name='tamanho[]' type="text" placeholder="Tamanho"></td>
     <td>
         <div class="select is-fullwidth">
-            <select name='formata[]'>
+            <select name='formato[]'>
                 <option>Formato</option>
                 @foreach ($formatos as $formato)
                     <option value="{{$formato}}">{{$formato}}</option>

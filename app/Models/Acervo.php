@@ -13,7 +13,7 @@ class Acervo extends Model {
 	protected $guarded = [];
 
 	public static function buscarAcervoSituacao($situacao) {
-		$busca = Acervo::select('jogo.id', 'jogo.id_igdb_cover', 'jogo.titulo', DB::connection('icigames')->raw('group_concat(plataforma.sigla) as siglas'))
+		$busca = Acervo::select('jogo.id', 'jogo.id_igdb_cover', 'jogo.titulo', DB::connection('icigames')->raw('group_concat(plataforma.sigla) as siglas'), 'acervo.data_lancamento')
                 ->join('jogo', 'acervo.id_jogo', 'jogo.id')
                 ->join('plataforma', 'acervo.id_plataforma', 'plataforma.id')
                     ->where('acervo.id_situacao', $situacao)
@@ -26,6 +26,25 @@ class Acervo extends Model {
         else {
             return $busca->orderBy('titulo')->get();
 		}
-	}
+    }
+    
+    public static function buscarTotaisSituacao() {
+        return Acervo::select('situacao.pagina', DB::connection('icigames')->raw('count(acervo.id) as total'))
+                    ->join('situacao', 'situacao.id', 'acervo.id_situacao')
+                        ->groupBy('situacao.id')
+                            ->get()
+                                ->pluck('total','pagina');
+    }
+
+    public static function buscarAcervoJogo($id_jogo) {
+        return Acervo::select('acervo.*','plataforma.sigla as plataforma', 'situacao.nome as situacao', 'classificacao.nome as classificacao', 'regiao.nome as regiao', 'loja.nome as loja')
+                        ->join('plataforma', 'acervo.id_plataforma', 'plataforma.id')
+                        ->join('situacao', 'acervo.id_situacao', 'situacao.id')
+                        ->LeftJoin('classificacao', 'acervo.id_classificacao', 'classificacao.id')
+                        ->LeftJoin('regiao', 'acervo.id_regiao', 'regiao.id')
+                        ->LeftJoin('loja', 'acervo.id_loja', 'loja.id')
+                            ->where('acervo.id_jogo', $id_jogo)
+                                ->get();
+    }
 	
 }

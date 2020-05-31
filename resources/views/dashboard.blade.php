@@ -8,9 +8,7 @@
         <div class="columns div_dashboard">
             <div class="column is-12">
                 <br>
-                @if (isset($pagina))
-                    @include($pagina)
-                @endif
+                @include('dashboard_totais')
             </div>
         </div>
     </body>

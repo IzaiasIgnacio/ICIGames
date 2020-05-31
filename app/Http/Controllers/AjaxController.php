@@ -59,6 +59,15 @@ class AjaxController extends Controller {
                 $acervo->id_jogo = $jogo->id;
                 $acervo->id_plataforma = $plataforma;
                 $acervo->id_situacao = $dados['situacao'][$i];
+                $acervo->data_lancamento = date('Y-m-d', strtotime($dados['data_lancamento'][$i]));
+                $acervo->data_compra = date('Y-m-d', strtotime($dados['data_compra'][$i]));
+                $acervo->id_regiao = $dados['regiao'][$i];
+                $acervo->id_classificacao = $dados['classificacao'][$i];
+                $acervo->metacritic = $dados['metacritic'][$i];
+                $acervo->preco = $dados['preco'][$i];
+                $acervo->tamanho = $dados['tamanho'][$i];
+                $acervo->formato = $dados['formato'][$i];
+                $acervo->id_loja = $dados['loja'][$i];
                 $acervo->save();
             }
 
@@ -116,6 +125,17 @@ class AjaxController extends Controller {
 
     public function exibirJogos(Request $request) {
         $html = view($request['tipo'], ['jogos' => Acervo::buscarAcervoSituacao(Situacao::where('pagina', $request['situacao'])->first()->id)])->render();
+        return ['html' => $html];
+    }
+
+    public function exibirDadosJogo(Request $request) {
+        $html = view('dados_jogo_'.$request['tipo'], [
+            'jogo' => Jogo::find($request['jogo']),
+            'desenvolvedores' => JogoEmpresa::buscarDesenvolvedores($request['jogo'])->pluck('nome')->toArray(),
+            'distribuidores' => JogoEmpresa::buscarDistribuidores($request['jogo'])->pluck('nome')->toArray(),
+            'generos' => JogoGenero::buscarGeneros($request['jogo'])->pluck('nome')->toArray(),
+            'acervo' => Acervo::buscarAcervoJogo($request['jogo'])
+            ])->render();
         return ['html' => $html];
     }
 

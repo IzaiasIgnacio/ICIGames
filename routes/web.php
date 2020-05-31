@@ -14,6 +14,7 @@
 Route::prefix('/ajax')->group(function () {
     Route::get('/html', 'AjaxController@buscarHtml')->name('buscar_html');
     Route::post('/exibir_jogos', 'AjaxController@exibirJogos')->name('exibir_grid');
+    Route::post('/exibir_dados_jogo', 'AjaxController@exibirDadosJogo')->name('exibir_dados_jogo');
     Route::post('/salvar_jogo', 'AjaxController@salvarJogo')->name('salvar_jogo');
 });
 
@@ -22,6 +23,7 @@ Route::prefix('/igdb')->group(function () {
     Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogo')->name('buscar_dados_jogo');
 });
 
+Route::get('/', 'IndexController@exibirDashboard')->name('exibir_dashboard');
 Route::get('/{pagina?}', 'IndexController@exibirJogos')->name('exibir_jogos');
 
 Route::prefix('/legado')->group(function () {

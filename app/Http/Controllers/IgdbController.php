@@ -23,7 +23,7 @@ class IgdbController extends Controller {
         '38', // PlayStation Portable
         '46', // PlayStation Vita
         '48', // PlayStation 4
-        '167', // PlayStation 5
+        '167' // PlayStation 5
     ];
 
     public function buscarJogosIgdb($busca) {

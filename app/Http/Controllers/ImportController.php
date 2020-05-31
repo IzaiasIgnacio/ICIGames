@@ -24,27 +24,14 @@ class ImportController extends Controller {
                 if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_cover_big.png')) {
                     Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
                 }
+                if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_cover_small.png')) {
+                    Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_small.png', file_get_contents(IgdbController::buscarUrlImagem('cover_small', $jogo->id_igdb_cover)));
+                }
+                if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_1080p.png')) {
+                    Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_1080p.png', file_get_contents(IgdbController::buscarUrlImagem('1080p', $jogo->id_igdb_cover)));
+                }
             }
         }
-
-        // $games = \MarcReichel\IGDBLaravel\Models\Game::search('tomb raider')
-        //                 ->select(['name', 'cover'])
-        //                 ->whereIn('platforms', ['6','7','8','9','38','46','48','167'])
-        //                 ->where('category', '!=', 1)
-        //                     ->take(50)
-        //                         ->get();
-
-        // foreach ($games as $game) {
-            // $cloudinary_id = null;
-            // if ($game->cover != null) {
-            //     $cloudinary_id = \MarcReichel\IGDBLaravel\Models\Cover::find($game->cover)->image_id;
-            // }
-
-        //     $resultado[] = [
-        //         'id' => $game->id,
-        //         'titulo' => $game->titulo
-        //     ];
-        // }
     }
     
     public function importar() {
@@ -167,7 +154,8 @@ class ImportController extends Controller {
         $acervo = Models\Acervo::firstOrCreate([
             'id_jogo' => $this->buscarJogo($game_platform->id_game)->id,
             'id_plataforma' => $this->buscarPlataforma($game_platform->id_platform)->id,
-            'id_situacao' => $game_platform->id_status
+            'id_situacao' => $game_platform->id_status,
+            'id_loja' => $this->buscarLoja($game_platform->id_store)
         ]);
 
         $acervo->data_lancamento = $game_platform->release_date;
@@ -175,7 +163,6 @@ class ImportController extends Controller {
         $acervo->preco = $game_platform->preco;
         $acervo->formato = ($game_platform->formato == 1) ? 'Fisico' : 'Digital';
         $acervo->tamanho = $game_platform->tamanho;
-        $acervo->id_loja = $this->buscarLoja($game_platform->id_store);
         $acervo->id_regiao = $game_platform->id_region;
         $acervo->id_classificacao = $this->buscarClassificacao($game_platform->id_rating);
 

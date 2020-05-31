@@ -17,4 +17,24 @@ class Helper {
         ];
     }
 
+    public static function formatarDataExibicao($data) {
+        if (empty($data)) {
+            return null;
+        }
+
+        return date('d/m/Y', \strtotime($data));
+    }
+
+    public static function formatarPrecoExibicao($preco) {
+        if (empty($preco)) {
+            return null;
+        }
+
+        return \number_format($preco, 2, ',', '');
+    }
+
+    public static function possuoJogo($id_jogo) {
+        return Models\Acervo::where('id_jogo', $id_jogo)->whereIn('id_situacao', [1, 4, 5])->exists();
+    }
+
 }
