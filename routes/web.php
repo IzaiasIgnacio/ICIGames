@@ -16,6 +16,7 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/exibir_jogos', 'AjaxController@exibirJogos')->name('exibir_grid');
     Route::post('/exibir_dados_jogo', 'AjaxController@exibirDadosJogo')->name('exibir_dados_jogo');
     Route::post('/salvar_jogo', 'AjaxController@salvarJogo')->name('salvar_jogo');
+    Route::post('/atualizar_imagens', 'AjaxController@atualizarImagens')->name('atualizar_imagens');
 });
 
 Route::prefix('/igdb')->group(function () {

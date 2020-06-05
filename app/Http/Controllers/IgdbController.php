@@ -131,6 +131,11 @@ class IgdbController extends Controller {
 
         return $screen;
     }
+
+    public static function buscarScreenshotsGame($id_igdb) {
+        $igdb = new IgdbController();
+        return $igdb->buscarUrlScreenshots(Game::find($id_igdb)->screenshots);
+    }
     
     public static function buscarUrlImagem($tamanho, $hash) {
         // cover_small	    90 x 128	Fit

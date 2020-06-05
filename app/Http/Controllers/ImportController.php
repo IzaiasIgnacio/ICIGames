@@ -7,7 +7,7 @@ use App\Models;
 use App\Models\Import;
 use App\Http\Controllers\IgdbController;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\DB;
 class ImportController extends Controller {
 
     public function capas() {
@@ -16,20 +16,20 @@ class ImportController extends Controller {
         $jogos = Models\Jogo::whereNotNull('id_igdb')->get();
 
         foreach ($jogos as $jogo) {
-            $cover = \MarcReichel\IGDBLaravel\Models\Game::find($jogo->id_igdb)->cover;
+            @$cover = \MarcReichel\IGDBLaravel\Models\Game::find($jogo->id_igdb)->cover;
             if (!empty($cover)) {
                 $jogo->id_igdb_cover = \MarcReichel\IGDBLaravel\Models\Cover::find($cover)->image_id;
                 $jogo->save();
                 
-                if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_cover_big.png')) {
-                    Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
-                }
-                if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_cover_small.png')) {
-                    Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_small.png', file_get_contents(IgdbController::buscarUrlImagem('cover_small', $jogo->id_igdb_cover)));
-                }
-                if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_1080p.png')) {
-                    Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_1080p.png', file_get_contents(IgdbController::buscarUrlImagem('1080p', $jogo->id_igdb_cover)));
-                }
+                // if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_cover_big.png')) {
+                //     Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
+                // }
+                // if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_cover_small.png')) {
+                //     Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_small.png', file_get_contents(IgdbController::buscarUrlImagem('cover_small', $jogo->id_igdb_cover)));
+                // }
+                // if (!Storage::disk('public')->exists('capas/'.$jogo->id_igdb_cover.'_1080p.png')) {
+                //     Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_1080p.png', file_get_contents(IgdbController::buscarUrlImagem('1080p', $jogo->id_igdb_cover)));
+                // }
             }
         }
     }
@@ -37,21 +37,23 @@ class ImportController extends Controller {
     public function importar() {
         ini_set('max_execution_time', 0);
 
+        DB::connection('icigames')->beginTransaction();
+
         foreach (Import\Game::orderBy('id')->get() as $game) {
             $this->importarJogo($game);
         }
 
-        foreach (Import\Status::get() as $status) {
-            $this->importarSituacao($status);
-        }
+        // foreach (Import\Status::get() as $status) {
+        //     $this->importarSituacao($status);
+        // }
 
         foreach (Import\Genre::get() as $gender) {
             $this->importarGenero($gender);
         }
 
-        foreach (Import\Platform::get() as $platform) {
-            $this->importarPlataforma($platform);
-        }
+        // foreach (Import\Platform::get() as $platform) {
+        //     $this->importarPlataforma($platform);
+        // }
 
         foreach (Import\DeveloperPublisher::get() as $developer_publisher) {
             $this->importarEmpresa($developer_publisher);
@@ -61,9 +63,9 @@ class ImportController extends Controller {
             $this->importarLoja($store);
         }
 
-        foreach (Import\Region::get() as $region) {
-            $this->importarRegiao($region);
-        }
+        // foreach (Import\Region::get() as $region) {
+        //     $this->importarRegiao($region);
+        // }
         
         foreach (Import\WishlistOrder::get() as $wishlist_order) {
             $this->importarOrdemWishlist($wishlist_order);
@@ -80,12 +82,14 @@ class ImportController extends Controller {
         foreach (Import\GamePlatform::get() as $game_platform) {
             $this->importarAcervo($game_platform);
         }
+
+        DB::connection('icigames')->commit();
     }
 
     private function importarJogo($game) {
         $jogo = Models\Jogo::firstOrCreate(['titulo' => $game->name, 'id_igdb' => $game->id_igdb]);
-        $jogo->id_igdb_cover = $game->cloudnary_id;
-        $jogo->descrição = $game->summary;
+        // $jogo->id_igdb_cover = $game->cloudnary_id;
+        $jogo->descricao = $game->summary;
         $jogo->nota = $game->nota;
         $jogo->completo = (int) $game->completo;
         $jogo->save();

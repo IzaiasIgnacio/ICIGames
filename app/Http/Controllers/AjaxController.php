@@ -102,7 +102,7 @@ class AjaxController extends Controller {
                     $jogo_genero->save();
                 }
             }
-            // imagens
+            
             if (!empty($dados['id_igdb'])) {
                 Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
                 Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_small.png', file_get_contents(IgdbController::buscarUrlImagem('cover_small', $jogo->id_igdb_cover)));
@@ -138,5 +138,37 @@ class AjaxController extends Controller {
             ])->render();
         return ['html' => $html];
     }
+
+    public function atualizarImagens(Request $request) {
+        try {
+            $jogo = Jogo::find($request->id);
+
+            if (empty($jogo->id_igdb)) {
+                return 'sem igdb';
+            }
+
+            $game = Game::find($jogo->id_igdb);
+            $cover = $game->cover;
+
+            if (empty($cover)) {
+                return 'sem cover';
+            }
+
+            $jogo->id_igdb_cover = Cover::find($cover)->image_id;
+            $jogo->save();           
+
+            Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
+            Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_small.png', file_get_contents(IgdbController::buscarUrlImagem('cover_small', $jogo->id_igdb_cover)));
+            Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_1080p.png', file_get_contents(IgdbController::buscarUrlImagem('1080p', $jogo->id_igdb_cover)));
+
+            return 'ok';
+        }
+        catch (\Exception $ex) {
+            return 'erro';
+        }
+        catch (\Error $ex) {
+            return 'erro';
+        }
+    }   
 
 }

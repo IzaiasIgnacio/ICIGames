@@ -29,11 +29,11 @@ class Acervo extends Model {
     }
     
     public static function buscarTotaisSituacao() {
-        return Acervo::select('situacao.pagina', DB::connection('icigames')->raw('count(acervo.id) as total'))
-                    ->join('situacao', 'situacao.id', 'acervo.id_situacao')
-                        ->groupBy('situacao.id')
-                            ->get()
-                                ->pluck('total','pagina');
+        return \App\Models\Situacao::select('situacao.pagina', DB::connection('icigames')->raw('count(acervo.id) as total'))
+                                        ->leftJoin('acervo', 'situacao.id', 'acervo.id_situacao')
+                                            ->groupBy('situacao.id')
+                                                ->get()
+                                                    ->pluck('total','pagina');
     }
 
     public static function buscarAcervoJogo($id_jogo) {

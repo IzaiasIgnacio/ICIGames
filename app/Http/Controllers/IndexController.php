@@ -43,7 +43,7 @@ class IndexController extends Controller {
             'total_completos' => Jogo::where('completo', true)->count(),
             'total_preco' => Helper::formatarPrecoExibicao(Acervo::sum('preco')),
             'total_fisicos' => Acervo::where('formato', 'Físico')->count(),
-            'total_digitais' => Acervo::where('formato', 'Digital')->count()
+            'total_digitais' => Acervo::where('formato', 'Digital')->where('id_situacao', 1)->count()
         ];
     }
 

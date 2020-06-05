@@ -340,3 +340,6 @@ fieldset legend {
     min-width: 99.4%;
     float: left;
 }
+.icones_dados_jogo i {
+    cursor: pointer;
+}

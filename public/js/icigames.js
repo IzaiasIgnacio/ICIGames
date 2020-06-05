@@ -1,3 +1,4 @@
+var scroll;
 $().ready(function() {
 
     $(".icone_exibir_grid").click(function() {
@@ -172,6 +173,7 @@ $().ready(function() {
     });
 
     $(".div_jogos_index").on('click', ".div_grid .coluna_thumb", function() {
+        scroll = $(window).scrollTop();
         $.post('/ICIGames/public/ajax/exibir_dados_jogo', {jogo: $(this).attr('jogo'), 'tipo': 'grid'},
         function(resposta) {
             $(".div_jogos_index").fadeOut(function() {
@@ -180,11 +182,21 @@ $().ready(function() {
             });
         });
     });
+
+    $(".div_jogos_index").on('click', '.icones_dados_jogo .fa-images', function() {
+        $.post('/ICIGames/public/ajax/atualizar_imagens', {id: $(this).parent().attr('id')},
+        function(resposta) {
+            $('.icones_dados_jogo .label_progresso').html(resposta);
+        });
+    });
+
 });
 
 window.onkeydown = function(e) {
     if (e.keyCode == 8 && e.target == document.body) {
+        $(window).scrollTop(scroll);
         e.preventDefault();
+        exibir_jogos('grid');
     }
 }
 

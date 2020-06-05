@@ -5,6 +5,10 @@
             <figure class="image is-3by4">
                 <img src="{{Storage::disk('public')->url('capas/'.$jogo['id_igdb_cover'].'_1080p.png')}}">
             </figure>
+            <div class='icones_dados_jogo' id='{{$jogo->id}}'>
+                <i class="fa fa-images fa-inverse"></i>
+                <label class='label_progresso'></label>
+            </div>
         </div>
         <div class="column is-8 coluna_texto">
             <label class='categoria_dados_jogo'>Desenvolvedores</label>
@@ -75,6 +79,19 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+            <?php /* 
+            <br>
+            <h3 class="title titulo_dados_jogo">Screenshots</h3>
+            <div class="columns is-gapless is-multiline">
+            @foreach (\App\Http\Controllers\IgdbController::buscarScreenshotsGame($jogo->id_igdb) as $screen)
+                <div class="column is-2">
+                    <figure class="image">
+                        <img src="{{$screen}}">
+                    </figure>
+                </div>
+            @endforeach
+            */ ?> 
             </div>
         </div>
     </div>
