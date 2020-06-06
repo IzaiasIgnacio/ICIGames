@@ -68,8 +68,8 @@
                                 <td>{{$ac->situacao}}</td>
                                 <td>{{\App\Util\Helper::formatarDataExibicao($ac->data_lancamento)}}</td>
                                 <td>{{\App\Util\Helper::formatarDataExibicao($ac->data_compra)}}</td>
-                                <td>{{$ac->classificacao}}</td>
                                 <td>{{$ac->regiao}}</td>
+                                <td>{{$ac->classificacao}}</td>
                                 <td>{{$ac->metacritic}}</td>
                                 <td>{{\App\Util\Helper::formatarPrecoExibicao($ac->preco)}}</td>
                                 <td>{{$ac->tamanho}}</td>
@@ -80,6 +80,7 @@
                     </tbody>
                 </table>
             </div>
+            <div class='div_screenshots' style='display: none'></div>
             <?php /* 
             <br>
             <h3 class="title titulo_dados_jogo">Screenshots</h3>
@@ -92,7 +93,6 @@
                 </div>
             @endforeach
             */ ?> 
-            </div>
         </div>
     </div>
 </div>

@@ -343,3 +343,9 @@ fieldset legend {
 .icones_dados_jogo i {
     cursor: pointer;
 }
+.selectize-dropdown-content {
+    overflow-y: hidden !important;
+}
+.navbar-dashboard .control {
+    width: 300px;
+}

@@ -129,14 +129,20 @@ class AjaxController extends Controller {
     }
 
     public function exibirDadosJogo(Request $request) {
+        $jogo = Jogo::find($request['jogo']);
+
         $html = view('dados_jogo_'.$request['tipo'], [
-            'jogo' => Jogo::find($request['jogo']),
+            'jogo' => $jogo,
             'desenvolvedores' => JogoEmpresa::buscarDesenvolvedores($request['jogo'])->pluck('nome')->toArray(),
             'distribuidores' => JogoEmpresa::buscarDistribuidores($request['jogo'])->pluck('nome')->toArray(),
             'generos' => JogoGenero::buscarGeneros($request['jogo'])->pluck('nome')->toArray(),
             'acervo' => Acervo::buscarAcervoJogo($request['jogo'])
             ])->render();
-        return ['html' => $html];
+
+        return [
+            'html' => $html,
+            'id_igdb' => $jogo->id_igdb
+        ];
     }
 
     public function atualizarImagens(Request $request) {
@@ -169,6 +175,14 @@ class AjaxController extends Controller {
         catch (\Error $ex) {
             return 'erro';
         }
-    }   
+    }
+
+    public function exibirScreenshots(Request $request) {
+        $html = view('screenshots', [
+            'screens' => IgdbController::buscarScreenshotsGame($request->id)
+        ])->render();
+        
+        return ['html' => $html];
+    }
 
 }

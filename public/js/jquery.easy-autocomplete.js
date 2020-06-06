@@ -1209,12 +1209,12 @@ var EasyAutocomplete = (function (scope) {
 					removeAutocomplete();
 				}
 
-				bindFocusOut();
+				// bindFocusOut();
 				bindKeyup();
 				bindKeydown();
 				bindKeypress();
 				// bindFocus();
-				bindBlur();
+				// bindBlur();
 			}
 
 			function bindFocusOut() {

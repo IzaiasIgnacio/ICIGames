@@ -173,14 +173,7 @@ $().ready(function() {
     });
 
     $(".div_jogos_index").on('click', ".div_grid .coluna_thumb", function() {
-        scroll = $(window).scrollTop();
-        $.post('/ICIGames/public/ajax/exibir_dados_jogo', {jogo: $(this).attr('jogo'), 'tipo': 'grid'},
-        function(resposta) {
-            $(".div_jogos_index").fadeOut(function() {
-                $(".div_jogos_index").html(resposta.html);
-                $(".div_jogos_index").fadeIn();
-            });
-        });
+        exibir_jogo($(this).attr('jogo'), 'grid');
     });
 
     $(".div_jogos_index").on('click', '.icones_dados_jogo .fa-images', function() {
@@ -189,6 +182,21 @@ $().ready(function() {
             $('.icones_dados_jogo .label_progresso').html(resposta);
         });
     });
+
+    var options = {
+        create: false,
+        highlight: true,
+        openOnFocus: false,
+        maxOptions: 10,
+        maxItems: 1,
+        hideSelected: true,
+        closeAfterSelect: true,
+        onItemAdd: function(value) {
+            exibir_jogo(value, 'grid');
+        }
+    };
+    
+    $("#buscar_jogos_topo").selectize(options);
 
 });
 
@@ -224,5 +232,28 @@ function exibir_jogos(tipo) {
     $.post('/ICIGames/public/ajax/exibir_jogos', {situacao: location.href.split('/').pop(), tipo: tipo},
     function(resposta) {
         $(".div_jogos_index").html(resposta.html);
+    });
+}
+
+function exibir_jogo(jogo, tipo) {
+    scroll = $(window).scrollTop();
+    $.post('/ICIGames/public/ajax/exibir_dados_jogo', {jogo: jogo, tipo: tipo},
+    function(resposta) {
+        $(".div_jogos_index").fadeOut(function() {
+            $(".div_jogos_index").html(resposta.html);
+            $(".div_jogos_index").fadeIn(function() {
+                if (resposta.id_igdb != '') {
+                    exibir_screenshots(resposta.id_igdb);
+                }
+            });
+        });
+    });
+}
+
+function exibir_screenshots(id_igdb) {
+    $.post('/ICIGames/public/ajax/exibir_screenshots', {id: id_igdb},
+    function(resposta) {
+        $('.div_screenshots').html(resposta.html);
+        $('.div_screenshots').fadeIn('slow');
     });
 }

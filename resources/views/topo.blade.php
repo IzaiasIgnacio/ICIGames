@@ -12,7 +12,15 @@
                 <a class="navbar-item{{($aba=='watchlist') ? ' selecionado' : ''}}" href='{{Route('exibir_jogos', ['pagina' => 'watchlist'])}}'><span class="has-badge-rounded has-badge-small" data-badge="{{$totais_topo['watchlist']}}">Watchlist</span></a>
                 <a class="navbar-item{{($aba=='plus') ? ' selecionado' : ''}}" href='{{Route('exibir_jogos', ['pagina' => 'plus'])}}'><span class="has-badge-rounded has-badge-small" data-badge="{{$totais_topo['plus']}}">PS Plus</span></a>
                 <a class="navbar-item navbar-dashboard">
-                    <input class="input is-small is-rounded" type="text" placeholder="Buscar">
+                    <!-- <input class="input is-small is-rounded" type="text" placeholder="Buscar"> -->
+                    <div class="control">
+                        <select id='buscar_jogos_topo' placeholder="Buscar">
+                            <option value=""></option>
+                            @foreach ($jogos as $jogo)
+                                <option value="{{$jogo->id}}">{{$jogo['titulo']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class='divisor'></div>
                     <i class="fas fa-chart-pie fa-lg{{($aba=='dashboard') ? ' icone_selecionado' : ''}}" onclick="window.location.href='{{Route('exibir_dashboard')}}'"></i>
                     <div class='divisor'></div>
