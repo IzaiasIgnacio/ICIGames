@@ -62,7 +62,7 @@ html, body {
     background-color: #000;
 }
 .navbar-end {
-    margin-right: 25px;
+    margin-right: 39px;
 }
 .stripe {
     background-color: rgba(0,0,0,0.7);
@@ -239,9 +239,9 @@ fieldset legend {
 .table td .select {
     height: 2.1em !important;
 }
-.select:not(.is-multiple):not(.is-loading)::after {
+/* .select:not(.is-multiple):not(.is-loading)::after {
     margin-top: -0.7em !important;
-}
+} */
 .table td {
     padding-top: 4px !important;
     padding-bottom: 2px !important;
@@ -348,4 +348,18 @@ fieldset legend {
 }
 .navbar-dashboard .control {
     width: 300px;
+}
+.btn_adicionar_acervo {
+    float: right;
+    margin-top: 5px;
+}
+.botao_escondido {
+    opacity: 0;
+}
+.botao_escondido:hover {
+    opacity: 1;
+}
+.campo_data::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
 }

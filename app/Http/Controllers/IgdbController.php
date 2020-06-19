@@ -12,6 +12,7 @@ use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\PLatform;
 use MarcReichel\IGDBLaravel\Models\Screenshot;
 use App\Models\Plataforma;
+use App\Models\Metacritic;
 
 class IgdbController extends Controller {
 
@@ -71,6 +72,9 @@ class IgdbController extends Controller {
         }
         if ($game->release_dates != null) {
             $lancamentos = ReleaseDate::whereIn('id', $game->release_dates)->get();
+            
+            $metacritic = new Metacritic();
+            $lancamentos = $metacritic->buscarNotas($game->name, $lancamentos);
         }
         if ($game->genres != null) {
             $genres = Genre::whereIn('id', $game->genres)->get()->pluck('name');
@@ -87,7 +91,8 @@ class IgdbController extends Controller {
                 'category' => $lancamento->category,
                 'platform' => $lancamento->platform,
                 'date' => $lancamento->date,
-                'region' => $lancamento->region
+                'region' => $lancamento->region,
+                'metacritic' => $lancamento->metacritic
             ];
 
         }
@@ -113,8 +118,9 @@ class IgdbController extends Controller {
         foreach ($releases as $release) {
             $html .= view('linha_acervo',\array_merge([
                 'plataforma_selecionada' => Plataforma::where('id_igdb', $release['platform'])->first()->id,
-                'data_lancamento' => \date('d/m/Y', $release['date']),
-                'regiao_selecionada' => $release['region']],
+                'data_lancamento' => \date('Y-m-d', $release['date']),
+                'regiao_selecionada' => $release['region'],
+                'metacritic' => $release['metacritic']],
                 \App\Util\Helper::getDadosFormulario()))->render();
         }
 
@@ -122,6 +128,10 @@ class IgdbController extends Controller {
     }
 
     public function buscarUrlScreenshots($screenshots) {
+        if (empty($screenshots)) {
+            return [];
+        }
+
         $screen = array();
         
         foreach ($screenshots as $s) {

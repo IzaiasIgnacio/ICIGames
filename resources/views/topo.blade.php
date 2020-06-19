@@ -16,7 +16,7 @@
                     <div class="control">
                         <select id='buscar_jogos_topo' placeholder="Buscar">
                             <option value=""></option>
-                            @foreach ($jogos as $jogo)
+                            @foreach ($jogos_busca as $jogo)
                                 <option value="{{$jogo->id}}">{{$jogo['titulo']}}</option>
                             @endforeach
                         </select>

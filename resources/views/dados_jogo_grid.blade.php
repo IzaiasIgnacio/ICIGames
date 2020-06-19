@@ -34,7 +34,11 @@
             <label class='valor_dados_jogo'>{{($jogo->descricao)}}</label>
             <br>
             <div class='container dados_jogo_grid_acervo_container'>
-                <h1 class="title titulo_dados_jogo">Plataformas</h1>
+                <h1 class="title titulo_dados_jogo">Plataformas
+                    <a class="button is-link is-small btn_adicionar_acervo botao_escondido">
+                        <strong><i class="fa fa-plus"></i></strong>
+                    </a>
+                </h1>
                 <table class='table is-narrow is-fullwidth tabela_acervo tabela_dados_jogo'>
                     <thead>
                         <tr>
@@ -59,6 +63,7 @@
                             <th><i class="fas fa-hdd"></i></th>
                             <th><i class="fas fa-compact-disc"></i> / <i class="fas fa-cloud"></i></th>
                             <th><i class="fas fa-shopping-cart"></i></th>
+                            <th width='1%'></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,24 +80,17 @@
                                 <td>{{$ac->tamanho}}</td>
                                 <td>{{$ac->formato}}</td>
                                 <td>{{$ac->loja}}</td>
+                                <td>
+                                    <a class="button is-danger is-small btn_remover_acervo botao_escondido">
+                                        <strong><i class="fa fa-minus"></i></strong>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <div class='div_screenshots' style='display: none'></div>
             </div>
-            <div class='div_screenshots' style='display: none'></div>
-            <?php /* 
-            <br>
-            <h3 class="title titulo_dados_jogo">Screenshots</h3>
-            <div class="columns is-gapless is-multiline">
-            @foreach (\App\Http\Controllers\IgdbController::buscarScreenshotsGame($jogo->id_igdb) as $screen)
-                <div class="column is-2">
-                    <figure class="image">
-                        <img src="{{$screen}}">
-                    </figure>
-                </div>
-            @endforeach
-            */ ?> 
         </div>
     </div>
 </div>

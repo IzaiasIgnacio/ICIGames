@@ -19,8 +19,8 @@
             </select>
         </div>
     </td>
-    <td><input class="input is-fullwidth" type="text" name='data_lancamento[]' placeholder="Data de Lançamento" value="{{$data_lancamento ?? '' }}"></td>
-    <td><input class="input is-fullwidth" type="text" name='data_compra[]' placeholder="Data de Compra"></td>
+    <td><input class="input is-fullwidth campo_data" type="date" name='data_lancamento[]' placeholder="Data de Lançamento" value="{{$data_lancamento ?? '' }}"></td>
+    <td><input class="input is-fullwidth campo_data" type="date" name='data_compra[]' placeholder="Data de Compra"></td>
     <td>
         <div class="select is-fullwidth">
             <select name='regiao[]'>
@@ -41,7 +41,7 @@
             </select>
         </div>
     </td>
-    <td><input class="input is-fullwidth" name='metacritic[]' type="text" placeholder="Metacritic"></td>
+    <td><input class="input is-fullwidth" name='metacritic[]' type="text" placeholder="Metacritic" value="{{$metacritic ?? ''}}"></td>
     <td><input class="input is-fullwidth" name='preco[]' type="text" placeholder="Preço"></td>
     <td><input class="input is-fullwidth" name='tamanho[]' type="text" placeholder="Tamanho"></td>
     <td>
@@ -56,7 +56,7 @@
     </td>
     <td>
         <div class="select is-fullwidth">
-            <select name='loja[]'>
+            <select name='loja[]' id='acervo_loja'>
                 <option>Loja</option>
                 @foreach ($lojas as $loja)
                     <option value="{{$loja['id']}}">{{$loja['nome']}}</option>

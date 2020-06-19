@@ -102,28 +102,28 @@
                     <table class='table is-narrow is-fullwidth tabela_acervo'>
                         <thead>
                             <tr>
-                                <th><i class="fas fa-gamepad"></i></th>
-                                <th><i class="fas fa-clipboard-check"></i></th>
-                                <th>
+                                <th width='11%'><i class="fas fa-gamepad"></i></th>
+                                <th width='11%'><i class="fas fa-clipboard-check"></i></th>
+                                <th width='11%'>
                                     <span class="fa-stack">
                                         <i class="fas fa-calendar fa-stack-2x"></i>
                                         <i class="fa fa-shipping-fast fa-stack-1x"></i>
                                     </span>
                                 </th>
-                                <th>
+                                <th width='11%'>
                                     <span class="fa-stack">
                                         <i class="fas fa-calendar fa-stack-2x"></i>
                                         <i class="fa fa-shopping-cart fa-stack-1x"></i>
                                     </span>
                                 </th>
-                                <th><i class="fas fa-globe"></i></th>
-                                <th><i class="fas fa-filter"></i></th>
-                                <th><i class="fas fa-star"></i></th>
-                                <th><i class="fas fa-money-bill-alt"></i></th>
-                                <th><i class="fas fa-hdd"></i></th>
-                                <th><i class="fas fa-compact-disc"></i> / <i class="fas fa-cloud"></i></th>
-                                <th><i class="fas fa-shopping-cart"></i></th>
-                                <th>&nbsp;</th>
+                                <th width='9%'><i class="fas fa-globe"></i></th>
+                                <th width='9%'><i class="fas fa-filter"></i></th>
+                                <th width='5%'><i class="fas fa-star"></i></th>
+                                <th width='5%'><i class="fas fa-money-bill-alt"></i></th>
+                                <th width='5%'><i class="fas fa-hdd"></i></th>
+                                <th width='6%'><i class="fas fa-compact-disc"></i> / <i class="fas fa-cloud"></i></th>
+                                <th width='11%'><i class="fas fa-shopping-cart"></i></th>
+                                <th width='1%'>&nbsp;</th>
                             </tr>
                         </thead>
                         <tbody>

@@ -25,9 +25,6 @@ Route::prefix('/igdb')->group(function () {
     Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogo')->name('buscar_dados_jogo');
 });
 
-Route::get('/', 'IndexController@exibirDashboard')->name('exibir_dashboard');
-Route::get('/{pagina?}', 'IndexController@exibirJogos')->name('exibir_jogos');
-
 Route::prefix('/legado')->group(function () {
     Route::get('/buscar_jogos/{titulo}', 'IgdbController@buscarJogosLegado')->name('buscar_jogos_legado');
     Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogoLegado')->name('buscar_dados_jogo_legado');
@@ -39,3 +36,19 @@ Route::prefix('/import')->group(function () {
     Route::get('/importar', 'ImportController@importar');
     Route::get('/capas', 'ImportController@capas');
 });
+
+Route::get('/teste', function () {
+    $game = \MarcReichel\IGDBLaravel\Models\Game::find(72870);
+    $releases = \MarcReichel\IGDBLaravel\Models\ReleaseDate::whereIn('id', $game->release_dates)->get();
+    $metacritic = new \App\Models\Metacritic();
+    // print_r($releases);
+    $releases = $metacritic->buscarNotas($game->name, $releases);
+    print_r($releases);
+    // $html = file_get_contents('https://www.metacritic.com/game/playstation-4/nier-automata');
+    // $div = substr($html, strpos($html, '<a class="metascore_anchor" href="/game/playstation-4/nier-automata/critic-reviews">'), 172);
+    // echo $span = substr($div, strpos($div, '<span>'), 50);
+    // echo preg_replace('/[^0-9]/', '', $span);
+});
+
+Route::get('/', 'IndexController@exibirDashboard')->name('exibir_dashboard');
+Route::get('/{pagina?}', 'IndexController@exibirJogos')->name('exibir_jogos');

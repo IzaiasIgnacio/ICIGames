@@ -13,7 +13,7 @@ class Helper {
             'regioes' => Models\Regiao::get(),
             'classificacoes' => Models\Classificacao::get(),
             'formatos' => Models\Formato::get(),
-            'lojas' => Models\Loja::get()
+            'lojas' => Models\Loja::orderBy('nome')->get()
         ];
     }
 

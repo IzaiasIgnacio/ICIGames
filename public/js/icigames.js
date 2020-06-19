@@ -47,6 +47,7 @@ $().ready(function() {
 
     $('.btn_modal_add_jogo').click(function() {
         $("#modal_formulario_jogo").addClass('is-active');
+        $("#campo_busca").focus();
     });
 
     $('.fechar_modal, .btn_cancelar, .modal-background').click(function() {
@@ -121,7 +122,6 @@ $().ready(function() {
                 $("#campo_busca").val('');
                 $("#descricao").html('');
                 preencherFormularioIgdb($("#campo_busca").getSelectedItemData().id);
-                // $(".coluna_igdb").fadeIn();
             },
             showAnimation: {
                 type: "slide", //normal|slide|fade
@@ -197,6 +197,7 @@ $().ready(function() {
     };
     
     $("#buscar_jogos_topo").selectize(options);
+    // $("#acervo_loja").selectize(options);
 
 });
 
@@ -224,7 +225,9 @@ function preencherFormularioIgdb(id_igdb) {
         $('#screen_4').attr('src', dados.screenshots[3]);
         $('#screen_5').attr('src', dados.screenshots[4]);
         $('#screen_6').attr('src', dados.screenshots[5]);
-        $(".coluna_igdb").fadeIn();
+        $(".coluna_igdb").fadeIn(function() {
+            $("#campo_busca").trigger('hide.eac');
+        });
     });
 }
 

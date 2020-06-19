@@ -75,19 +75,8 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class='div_screenshots' style='display: none'></div>
             </div>
-            <?php /* 
-            <br>
-            <h3 class="title titulo_dados_jogo">Screenshots</h3>
-            <div class="columns is-gapless is-multiline">
-            @foreach (\App\Http\Controllers\IgdbController::buscarScreenshotsGame($jogo->id_igdb) as $screen)
-                <div class="column is-2">
-                    <figure class="image">
-                        <img src="{{$screen}}">
-                    </figure>
-                </div>
-            @endforeach
-            */ ?> 
         </div>
     </div>
 </div>

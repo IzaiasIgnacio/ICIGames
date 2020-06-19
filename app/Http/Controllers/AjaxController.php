@@ -71,35 +71,37 @@ class AjaxController extends Controller {
                 $acervo->save();
             }
 
-            if ($game->involved_companies != null) {
-                $developers = Company::select('id', 'name')->whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('developer', true)->get()->pluck('company')->toArray())->get();
-                foreach ($developers as $dev) {
-                    $jogo_empresa = new JogoEmpresa();
-                    $jogo_empresa->desenvolvedor = 1;
-                    $jogo_empresa->distribuidor = 0;
-                    $jogo_empresa->id_jogo = $jogo->id;
-                    $jogo_empresa->id_empresa = Empresa::buscarEmpresa($dev)->id;
-                    $jogo_empresa->save();
+            if (!is_null($game)) {
+                if ($game->involved_companies != null) {
+                    $developers = Company::select('id', 'name')->whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('developer', true)->get()->pluck('company')->toArray())->get();
+                    foreach ($developers as $dev) {
+                        $jogo_empresa = new JogoEmpresa();
+                        $jogo_empresa->desenvolvedor = 1;
+                        $jogo_empresa->distribuidor = 0;
+                        $jogo_empresa->id_jogo = $jogo->id;
+                        $jogo_empresa->id_empresa = Empresa::buscarEmpresa($dev)->id;
+                        $jogo_empresa->save();
+                    }
+
+                    $publishers = Company::select('id', 'name')->whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('publisher', true)->get()->pluck('company')->toArray())->get();
+                    foreach ($publishers as $pub) {
+                        $jogo_empresa = new JogoEmpresa();
+                        $jogo_empresa->desenvolvedor = 0;
+                        $jogo_empresa->distribuidor = 1;
+                        $jogo_empresa->id_jogo = $jogo->id;
+                        $jogo_empresa->id_empresa = Empresa::buscarEmpresa($pub)->id;
+                        $jogo_empresa->save();
+                    }
                 }
 
-                $publishers = Company::select('id', 'name')->whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('publisher', true)->get()->pluck('company')->toArray())->get();
-                foreach ($publishers as $pub) {
-                    $jogo_empresa = new JogoEmpresa();
-                    $jogo_empresa->desenvolvedor = 0;
-                    $jogo_empresa->distribuidor = 1;
-                    $jogo_empresa->id_jogo = $jogo->id;
-                    $jogo_empresa->id_empresa = Empresa::buscarEmpresa($pub)->id;
-                    $jogo_empresa->save();
-                }
-            }
-
-            if ($game->genres != null) {
-                $genres = Genre::select('id', 'name')->whereIn('id', $game->genres)->get();
-                foreach ($genres as $genre) {
-                    $jogo_genero = new JogoGenero();
-                    $jogo_genero->id_jogo = $jogo->id;
-                    $jogo_genero->id_genero = Genero::buscarGenero($genre)->id;
-                    $jogo_genero->save();
+                if ($game->genres != null) {
+                    $genres = Genre::select('id', 'name')->whereIn('id', $game->genres)->get();
+                    foreach ($genres as $genre) {
+                        $jogo_genero = new JogoGenero();
+                        $jogo_genero->id_jogo = $jogo->id;
+                        $jogo_genero->id_genero = Genero::buscarGenero($genre)->id;
+                        $jogo_genero->save();
+                    }
                 }
             }
             

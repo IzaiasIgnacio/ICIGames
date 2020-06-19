@@ -19,6 +19,7 @@ class IndexController extends Controller {
 
         return view('index', \array_merge([
             'jogos' => $jogos,
+            'jogos_busca' => Jogo::get(),
             'aba' => $pagina,
             'pagina' => $situacao->tipo,
             'totais_topo' => $totais_topo,
@@ -30,6 +31,7 @@ class IndexController extends Controller {
 
     public function exibirDashboard() {
         return view('dashboard',\array_merge([
+            'jogos_busca' => Jogo::get(),
             'aba' => 'dashboard',
             'totais_dashboard' => $this->buscarTotaisDashboard(),
             'totais_topo' => $this->buscarTotaisTopo()],
@@ -38,8 +40,10 @@ class IndexController extends Controller {
     }
 
     private function buscarTotaisDashboard() {
+        // echo Acervo::where('id_situacao', 1)->count();die;
         return [
             'total_jogos' => Jogo::count(),
+            'total_colecao' => Acervo::where('id_situacao', 1)->groupBy('id_jogo')->get()->count(),
             'total_completos' => Jogo::where('completo', true)->count(),
             'total_preco' => Helper::formatarPrecoExibicao(Acervo::sum('preco')),
             'total_fisicos' => Acervo::where('formato', 'Físico')->count(),

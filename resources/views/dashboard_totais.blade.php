@@ -8,6 +8,12 @@
         </div>
         <div class="level-item has-text-centered">
             <div>
+                <p class="heading">Coleção</p>
+                <p class="title">{{$totais_dashboard['total_colecao']}}</p>
+            </div>
+        </div>
+        <div class="level-item has-text-centered">
+            <div>
                 <p class="heading">Completos</p>
                 <p class="title">{{$totais_dashboard['total_completos']}}</p>
             </div>
