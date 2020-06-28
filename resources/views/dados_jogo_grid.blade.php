@@ -1,4 +1,5 @@
 <div class='container container_dados_jogo container_dados_jogo_grid'>
+    <input type='hidden' id='id_jogo_exibido' value='{{$jogo->id}}' />
     <h1 class="title titulo_dados_jogo">{{$jogo->titulo}}</h1>
     <div class="columns is-gapless is-narrow">
         <div class="column is-4">
@@ -81,8 +82,8 @@
                                 <td>{{$ac->formato}}</td>
                                 <td>{{$ac->loja}}</td>
                                 <td>
-                                    <a class="button is-danger is-small btn_remover_acervo botao_escondido">
-                                        <strong><i class="fa fa-minus"></i></strong>
+                                    <a class="button is-link is-small btn_editar_acervo botao_escondido">
+                                        <strong><i class="fa fa-edit"></i></strong>
                                     </a>
                                 </td>
                             </tr>

@@ -50,8 +50,25 @@ $().ready(function() {
         $("#campo_busca").focus();
     });
 
-    $('.fechar_modal, .btn_cancelar, .modal-background').click(function() {
+    $('.div_jogos_index').on('click', '.btn_adicionar_acervo', function() {
+        $(".modal_linha_acervo").addClass('is-active');
+    });
+
+    $('.div_jogos_index').on('click', '.btn_editar_acervo', function() {
+        $(".modal_linha_acervo").addClass('is-active');
+    });
+
+    $('.div_menu').on('click', '.btn_salvar_acervo', function() {
+        $.post('/ICIGames/public/ajax/salvar_acervo', {dados: $("#form_acervo").serialize(), jogo: $("#id_jogo_exibido").val()},
+        function(resposta) {
+            exibir_jogo($("#id_jogo_exibido").val(), 'grid');
+            $(".modal_linha_acervo").removeClass('is-active');
+        })
+    });
+
+    $('.btn_cancelar, .modal-background').click(function() {
         $("#modal_formulario_jogo").removeClass('is-active');
+        $(".modal_linha_acervo").removeClass('is-active');
     });
 
     $('.tabela_acervo').on('click', '.btn_remover_linha', function() {
@@ -64,7 +81,7 @@ $().ready(function() {
 
     $('.btn_adicionar_linha').click(function() {
         $.get('/ICIGames/public/ajax/html', function(html) {
-            $(".tabela_acervo tbody").append(html);
+            $("#modal_formulario_jogo .tabela_acervo tbody").append(html);
         });
     });
 
@@ -72,6 +89,7 @@ $().ready(function() {
         // esc
         if (e.keyCode === 27) {
             $("#modal_formulario_jogo").removeClass('is-active');
+            $(".modal_linha_acervo").removeClass('is-active');
         }
     });
 

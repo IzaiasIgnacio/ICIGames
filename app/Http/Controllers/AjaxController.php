@@ -59,12 +59,12 @@ class AjaxController extends Controller {
                 $acervo->id_jogo = $jogo->id;
                 $acervo->id_plataforma = $plataforma;
                 $acervo->id_situacao = $dados['situacao'][$i];
-                $acervo->data_lancamento = date('Y-m-d', strtotime($dados['data_lancamento'][$i]));
-                $acervo->data_compra = date('Y-m-d', strtotime($dados['data_compra'][$i]));
+                $acervo->data_lancamento = empty($dados['data_lancamento'][$i]) ? null : date('Y-m-d', strtotime($dados['data_lancamento'][$i]));
+                $acervo->data_compra = empty($dados['data_lancamento'][$i]) ? null : date('Y-m-d', strtotime($dados['data_compra'][$i]));
                 $acervo->id_regiao = $dados['regiao'][$i];
                 $acervo->id_classificacao = $dados['classificacao'][$i];
                 $acervo->metacritic = $dados['metacritic'][$i];
-                $acervo->preco = $dados['preco'][$i];
+                $acervo->preco = $dados['preco'][$i] == '' ? null : $dados['preco'][$i];
                 $acervo->tamanho = $dados['tamanho'][$i];
                 $acervo->formato = $dados['formato'][$i];
                 $acervo->id_loja = $dados['loja'][$i];
@@ -185,6 +185,24 @@ class AjaxController extends Controller {
         ])->render();
         
         return ['html' => $html];
+    }
+
+    public function salvarAcervo(Request $request) {
+        parse_str($request->dados, $dados);
+        $acervo = new Acervo();
+        $acervo->id_jogo = $request->jogo;
+        $acervo->id_plataforma = $dados['plataforma'][0];
+        $acervo->id_situacao = $dados['situacao'][0];
+        $acervo->data_lancamento = empty($dados['data_lancamento'][0]) ? null : date('Y-m-d', strtotime($dados['data_lancamento'][0]));
+        $acervo->data_compra = empty($dados['data_compra'][0]) ? null : date('Y-m-d', strtotime($dados['data_compra'][0]));
+        $acervo->id_regiao = empty($dados['regiao'][0]) ? null : $dados['regiao'][0];
+        $acervo->id_classificacao = empty($dados['classificacao'][0]) ? null : $dados['classificacao'][0];
+        $acervo->metacritic = empty($dados['metacritic'][0]) ? null : $dados['metacritic'][0];
+        $acervo->preco = $dados['preco'][0] == '' ? null : $dados['preco'][0];
+        $acervo->tamanho = empty($dados['tamanho'][0]) ? null : $dados['tamanho'][0];
+        $acervo->formato = empty($dados['formato'][0]) ? null : $dados['formato'][0];
+        $acervo->id_loja = empty($dados['loja'][0]) ? null : $dados['loja'][0];
+        $acervo->save();
     }
 
 }

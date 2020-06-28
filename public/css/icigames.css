@@ -146,10 +146,19 @@ html, body {
 .divisor {
     margin-right: 20px;
 }
-.modal_jogo > .modal-card {
+.modal_jogo > .modal-card, .modal_linha_acervo > .modal-card {
     height: 80%;
     width: 80%;
     margin-top: -150px;
+}
+.modal_linha_acervo .modal-card {
+    margin-top: 15% !important;
+}
+.modal_linha_acervo .modal-card-foot {
+    justify-content: flex-end !important;
+}
+.modal_linha_acervo .modal-card-body {
+    max-height: 120px !important;
 }
 .modal-card-head {
     background-color: #0c1b93;

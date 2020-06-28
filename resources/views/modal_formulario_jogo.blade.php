@@ -3,7 +3,6 @@
     <div class="modal-card">
         <header class="modal-card-head">
             <p class="modal-card-title">Adicionar jogo</p>
-            <button class="delete fechar_modal" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
             <form id='form_jogo'>
