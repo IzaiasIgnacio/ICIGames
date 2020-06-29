@@ -21,6 +21,10 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/salvar_acervo', 'AjaxController@salvarAcervo')->name('salvar_acervo');
 });
 
+Route::prefix('/graficos')->group(function () {
+    Route::get('/plataformas', 'DashboardController@graficoPlataformas')->name('grafico_plataformas');
+});
+
 Route::prefix('/igdb')->group(function () {
     Route::get('/buscar_jogos/{busca}', 'IgdbController@buscarJogosIgdb')->name('buscar_jogos_igdb');
     Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogo')->name('buscar_dados_jogo');
@@ -51,5 +55,5 @@ Route::get('/teste', function () {
     // echo preg_replace('/[^0-9]/', '', $span);
 });
 
-Route::get('/', 'IndexController@exibirDashboard')->name('exibir_dashboard');
+Route::get('/', 'DashboardController@exibirDashboard')->name('exibir_dashboard');
 Route::get('/{pagina?}', 'IndexController@exibirJogos')->name('exibir_jogos');

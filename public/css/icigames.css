@@ -372,3 +372,6 @@ fieldset legend {
     display: none;
     -webkit-appearance: none;
 }
+.container_graficos {
+    max-width: 90%;
+}
