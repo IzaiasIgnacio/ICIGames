@@ -82,6 +82,7 @@
                                 <td>{{$ac->formato}}</td>
                                 <td>{{$ac->loja}}</td>
                                 <td>
+                                    <input type='hidden' class='id_acervo' value='{{$ac->id}}'>
                                     <a class="button is-link is-small btn_editar_acervo botao_escondido">
                                         <strong><i class="fa fa-edit"></i></strong>
                                     </a>

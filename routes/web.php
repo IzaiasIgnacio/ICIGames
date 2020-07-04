@@ -15,15 +15,14 @@ Route::prefix('/ajax')->group(function () {
     Route::get('/html', 'AjaxController@buscarHtml')->name('buscar_html');
     Route::post('/exibir_jogos', 'AjaxController@exibirJogos')->name('exibir_grid');
     Route::post('/exibir_dados_jogo', 'AjaxController@exibirDadosJogo')->name('exibir_dados_jogo');
+    Route::post('/carregar_acervo', 'AjaxController@carregarAcervo')->name('carregar_acervo');
     Route::post('/salvar_jogo', 'AjaxController@salvarJogo')->name('salvar_jogo');
     Route::post('/atualizar_imagens', 'AjaxController@atualizarImagens')->name('atualizar_imagens');
     Route::post('/exibir_screenshots', 'AjaxController@exibirScreenshots')->name('exibir_screenshots');
     Route::post('/salvar_acervo', 'AjaxController@salvarAcervo')->name('salvar_acervo');
 });
 
-Route::prefix('/graficos')->group(function () {
-    Route::get('/plataformas', 'DashboardController@graficoPlataformas')->name('grafico_plataformas');
-});
+Route::get('/graficos', 'DashboardController@graficos')->name('grafico_plataformas');
 
 Route::prefix('/igdb')->group(function () {
     Route::get('/buscar_jogos/{busca}', 'IgdbController@buscarJogosIgdb')->name('buscar_jogos_igdb');

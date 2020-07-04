@@ -50,20 +50,50 @@ $().ready(function() {
         $("#campo_busca").focus();
     });
 
+    var id_acervo = '';
+
     $('.div_jogos_index').on('click', '.btn_adicionar_acervo', function() {
+        $("select[name='plataforma[]'").val('');
+        $("select[name='situacao[]']").val('');
+        $("input[name='data_lancamento[]']").val('');
+        $("input[name='data_compra[]']").val('');
+        $("select[name='regiao[]']").val('');
+        $("select[name='classificacao[]']").val('');
+        $("input[name='metacritic[]']").val('');
+        $("input[name='preco[]']").val('');
+        $("input[name='tamanho[]']").val('');
+        $("select[name='formato[]']").val('');
+        $("select[name='loja[]']").val('');
+        id_acervo = ''
         $(".modal_linha_acervo").addClass('is-active');
     });
 
     $('.div_jogos_index').on('click', '.btn_editar_acervo', function() {
-        $(".modal_linha_acervo").addClass('is-active');
+        $.post('/ICIGames/public/ajax/carregar_acervo', {acervo: $(this).parent().find('.id_acervo').val()},
+        function(resposta) {
+            $("select[name='plataforma[]'").val(resposta.id_plataforma);
+            $("select[name='situacao[]']").val(resposta.id_situacao);
+            $("input[name='data_lancamento[]']").val(resposta.data_lancamento);
+            $("input[name='data_compra[]']").val(resposta.data_compra);
+            $("select[name='regiao[]']").val(resposta.id_regiao);
+            $("select[name='classificacao[]']").val(resposta.id_classificacao);
+            $("input[name='metacritic[]']").val(resposta.metacritic);
+            $("input[name='preco[]']").val(resposta.preco);
+            $("input[name='tamanho[]']").val(resposta.tamanho);
+            $("select[name='formato[]']").val(resposta.formato);
+            $("select[name='loja[]']").val(resposta.id_loja);
+            id_acervo = resposta.id;
+            $(".modal_linha_acervo").addClass('is-active');
+        });
     });
 
     $('.div_menu').on('click', '.btn_salvar_acervo', function() {
-        $.post('/ICIGames/public/ajax/salvar_acervo', {dados: $("#form_acervo").serialize(), jogo: $("#id_jogo_exibido").val()},
+        $.post('/ICIGames/public/ajax/salvar_acervo', {dados: $("#form_acervo").serialize(), jogo: $("#id_jogo_exibido").val(), acervo: id_acervo},
         function(resposta) {
+            console.log(resposta)
             exibir_jogo($("#id_jogo_exibido").val(), 'grid');
             $(".modal_linha_acervo").removeClass('is-active');
-        })
+        });
     });
 
     $('.btn_cancelar, .modal-background').click(function() {

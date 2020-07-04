@@ -187,10 +187,20 @@ class AjaxController extends Controller {
         return ['html' => $html];
     }
 
+    public function carregarAcervo(Request $request) {
+        return Acervo::find($request->acervo);
+    }
+
     public function salvarAcervo(Request $request) {
+        if (empty($request->acervo)) {
+            $acervo = new Acervo();
+            $acervo->id_jogo = $request->jogo;
+        }
+        else {
+            $acervo = Acervo::find($request->acervo);
+        }
+        
         parse_str($request->dados, $dados);
-        $acervo = new Acervo();
-        $acervo->id_jogo = $request->jogo;
         $acervo->id_plataforma = $dados['plataforma'][0];
         $acervo->id_situacao = $dados['situacao'][0];
         $acervo->data_lancamento = empty($dados['data_lancamento'][0]) ? null : date('Y-m-d', strtotime($dados['data_lancamento'][0]));
