@@ -3,9 +3,14 @@
         <div class="column is-3">
             <canvas id="grafico_plataformas"></canvas>        
         </div>
+        <div class="column is-3">
+            <canvas id="grafico_situacoes"></canvas>        
+        </div>
+        <div class="column is-3">
+            <canvas id="grafico_lojas"></canvas>        
+        </div>
         <!--
         preco
-        situacao
         critic
 
         TotalJogosAno

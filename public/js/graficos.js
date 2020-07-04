@@ -18,33 +18,44 @@ $().ready(function() {
     Chart.defaults.global.legend.labels.fontColor = '#fff';
 
     var plataformas = document.getElementById('grafico_plataformas').getContext('2d');
+    var situacoes = document.getElementById('grafico_situacoes').getContext('2d');
+    var lojas = document.getElementById('grafico_lojas').getContext('2d');
 
-    $.get('/ICIGames/public/graficos/plataformas',
+    $.get('/ICIGames/public/graficos',
     function(resposta) {
-        new Chart(plataformas, {
-            type: 'pie',
-            data: {
-                labels: resposta.plataformas,
-                datasets: [{
-                    backgroundColor: [
-						cores.vermelho,
-						cores.azul,
-						cores.verde,
-						cores.roxo,
-						cores.rosa,
-                        cores.azul_claro,
-                        cores.vermelho_claro
-					],
-                    borderColor: '#fff',
-                    borderWidth: 1,
-                    data: resposta.valores
-                }]
-            },
-            options: {
-                title: {
-                    text: 'Jogos por Plataforma'
-                }
-            }
-        });
-    })
+        exibir_grafico('pie', plataformas, resposta.plataformas.rotulos, resposta.plataformas.valores, 'Coleção por Plataforma')
+        exibir_grafico('pie', situacoes, resposta.situacoes.rotulos, resposta.situacoes.valores, 'Jogos por Situação')
+        exibir_grafico('horizontalBar', lojas, resposta.lojas.rotulos, resposta.lojas.valores, 'Jogos por Loja')
+    });
 });
+
+function exibir_grafico(tipo, canvas, labels, valores, titulo) {
+    new Chart(canvas, {
+        type: tipo,
+        data: {
+            labels: labels,
+            datasets: [{
+                backgroundColor: [
+                    cores.vermelho,
+                    cores.azul,
+                    cores.verde,
+                    cores.roxo,
+                    cores.rosa,
+                    cores.azul_claro,
+                    cores.vermelho_claro
+                ],
+                borderColor: '#fff',
+                borderWidth: 1,
+                data: valores
+            }]
+        },
+        options: {
+            title: {
+                text: titulo
+            },
+            legend: {
+                display: (tipo == 'pie')
+            }
+        }
+    });
+}

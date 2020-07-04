@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Acervo;
 use App\Models\Jogo;
 use App\Models\Plataforma;
+use App\Models\Situacao;
+use App\Models\Loja;
 use App\Util\Helper;
 use Illuminate\Support\Facades\DB;
 
@@ -32,19 +34,45 @@ class DashboardController extends Controller {
         ];
     }
 
-    public function graficoPlataformas() {
-        $dados = null;
+    public function graficos() {
         $plataformas = Plataforma::orderBy('ordem')->get();
+        $situacoes = Situacao::get();
+        $lojas = Loja::get();
 
+        $dados_plataformas = null;
         foreach ($plataformas as $plataforma) {
             $acervo = Acervo::where('id_plataforma', $plataforma->id)->where('id_situacao', 1)->count();
-            $dados['plataformas'][] = $plataforma->nome.' ('.$acervo.')';
-            $dados['valores'][] = $acervo;
+            $dados_plataformas['plataformas'][] = $plataforma->nome.' ('.$acervo.')';
+            $dados_plataformas['valores'][] = $acervo;
+        }
+
+        $dados_situacoes = null;
+        foreach ($situacoes as $situacao) {
+            $acervo = Acervo::where('id_situacao', $situacao->id)->distinct('id_jogo')->count();
+            $dados_situacoes['situacoes'][] = $situacao->nome.' ('.$acervo.')';
+            $dados_situacoes['valores'][] = $acervo;
+        }
+
+        $dados_lojas = null;
+        foreach ($lojas as $loja) {
+            $acervo = Acervo::where('id_loja', $loja->id)->count();
+            $dados_lojas['lojas'][] = $loja->nome.' ('.$acervo.')';
+            $dados_lojas['valores'][] = $acervo;
         }
 
         return [
-            'plataformas' => $dados['plataformas'],
-            'valores' => $dados['valores']
+            'plataformas' => [
+                'rotulos' => $dados_plataformas['plataformas'],
+                'valores' => $dados_plataformas['valores']
+            ],
+            'situacoes' => [
+                'rotulos' => $dados_situacoes['situacoes'],
+                'valores' => $dados_situacoes['valores']
+            ],
+            'lojas' => [
+                'rotulos' => $dados_lojas['lojas'],
+                'valores' => $dados_lojas['valores']
+            ]
         ];
     }
 
