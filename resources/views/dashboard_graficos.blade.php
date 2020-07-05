@@ -6,17 +6,23 @@
         <div class="column is-3">
             <canvas id="grafico_situacoes"></canvas>        
         </div>
+        <div class="column is-3"></div>
+        <div class="column is-3"></div>
         <div class="column is-3">
             <canvas id="grafico_lojas"></canvas>        
+        </div>
+        <div class="column is-3">
+            <canvas id="grafico_lancamentos"></canvas>        
+        </div>
+        <div class="column is-3">
+            <canvas id="grafico_aquisicoes"></canvas>        
         </div>
         <!--
         preco
         critic
 
-        TotalJogosAno
         TotalJogosDeveloper
         TotalJogosPublisher
-        TotalJogosLoja
         TotalJogosGenero
         -->
     </div>

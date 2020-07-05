@@ -37,7 +37,6 @@ class DashboardController extends Controller {
     public function graficos() {
         $plataformas = Plataforma::orderBy('ordem')->get();
         $situacoes = Situacao::get();
-        $lojas = Loja::get();
 
         $dados_plataformas = null;
         foreach ($plataformas as $plataforma) {
@@ -53,11 +52,46 @@ class DashboardController extends Controller {
             $dados_situacoes['valores'][] = $acervo;
         }
 
+        $lojas = Loja::select('nome', DB::connection('icigames')->raw('count(acervo.id) as valor'))
+                        ->join('acervo', 'acervo.id_loja', 'loja.id')
+                            ->where('acervo.id_situacao', 1)
+                                ->groupBy('loja.id')
+                                    ->orderByDesc(DB::connection('icigames')->raw('count(acervo.id)'))
+                                        ->take(10)
+                                            ->get();
+
         $dados_lojas = null;
         foreach ($lojas as $loja) {
-            $acervo = Acervo::where('id_loja', $loja->id)->count();
-            $dados_lojas['lojas'][] = $loja->nome.' ('.$acervo.')';
-            $dados_lojas['valores'][] = $acervo;
+            $dados_lojas['lojas'][] = $loja->nome.' ('.$loja->valor.')';
+            $dados_lojas['valores'][] = $loja->valor;
+        }
+
+        $lancamentos = Acervo::select(DB::connection('icigames')->raw('year(acervo.data_lancamento) as lancamento, count(acervo.id) as valor'))
+                        ->whereNotNull('acervo.data_lancamento')
+                        ->where('acervo.id_situacao', 1)
+                            ->groupBy(DB::connection('icigames')->raw('year(acervo.data_lancamento)'))
+                                ->orderByDesc(DB::connection('icigames')->raw('count(acervo.id)'))
+                                    ->take(10)
+                                        ->get();
+
+        $dados_lancamentos = null;
+        foreach ($lancamentos as $lancamento) {
+            $dados_lancamentos['lancamentos'][] = $lancamento->lancamento.' ('.$lancamento->valor.')';
+            $dados_lancamentos['valores'][] = $lancamento->valor;
+        }
+
+        $aquisicoes = Acervo::select(DB::connection('icigames')->raw('year(acervo.data_compra) as aquisicao, count(acervo.id) as valor'))
+                        ->whereNotNull('acervo.data_compra')
+                        ->where('acervo.id_situacao', 1)
+                            ->groupBy(DB::connection('icigames')->raw('year(acervo.data_compra)'))
+                                ->orderByDesc(DB::connection('icigames')->raw('count(acervo.id)'))
+                                    ->take(10)
+                                        ->get();
+
+        $dados_aquisicoes = null;
+        foreach ($aquisicoes as $aquisicao) {
+            $dados_aquisicoes['aquisicoes'][] = $aquisicao->aquisicao.' ('.$aquisicao->valor.')';
+            $dados_aquisicoes['valores'][] = $aquisicao->valor;
         }
 
         return [
@@ -72,6 +106,14 @@ class DashboardController extends Controller {
             'lojas' => [
                 'rotulos' => $dados_lojas['lojas'],
                 'valores' => $dados_lojas['valores']
+            ],
+            'lancamentos' => [
+                'rotulos' => $dados_lancamentos['lancamentos'],
+                'valores' => $dados_lancamentos['valores']
+            ],
+            'aquisicoes' => [
+                'rotulos' => $dados_aquisicoes['aquisicoes'],
+                'valores' => $dados_aquisicoes['valores']
             ]
         ];
     }
