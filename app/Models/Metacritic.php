@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Metacritic extends Model {
+class Metacritic {
 
     // $name => MarcReichel\IGDBLaravel\Models\Game->name;
     // $releases => MarcReichel\IGDBLaravel\Models\ReleaseDate;

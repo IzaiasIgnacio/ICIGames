@@ -29,6 +29,13 @@ Route::prefix('/igdb')->group(function () {
     Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogo')->name('buscar_dados_jogo');
 });
 
+Route::prefix('/opencritic')->group(function () {
+    Route::get('/buscar_jogo/{busca}', function ($busca) {
+        $opencritic = new \App\Models\OpenCritic();
+        return $opencritic->buscarMedia($busca);
+    });
+});
+
 Route::prefix('/legado')->group(function () {
     Route::get('/buscar_jogos/{titulo}', 'IgdbController@buscarJogosLegado')->name('buscar_jogos_legado');
     Route::get('/buscar_dados_jogo/{id}', 'IgdbController@buscarDadosJogoLegado')->name('buscar_dados_jogo_legado');
