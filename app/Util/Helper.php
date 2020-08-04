@@ -13,7 +13,12 @@ class Helper {
             'regioes' => Models\Regiao::get(),
             'classificacoes' => Models\Classificacao::get(),
             'formatos' => Models\Formato::get(),
-            'lojas' => Models\Loja::orderBy('nome')->get()
+            'lojas' => Models\Loja::select('loja.*')
+                        ->join('acervo', 'acervo.id_loja', 'loja.id')
+                            ->where('acervo.id_situacao', 1)
+                                ->groupBy('loja.id')
+                                    ->orderByDesc(\Illuminate\Support\Facades\DB::connection('icigames')->raw('count(acervo.id)'))
+                                        ->get()
         ];
     }
 

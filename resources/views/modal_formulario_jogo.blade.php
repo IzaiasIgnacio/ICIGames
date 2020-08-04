@@ -148,7 +148,6 @@
                 <button class="button is-light btn_cancelar">Cancelar</button>
                 <label class='label_progresso'></label>
             </div>
-            <button class="button is-pulled-right is-danger btn_excluir" style="display:none">Excluir</button>
         </footer>
     </div>
 </div>

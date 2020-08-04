@@ -12,6 +12,7 @@ use App\Models\JogoGenero;
 use App\Models\Genero;
 use App\Models\Acervo;
 use App\Models\Situacao;
+use App\Models\OrdemWishlist;
 use MarcReichel\IGDBLaravel\Models\Game;
 use MarcReichel\IGDBLaravel\Models\InvolvedCompany;
 use MarcReichel\IGDBLaravel\Models\Company;
@@ -213,6 +214,27 @@ class AjaxController extends Controller {
         $acervo->formato = empty($dados['formato'][0]) ? null : $dados['formato'][0];
         $acervo->id_loja = empty($dados['loja'][0]) ? null : $dados['loja'][0];
         $acervo->save();
+    }
+
+    public function excluirJogo(Request $request, $args) {
+        $jogo = Jogo::find($args);
+        if (!empty($jogo->id_igdb_cover)) {
+            Storage::disk('public')->delete('capas/'.$jogo->id_igdb_cover.'_cover_big.png');
+            Storage::disk('public')->delete('capas/'.$jogo->id_igdb_cover.'_cover_small.png');
+            Storage::disk('public')->delete('capas/'.$jogo->id_igdb_cover.'_1080p.png');
+        }
+
+        DB::connection('icigames')->beginTransaction();
+
+        OrdemWishlist::where('id_jogo', $jogo->id)->delete();
+        JogoEmpresa::where('id_jogo', $jogo->id)->delete();
+        JogoGenero::where('id_jogo', $jogo->id)->delete();
+        Acervo::where('id_jogo', $jogo->id)->delete();
+        $jogo->delete();
+
+        DB::connection('icigames')->commit();
+
+        return 'ok';
     }
 
 }

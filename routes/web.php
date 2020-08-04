@@ -20,6 +20,7 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/atualizar_imagens', 'AjaxController@atualizarImagens')->name('atualizar_imagens');
     Route::post('/exibir_screenshots', 'AjaxController@exibirScreenshots')->name('exibir_screenshots');
     Route::post('/salvar_acervo', 'AjaxController@salvarAcervo')->name('salvar_acervo');
+    Route::get('/excluir_jogo/{jogo}', 'AjaxController@excluirJogo')->name('excluir_jogo');
 });
 
 Route::get('/graficos', 'DashboardController@graficos')->name('grafico_plataformas');
@@ -49,12 +50,19 @@ Route::prefix('/import')->group(function () {
 });
 
 Route::get('/teste', function () {
-    $game = \MarcReichel\IGDBLaravel\Models\Game::find(72870);
-    $releases = \MarcReichel\IGDBLaravel\Models\ReleaseDate::whereIn('id', $game->release_dates)->get();
-    $metacritic = new \App\Models\Metacritic();
+    print_r(
+        \App\Models\Loja::select('loja.nome')
+                            ->join('acervo', 'acervo.id_loja', 'loja.id')
+                                ->groupBy('loja.id')
+                                    ->orderByDesc(\Illuminate\Support\Facades\DB::connection('icigames')->raw('count(acervo.id)'))
+                                        ->get()
+    );
+    // $game = \MarcReichel\IGDBLaravel\Models\Game::find(72870);
+    // $releases = \MarcReichel\IGDBLaravel\Models\ReleaseDate::whereIn('id', $game->release_dates)->get();
+    // $metacritic = new \App\Models\Metacritic();
     // print_r($releases);
-    $releases = $metacritic->buscarNotas($game->name, $releases);
-    print_r($releases);
+    // $releases = $metacritic->buscarNotas($game->name, $releases);
+    // print_r($releases);
     // $html = file_get_contents('https://www.metacritic.com/game/playstation-4/nier-automata');
     // $div = substr($html, strpos($html, '<a class="metascore_anchor" href="/game/playstation-4/nier-automata/critic-reviews">'), 172);
     // echo $span = substr($div, strpos($div, '<span>'), 50);
