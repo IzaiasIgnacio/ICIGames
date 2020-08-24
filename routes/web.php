@@ -21,6 +21,7 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/exibir_screenshots', 'AjaxController@exibirScreenshots')->name('exibir_screenshots');
     Route::post('/salvar_acervo', 'AjaxController@salvarAcervo')->name('salvar_acervo');
     Route::get('/excluir_jogo/{jogo}', 'AjaxController@excluirJogo')->name('excluir_jogo');
+    Route::post('/ordenar_wishlist', 'AjaxController@ordenarWishlist')->name('ordenar_wishlist');
 });
 
 Route::get('/graficos', 'DashboardController@graficos')->name('grafico_plataformas');

@@ -24,3 +24,18 @@
     <div class="column is-10 coluna_dados_jogo" style='display: none'>
     </div>
 </div>
+<script>
+    $().ready(function() {
+        sortable('#sortable', {
+            forcePlaceholderSize: true,
+            // placeholderClass: 'ph-class',
+            // hoverClass: 'bg-maroon yellow'
+            // handle: 'h2'
+            // placeholder: '<tr><td colspan="7">&nbsp;</td></tr>'
+        });
+        sortable('#sortable')[0].addEventListener('sortupdate', function(e) {
+            var ordem = $("#sortable li").map(function(){return $(this).attr('jogo');}).get();
+            $.post('/ICIGames/public/ajax/ordenar_wishlist', {ordem: ordem});
+        });
+    });
+</script>

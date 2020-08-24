@@ -124,7 +124,7 @@ $().ready(function() {
         }
     });
 
-    $('.div_jogos_index').on('click', '.titulo_dados_jogo', function(){
+    $('.div_jogos_index').on('click', '.container_dados_jogo > .titulo_dados_jogo', function(){
         $(".modal_ajuste").addClass('is-active');
     });
 
@@ -213,21 +213,6 @@ $().ready(function() {
             else {
                 $(".label_progresso").html(resposta);
             }
-        });
-    });
-
-    // $('#sortable').sortable();
-    sortable('#sortable', {
-        forcePlaceholderSize: true,
-        // placeholderClass: 'ph-class',
-        // hoverClass: 'bg-maroon yellow'
-        // handle: 'h2'
-        // placeholder: '<tr><td colspan="7">&nbsp;</td></tr>'
-    });
-    sortable('#sortable')[0].addEventListener('sortupdate', function(e) {
-        // console.log(e.detail);
-        $("#sortable li").each(function(i, e) {
-            console.log($(e).attr('jogo'))
         });
     });
 

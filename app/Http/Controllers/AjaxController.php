@@ -237,4 +237,20 @@ class AjaxController extends Controller {
         return 'ok';
     }
 
+    public function ordenarWishlist(Request $request) {
+        try {
+            for ($i=1;$i<count($request['ordem']);$i++) {
+                OrdemWishlist::where('id_jogo', $request['ordem'][$i-1])->update(['ordem' => $i]);
+            }
+        }
+        catch (\Exception $ex) {
+            return $ex->getMessage();
+        }
+        catch (\Error $ex) {
+            return $ex->getMessage();
+        }
+
+        return 'ok';
+    }
+
 }
