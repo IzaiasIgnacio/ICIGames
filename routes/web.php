@@ -50,6 +50,8 @@ Route::prefix('/import')->group(function () {
     Route::get('/capas', 'ImportController@capas');
 });
 
+Route::any('exportar', 'ExportarController@exportar')->name('exportar');
+
 Route::get('/teste', function () {
     print_r(
         \App\Models\Loja::select('loja.nome')
