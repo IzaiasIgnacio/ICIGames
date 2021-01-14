@@ -267,8 +267,12 @@ function preencherFormularioIgdb(id_igdb) {
         $("#id_igdb").val(id_igdb);
         $('#campo_busca').val(dados.name);
         $('#descricao').html(dados.summary);
-        $('#desenvolvedores').html(dados.developers.join(", "));
-        $('#distribuidores').html(dados.publishers.join(", "));
+        if (dados.developers != undefined) {
+            $('#desenvolvedores').html(dados.developers.join(", "));
+        }
+        if (dados.publishers != undefined) {
+            $('#distribuidores').html(dados.publishers.join(", "));
+        }
         if (dados.genres != undefined) {
             $('#generos').html(dados.genres.join(", "));
         }
