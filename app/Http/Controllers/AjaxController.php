@@ -240,7 +240,13 @@ class AjaxController extends Controller {
     public function ordenarWishlist(Request $request) {
         try {
             for ($i=1;$i<count($request['ordem']);$i++) {
-                OrdemWishlist::where('id_jogo', $request['ordem'][$i-1])->update(['ordem' => $i]);
+                $ordem = OrdemWishlist::where('id_jogo', $request['ordem'][$i-1])->first();
+                if ($ordem == null) {
+                    $ordem = new OrdemWishlist();
+                    $ordem->id_jogo = $request['ordem'][$i-1];
+                    $ordem->save();
+                }
+                $ordem->update(['ordem' => $i]);
             }
         }
         catch (\Exception $ex) {

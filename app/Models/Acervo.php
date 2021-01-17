@@ -21,7 +21,7 @@ class Acervo extends Model {
 
 		// wishlist
         if ($situacao == 2) {
-            return $busca->join('ordem_wishlist', 'acervo.id_jogo', 'ordem_wishlist.id_jogo')->orderBy('ordem_wishlist.ordem')->get();
+            return $busca->leftJoin('ordem_wishlist', 'acervo.id_jogo', 'ordem_wishlist.id_jogo')->orderBy('ordem_wishlist.ordem')->get();
         }
         else {
             return $busca->orderBy('titulo')->get();
