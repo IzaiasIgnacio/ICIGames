@@ -15,10 +15,9 @@ $().ready(function() {
     Chart.defaults.global.layout.padding.left = 120;
     Chart.defaults.global.title.display = true;
     Chart.defaults.global.title.fontSize = 14;
-    Chart.defaults.global.title.fontColor = '#fff';
     Chart.defaults.global.legend.position = 'right';
     Chart.defaults.global.legend.labels.boxWidth = 12;
-    Chart.defaults.global.legend.labels.fontColor = '#fff';
+    Chart.defaults.global.defaultFontColor = '#fff';
 
     var plataformas = document.getElementById('grafico_plataformas').getContext('2d');
     var situacoes = document.getElementById('grafico_situacoes').getContext('2d');
@@ -65,6 +64,11 @@ function exibir_grafico(tipo, canvas, labels, valores, titulo) {
             },
             legend: {
                 display: (tipo == 'pie')
+            },
+            scales:{
+                xAxes: [{
+                    display: false
+                }]
             }
         }
     });

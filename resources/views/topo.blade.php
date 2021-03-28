@@ -8,9 +8,9 @@
             <div class="navbar-start">
                 <a class="navbar-item{{($aba=='colecao') ? ' selecionado' : ''}}" href='{{Route('exibir_jogos', ['pagina' => 'colecao'])}}'><span class="has-badge-rounded has-badge-small" data-badge="{{$totais_topo['colecao']}}">Coleção</span></a>
                 <a class="navbar-item{{($aba=='wishlist') ? ' selecionado' : ''}}" href='{{Route('exibir_jogos', ['pagina' => 'wishlist'])}}'><span class="has-badge-rounded has-badge-small" data-badge="{{$totais_topo['wishlist']}}">Wishlist</span></a>
-                <a class="navbar-item{{($aba=='game_pass') ? ' selecionado' : ''}}" href='{{Route('exibir_jogos', ['pagina' => 'game_pass'])}}'><span class="has-badge-rounded has-badge-small" data-badge="{{$totais_topo['game_pass']}}">Game Pass</span></a>
                 <a class="navbar-item{{($aba=='watchlist') ? ' selecionado' : ''}}" href='{{Route('exibir_jogos', ['pagina' => 'watchlist'])}}'><span class="has-badge-rounded has-badge-small" data-badge="{{$totais_topo['watchlist']}}">Watchlist</span></a>
                 <a class="navbar-item{{($aba=='plus') ? ' selecionado' : ''}}" href='{{Route('exibir_jogos', ['pagina' => 'plus'])}}'><span class="has-badge-rounded has-badge-small" data-badge="{{$totais_topo['plus']}}">PS Plus</span></a>
+                <a class="navbar-item{{($aba=='game_pass') ? ' selecionado' : ''}}" href='{{Route('exibir_jogos', ['pagina' => 'game_pass'])}}'><span class="has-badge-rounded has-badge-small" data-badge="{{$totais_topo['game_pass']}}">Game Pass</span></a>
                 <a class="navbar-item navbar-dashboard">
                     <!-- <input class="input is-small is-rounded" type="text" placeholder="Buscar"> -->
                     <div class="control">
