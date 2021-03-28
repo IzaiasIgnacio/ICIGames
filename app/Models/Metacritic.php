@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Metacritic {
 
     // $name => MarcReichel\IGDBLaravel\Models\Game->name;
@@ -11,13 +9,15 @@ class Metacritic {
 	public function buscarNotas($name, $releases) {
         try {
             foreach ($releases as $release) {
-                $nome_plataforma = Plataforma::where('id_igdb', $release->platform)->first()->nome_metaritic;
-                $name = $this->tratarString($name);
-                $html = file_get_contents('https://www.metacritic.com/game/'.$nome_plataforma.'/'.$name);
-                $div = substr($html, strpos($html, '<a class="metascore_anchor" href="/game/'.$nome_plataforma.'/'.$name.'/critic-reviews">'), 172);
-                $span = substr($div, strpos($div, '<span>'), 50);
-                $nota = preg_replace('/[^0-9]/', '', $span);
-                $release->metacritic = ($nota == 3401) ? null : $nota;
+                if (Plataforma::where('id_igdb', $release->platform)->exists()) {
+                    $nome_plataforma = Plataforma::where('id_igdb', $release->platform)->first()->nome_metacritic;
+                    $name = $this->tratarString($name);
+                    $html = file_get_contents('https://www.metacritic.com/game/'.$nome_plataforma.'/'.$name);
+                    $div = substr($html, strpos($html, '<a class="metascore_anchor" href="/game/'.$nome_plataforma.'/'.$name.'/critic-reviews">'), 172);
+                    $span = substr($div, strpos($div, '<span>'), 50);
+                    $nota = preg_replace('/[^0-9]/', '', $span);
+                    $release->metacritic = ($nota == 3401) ? null : $nota;
+                }
             }
         }
         catch(\Exception $ex) {

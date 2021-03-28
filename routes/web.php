@@ -53,23 +53,23 @@ Route::prefix('/import')->group(function () {
 Route::any('exportar', 'ExportarController@exportar')->name('exportar');
 
 Route::get('/teste', function () {
-    print_r(
-        \App\Models\Loja::select('loja.nome')
-                            ->join('acervo', 'acervo.id_loja', 'loja.id')
-                                ->groupBy('loja.id')
-                                    ->orderByDesc(\Illuminate\Support\Facades\DB::connection('icigames')->raw('count(acervo.id)'))
-                                        ->get()
-    );
-    // $game = \MarcReichel\IGDBLaravel\Models\Game::find(72870);
-    // $releases = \MarcReichel\IGDBLaravel\Models\ReleaseDate::whereIn('id', $game->release_dates)->get();
-    // $metacritic = new \App\Models\Metacritic();
+    // print_r(
+    //     \App\Models\Loja::select('loja.nome')
+    //                         ->join('acervo', 'acervo.id_loja', 'loja.id')
+    //                             ->groupBy('loja.id')
+    //                                 ->orderByDesc(\Illuminate\Support\Facades\DB::connection('icigames')->raw('count(acervo.id)'))
+    //                                     ->get()
+    // );
+    $game = \MarcReichel\IGDBLaravel\Models\Game::find(1877);
+    $releases = \MarcReichel\IGDBLaravel\Models\ReleaseDate::whereIn('id', $game->release_dates)->get();
+    $metacritic = new \App\Models\Metacritic();
     // print_r($releases);
-    // $releases = $metacritic->buscarNotas($game->name, $releases);
+    $releases = $metacritic->buscarNotas($game->name, $releases);
     // print_r($releases);
-    // $html = file_get_contents('https://www.metacritic.com/game/playstation-4/nier-automata');
-    // $div = substr($html, strpos($html, '<a class="metascore_anchor" href="/game/playstation-4/nier-automata/critic-reviews">'), 172);
-    // echo $span = substr($div, strpos($div, '<span>'), 50);
-    // echo preg_replace('/[^0-9]/', '', $span);
+    $html = file_get_contents('https://www.metacritic.com/game/playstation-4/cyberpunk-2077');
+    $div = substr($html, strpos($html, '<a class="metascore_anchor" href="/game/playstation-4/cyberpunk-2077/critic-reviews">'), 172);
+    echo $span = substr($div, strpos($div, '<span>'), 50);
+    echo preg_replace('/[^0-9]/', '', $span);
 });
 
 Route::get('/', 'DashboardController@exibirDashboard')->name('exibir_dashboard');
