@@ -24,6 +24,7 @@ class IgdbController extends Controller {
         '38', // PlayStation Portable
         '46', // PlayStation Vita
         '48', // PlayStation 4
+        '165', // PlayStation VR
         '167' // PlayStation 5
     ];
 
