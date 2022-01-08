@@ -25,7 +25,13 @@ class IgdbController extends Controller {
         '46', // PlayStation Vita
         '48', // PlayStation 4
         '165', // PlayStation VR
-        '167' // PlayStation 5
+        '167', // PlayStation 5
+
+        '163', // Steamvr
+        '162', // Oculus VR
+        '384', // Oculus Quest
+        '385', // Oculus Rift
+        '386' // Oculus Quest 2
     ];
 
     public function buscarJogosIgdb($busca) {
@@ -87,6 +93,10 @@ class IgdbController extends Controller {
                 continue;
             }
 
+            if (in_array($lancamento->platform, ['163', '162', '384', '385'])) {
+                $lancamento->platform = '386';
+            }
+
             $releases[] = [
                 'id' => $lancamento->id,
                 'category' => $lancamento->category,
@@ -95,7 +105,6 @@ class IgdbController extends Controller {
                 'region' => $lancamento->region,
                 'metacritic' => $lancamento->metacritic
             ];
-
         }
 
         $cover = Cover::find($game->cover)->image_id;
@@ -118,7 +127,7 @@ class IgdbController extends Controller {
         $html = null;
         foreach ($releases as $release) {
             $html .= view('linha_acervo',\array_merge([
-                'plataforma_selecionada' => Plataforma::where('id_igdb', $release['platform'])->first()->id,
+                'plataforma_selecionada' => @Plataforma::where('id_igdb', $release['platform'])->first()->id,
                 'data_lancamento' => \date('Y-m-d', $release['date']),
                 'regiao_selecionada' => $release['region'],
                 'metacritic' => $release['metacritic']],
