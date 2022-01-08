@@ -53,6 +53,37 @@ Route::prefix('/import')->group(function () {
 Route::any('exportar', 'ExportarController@exportar')->name('exportar');
 
 Route::get('/teste', function () {
+    $jogos = \App\Models\Keyshop::get();
+
+    $resultado = [];
+    foreach ($jogos as $jogo) {
+        $html = file_get_contents($jogo['url']);
+        $a = substr($html, strpos($html, '#keyshops'), 1000);
+        $span = substr($a, strpos($a, '<span class="numeric">'), 50);
+        $preco = preg_replace('/[^0-9,]/', '', $span);
+        
+        $resultado['lista'][] = [
+            'titulo' => $jogo->titulo,
+            'preco' => $preco
+        ];
+
+        $preco = str_replace(',', '.', $preco);
+
+        if (empty($jogo->preco) || $preco < $jogo->preco) {
+            $jogo->preco = $preco;
+            $jogo->save();
+
+            $resultado['novos'][] = [
+                'titulo' => $jogo->titulo,
+                'preco' => str_replace('.', ',', $preco)
+            ];
+        }
+    }
+
+    print_r($resultado);
+    die;
+    print_r(\MarcReichel\IGDBLaravel\Models\Platform::search('steamvr')->select(['name', 'id'])->get());
+    die;
     // print_r(
     //     \App\Models\Loja::select('loja.nome')
     //                         ->join('acervo', 'acervo.id_loja', 'loja.id')
