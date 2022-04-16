@@ -166,7 +166,6 @@ class ImportController extends Controller {
         $acervo->metacritic = $game_platform->metacritic;
         $acervo->preco = $game_platform->preco;
         $acervo->formato = ($game_platform->formato == 1) ? 'Fisico' : 'Digital';
-        $acervo->tamanho = $game_platform->tamanho;
         $acervo->id_regiao = $game_platform->id_region;
         $acervo->id_classificacao = $this->buscarClassificacao($game_platform->id_rating);
 

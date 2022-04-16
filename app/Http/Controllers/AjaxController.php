@@ -66,7 +66,6 @@ class AjaxController extends Controller {
                 $acervo->id_classificacao = $dados['classificacao'][$i];
                 $acervo->metacritic = $dados['metacritic'][$i];
                 $acervo->preco = $dados['preco'][$i] == '' ? null : $dados['preco'][$i];
-                $acervo->tamanho = $dados['tamanho'][$i];
                 $acervo->formato = $dados['formato'][$i];
                 $acervo->id_loja = $dados['loja'][$i];
                 $acervo->save();
@@ -210,7 +209,6 @@ class AjaxController extends Controller {
         $acervo->id_classificacao = empty($dados['classificacao'][0]) ? null : $dados['classificacao'][0];
         $acervo->metacritic = empty($dados['metacritic'][0]) ? null : $dados['metacritic'][0];
         $acervo->preco = $dados['preco'][0] == '' ? null : $dados['preco'][0];
-        $acervo->tamanho = empty($dados['tamanho'][0]) ? null : $dados['tamanho'][0];
         $acervo->formato = empty($dados['formato'][0]) ? null : $dados['formato'][0];
         $acervo->id_loja = empty($dados['loja'][0]) ? null : $dados['loja'][0];
         $acervo->save();

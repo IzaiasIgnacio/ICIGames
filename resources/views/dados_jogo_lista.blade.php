@@ -68,7 +68,6 @@
                                 <td>{{$ac->regiao}}</td>
                                 <td>{{$ac->metacritic}}</td>
                                 <td>{{\App\Util\Helper::formatarPrecoExibicao($ac->preco)}}</td>
-                                <td>{{$ac->tamanho}}</td>
                                 <td>{{$ac->formato}}</td>
                                 <td style='max-width: 61px'>{{$ac->loja}}</td>
                             </tr>

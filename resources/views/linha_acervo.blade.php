@@ -43,7 +43,6 @@
     </td>
     <td><input class="input is-fullwidth" name='metacritic[]' type="text" placeholder="Metacritic" value="{{$metacritic ?? ''}}"></td>
     <td><input class="input is-fullwidth" name='preco[]' type="text" placeholder="Preço"></td>
-    <td><input class="input is-fullwidth" name='tamanho[]' type="text" placeholder="Tamanho"></td>
     <td>
         <div class="select is-fullwidth">
             <select name='formato[]'>

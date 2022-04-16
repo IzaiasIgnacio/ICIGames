@@ -61,7 +61,6 @@ $().ready(function() {
         $("select[name='classificacao[]']").val('');
         $("input[name='metacritic[]']").val('');
         $("input[name='preco[]']").val('');
-        $("input[name='tamanho[]']").val('');
         $("select[name='formato[]']").val('');
         $("select[name='loja[]']").val('');
         id_acervo = ''
@@ -79,7 +78,6 @@ $().ready(function() {
             $("select[name='classificacao[]']").val(resposta.id_classificacao);
             $("input[name='metacritic[]']").val(resposta.metacritic);
             $("input[name='preco[]']").val(resposta.preco);
-            $("input[name='tamanho[]']").val(resposta.tamanho);
             $("select[name='formato[]']").val(resposta.formato);
             $("select[name='loja[]']").val(resposta.id_loja);
             id_acervo = resposta.id;
