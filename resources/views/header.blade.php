@@ -13,4 +13,5 @@
 <script src="{{URL::asset('public/js/html5sortable.min.js')}}"></script>
 <script src="{{URL::asset('public/js/selectize.min.js')}}"></script>
 <script src="{{URL::asset('public/js/chart.min.js')}}"></script>
+<script src="{{URL::asset('public/js/jquery.mask.min.js')}}"></script>
 <script src="{{URL::asset('public/js/icigames.js')}}"></script>

@@ -19,8 +19,8 @@
             </select>
         </div>
     </td>
-    <td><input class="input is-fullwidth campo_data" type="date" name='data_lancamento[]' placeholder="Data de Lançamento" value="{{$data_lancamento ?? '' }}"></td>
-    <td><input class="input is-fullwidth campo_data" type="date" name='data_compra[]' placeholder="Data de Compra"></td>
+    <td><input class="input is-fullwidth campo_data" type="text" name='data_lancamento[]' placeholder="Data de Lançamento" value="{{$data_lancamento ?? '' }}"></td>
+    <td><input class="input is-fullwidth campo_data" type="text" name='data_compra[]' placeholder="Data de Compra"></td>
     <td>
         <div class="select is-fullwidth">
             <select name='regiao[]'>

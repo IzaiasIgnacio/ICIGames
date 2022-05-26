@@ -13,6 +13,7 @@ use App\Models\Genero;
 use App\Models\Acervo;
 use App\Models\Situacao;
 use App\Models\OrdemWishlist;
+use Carbon\Carbon;
 use MarcReichel\IGDBLaravel\Models\Game;
 use MarcReichel\IGDBLaravel\Models\InvolvedCompany;
 use MarcReichel\IGDBLaravel\Models\Company;
@@ -60,8 +61,8 @@ class AjaxController extends Controller {
                 $acervo->id_jogo = $jogo->id;
                 $acervo->id_plataforma = $plataforma;
                 $acervo->id_situacao = $dados['situacao'][$i];
-                $acervo->data_lancamento = empty($dados['data_lancamento'][$i]) ? null : date('Y-m-d', strtotime($dados['data_lancamento'][$i]));
-                $acervo->data_compra = empty($dados['data_lancamento'][$i]) ? null : date('Y-m-d', strtotime($dados['data_compra'][$i]));
+                $acervo->data_lancamento = empty($dados['data_lancamento'][$i]) ? null : Carbon::createFromFormat('d/m/Y', $dados['data_lancamento'][$i])->format('Y-m-d');
+                $acervo->data_compra = empty($dados['data_compra'][$i]) ? null : Carbon::createFromFormat('d/m/Y', $dados['data_compra'][$i])->format('Y-m-d');
                 $acervo->id_regiao = $dados['regiao'][$i];
                 $acervo->id_classificacao = $dados['classificacao'][$i];
                 $acervo->metacritic = $dados['metacritic'][$i];
@@ -188,7 +189,10 @@ class AjaxController extends Controller {
     }
 
     public function carregarAcervo(Request $request) {
-        return Acervo::find($request->acervo);
+        $acervo = Acervo::find($request->acervo);
+        $acervo->data_lancamento = Carbon::createFromTimestamp(strtotime($acervo->data_lancamento))->format('d/m/Y');
+        $acervo->data_compra = Carbon::createFromTimestamp(strtotime($acervo->data_compra))->format('d/m/Y');
+        return $acervo;
     }
 
     public function salvarAcervo(Request $request) {
@@ -203,8 +207,8 @@ class AjaxController extends Controller {
         parse_str($request->dados, $dados);
         $acervo->id_plataforma = $dados['plataforma'][0];
         $acervo->id_situacao = $dados['situacao'][0];
-        $acervo->data_lancamento = empty($dados['data_lancamento'][0]) ? null : date('Y-m-d', strtotime($dados['data_lancamento'][0]));
-        $acervo->data_compra = empty($dados['data_compra'][0]) ? null : date('Y-m-d', strtotime($dados['data_compra'][0]));
+        $acervo->data_lancamento = empty($dados['data_lancamento'][0]) ? null : Carbon::createFromFormat('d/m/Y', $dados['data_lancamento'][0])->format('Y-m-d');
+        $acervo->data_compra = empty($dados['data_compra'][0]) ? null : Carbon::createFromFormat('d/m/Y', $dados['data_compra'][0])->format('Y-m-d');
         $acervo->id_regiao = empty($dados['regiao'][0]) ? null : $dados['regiao'][0];
         $acervo->id_classificacao = empty($dados['classificacao'][0]) ? null : $dados['classificacao'][0];
         $acervo->metacritic = empty($dados['metacritic'][0]) ? null : $dados['metacritic'][0];

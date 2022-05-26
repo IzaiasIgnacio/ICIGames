@@ -13,6 +13,7 @@ use MarcReichel\IGDBLaravel\Models\PLatform;
 use MarcReichel\IGDBLaravel\Models\Screenshot;
 use App\Models\Plataforma;
 use App\Models\Metacritic;
+use Carbon\Carbon;
 
 class IgdbController extends Controller {
 
@@ -128,7 +129,7 @@ class IgdbController extends Controller {
         foreach ($releases as $release) {
             $html .= view('linha_acervo',\array_merge([
                 'plataforma_selecionada' => @Plataforma::where('id_igdb', $release['platform'])->first()->id,
-                'data_lancamento' => \date('Y-m-d', $release['date']),
+                'data_lancamento' => Carbon::createFromTimestamp($release['date'])->format('d/m/Y'),
                 'regiao_selecionada' => $release['region'],
                 'metacritic' => $release['metacritic']],
                 \App\Util\Helper::getDadosFormulario()))->render();

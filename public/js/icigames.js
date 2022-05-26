@@ -65,6 +65,7 @@ $().ready(function() {
         $("select[name='loja[]']").val('');
         id_acervo = ''
         $(".modal_linha_acervo").addClass('is-active');
+        mascaras();
     });
 
     $('.div_jogos_index').on('click', '.btn_editar_acervo', function() {
@@ -82,6 +83,7 @@ $().ready(function() {
             $("select[name='loja[]']").val(resposta.id_loja);
             id_acervo = resposta.id;
             $(".modal_linha_acervo").addClass('is-active');
+            mascaras();
         });
     });
 
@@ -259,6 +261,12 @@ window.onkeydown = function(e) {
     }
 }
 
+function mascaras() {
+    $(".campo_data").each(function() {
+        $(this).mask('00/00/0000');
+    });
+}
+
 function preencherFormularioIgdb(id_igdb) {
     $.get('/ICIGames/public/igdb/buscar_dados_jogo/'+id_igdb, function(dados) {
         $(".tabela_acervo tbody").html(dados.acervo.html);
@@ -284,6 +292,7 @@ function preencherFormularioIgdb(id_igdb) {
         $(".coluna_igdb").fadeIn(function() {
             $("#campo_busca").trigger('hide.eac');
         });
+        mascaras();
     });
 }
 
