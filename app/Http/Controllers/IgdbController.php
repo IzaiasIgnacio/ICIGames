@@ -46,6 +46,10 @@ class IgdbController extends Controller {
                             ->take(10)
                                 ->get();
 
+        if (!$games) {
+            return ['não encontrado'];
+        }
+        
         foreach ($games as $game) {
             $hash = null;
             $cover = Game::find($game->id)->cover;
@@ -108,7 +112,9 @@ class IgdbController extends Controller {
             ];
         }
 
-        $cover = Cover::find($game->cover)->image_id;
+        if (!empty($game->cover)) {
+            $cover = Cover::find($game->cover)->image_id;
+        }
 
         return [
             'id' => $game->id,
@@ -120,7 +126,9 @@ class IgdbController extends Controller {
             'genres' => $genres,
             'release_dates' => $releases,
             'acervo' => $this->getHtmlAcervo($releases),
-            'cover' => empty($cover) ? null : $this->buscarUrlImagem('cover_big', $cover)
+            'cover' => empty($cover) ? null : $this->buscarUrlImagem('cover_big', $cover),
+            'dlcs' => $game->dlcs,
+            'expansions' => $game->expansions
         ];
     }
 

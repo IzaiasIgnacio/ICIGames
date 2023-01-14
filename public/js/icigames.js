@@ -125,6 +125,7 @@ $().ready(function() {
     });
 
     $('.div_jogos_index').on('click', '.container_dados_jogo > .titulo_dados_jogo', function(){
+        mascaras();
         $(".modal_ajuste").addClass('is-active');
     });
 
@@ -136,6 +137,18 @@ $().ready(function() {
                 }
             });
         }
+    });
+
+    $(".modal_ajuste .btn_salvar_ajuste").click(function() {
+        $.post('/ICIGames/public/ajax/atualizar_jogo', {jogo: $("#id_jogo_exibido").val(), dados: $("#form_ajuste").serialize()},
+        function(resposta) {
+            if (resposta == 'ok') {
+                $(".modal_ajuste").removeClass('is-active');
+            }
+            // else {
+            //     $(".label_progresso").html(resposta);
+            // }
+        });
     });
 
     var options = {

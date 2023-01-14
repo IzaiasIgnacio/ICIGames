@@ -48,7 +48,7 @@ class AjaxController extends Controller {
             DB::connection('icigames')->beginTransaction();
 
             $jogo->id_igdb = !empty($dados['id_igdb']) ? $dados['id_igdb'] : null;
-            $jogo->id_igdb_cover = !empty($game) ? Cover::find($game->cover)->image_id : null;
+            $jogo->id_igdb_cover = !empty($game) && !empty($game->cover) ? Cover::find($game->cover)->image_id : null;
             $jogo->titulo = $dados['titulo'];
             $jogo->descricao = $dados['descricao'];
             $jogo->nota = $dados['nota'];
@@ -106,7 +106,7 @@ class AjaxController extends Controller {
                 }
             }
             
-            if (!empty($dados['id_igdb'])) {
+            if (!empty($dados['id_igdb']) && !empty($game->cover)) {
                 Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
                 Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_small.png', file_get_contents(IgdbController::buscarUrlImagem('cover_small', $jogo->id_igdb_cover)));
                 Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_1080p.png', file_get_contents(IgdbController::buscarUrlImagem('1080p', $jogo->id_igdb_cover)));
@@ -233,6 +233,19 @@ class AjaxController extends Controller {
         JogoGenero::where('id_jogo', $jogo->id)->delete();
         Acervo::where('id_jogo', $jogo->id)->delete();
         $jogo->delete();
+
+        DB::connection('icigames')->commit();
+
+        return 'ok';
+    }
+
+    public function atualizarJogo(Request $request) {
+        $jogo = Jogo::find($request['jogo']);
+        parse_str($request->dados, $dados);
+
+        DB::connection('icigames')->beginTransaction();
+
+        Acervo::where('id_jogo', $jogo->id)->update(['data_lancamento' => Carbon::createFromFormat('d/m/Y', $dados['data_lancamento_ajuste'])->format('Y-m-d')]);
 
         DB::connection('icigames')->commit();
 

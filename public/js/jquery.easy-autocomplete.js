@@ -1214,7 +1214,7 @@ var EasyAutocomplete = (function (scope) {
 				bindKeydown();
 				bindKeypress();
 				// bindFocus();
-				// bindBlur();
+				bindBlur();
 			}
 
 			function bindFocusOut() {

@@ -1,4 +1,5 @@
 <div class='container container_dados_jogo container_dados_jogo_lista'>
+    <input type='hidden' id='id_jogo_exibido' value='{{$jogo->id}}' />
     <h1 class="title titulo_dados_jogo">{{$jogo->titulo}}</h1>
     <div class="columns is-gapless is-narrow">
         <div class="column is-5">
@@ -52,7 +53,6 @@
                             <th><i class="fas fa-filter"></i></th>
                             <th><i class="fas fa-star"></i></th>
                             <th><i class="fas fa-money-bill-alt"></i></th>
-                            <th><i class="fas fa-hdd"></i></th>
                             <th><i class="fas fa-compact-disc"></i> / <i class="fas fa-cloud"></i></th>
                             <th><i class="fas fa-shopping-cart"></i></th>
                         </tr>

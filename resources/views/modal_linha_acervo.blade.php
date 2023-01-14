@@ -27,7 +27,6 @@
                             <th width='9%'><i class="fas fa-filter"></i></th>
                             <th width='5%'><i class="fas fa-star"></i></th>
                             <th width='5%'><i class="fas fa-money-bill-alt"></i></th>
-                            <th width='5%'><i class="fas fa-hdd"></i></th>
                             <th width='6%'><i class="fas fa-compact-disc"></i> / <i class="fas fa-cloud"></i></th>
                             <th width='11%'><i class="fas fa-shopping-cart"></i></th>
                         </tr>

@@ -48,7 +48,7 @@
             <select name='formato[]'>
                 <option value=''>Formato</option>
                 @foreach ($formatos as $formato)
-                    <option value="{{$formato}}">{{$formato}}</option>
+                    <option value="{{$formato}}" {{($formato == 'Digital' ? 'selected' : '')}}>{{$formato}}</option>
                 @endforeach
             </select>
         </div>

@@ -57,8 +57,8 @@ return [
 
         'drive' => [
             'driver' => 'local',
-            'root' => 'I:/Google Drive/db',
-            'url' => 'I:/Google Drive/db',
+            'root' => 'C:/Google Drive/db',
+            'url' => 'C:/Google Drive/db',
             'visibility' => 'public',
         ],
 

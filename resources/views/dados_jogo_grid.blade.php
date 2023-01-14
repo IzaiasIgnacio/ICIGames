@@ -61,7 +61,6 @@
                             <th><i class="fas fa-filter"></i></th>
                             <th><i class="fas fa-star"></i></th>
                             <th><i class="fas fa-money-bill-alt"></i></th>
-                            <th><i class="fas fa-hdd"></i></th>
                             <th><i class="fas fa-compact-disc"></i> / <i class="fas fa-cloud"></i></th>
                             <th><i class="fas fa-shopping-cart"></i></th>
                             <th width='1%'></th>

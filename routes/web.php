@@ -21,6 +21,7 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/exibir_screenshots', 'AjaxController@exibirScreenshots')->name('exibir_screenshots');
     Route::post('/salvar_acervo', 'AjaxController@salvarAcervo')->name('salvar_acervo');
     Route::get('/excluir_jogo/{jogo}', 'AjaxController@excluirJogo')->name('excluir_jogo');
+    Route::post('/atualizar_jogo', 'AjaxController@atualizarJogo')->name('atualizar_jogo');
     Route::post('/ordenar_wishlist', 'AjaxController@ordenarWishlist')->name('ordenar_wishlist');
 });
 
@@ -53,6 +54,7 @@ Route::prefix('/import')->group(function () {
 Route::any('exportar', 'ExportarController@exportar')->name('exportar');
 
 Route::get('/teste', function () {
+    echo Storage::disk('public')->url('a');echo env('APP_URL');die;
     $jogos = \App\Models\Keyshop::get();
 
     $resultado = [];

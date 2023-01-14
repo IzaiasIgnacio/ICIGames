@@ -8,14 +8,22 @@
             <form id='form_ajuste'>
                 <div class="columns">
                     <div class="column is-3">
-                    <label class="label">Título</label>
-                        <div class="control">
-                            <input class="input is-small" type="text" id="titulo_ajuste" placeholder="Título" name='titulo_ajuste'>
+                        <div class="field">
+                            <label class="label">Título</label>
+                            <div class="control">
+                                <input class="input is-small" type="text" id="titulo_ajuste" placeholder="Título" name='titulo_ajuste'>
+                            </div>
                         </div>
                         <div class="field">
                             <label class="label">IGDB</label>
                             <div class="control">
-                                <input class="input is-small" type='text' name='id_igdb_ajuste' id='id_igdb_ajuste'>
+                                <input class="input is-small" type='text' name='id_igdb_ajuste' id='id_igdb_ajuste' placeholder="IGDB">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Lançamento</label>
+                            <div class="control">
+                                <input class="input is-small campo_data" type="text" name='data_lancamento_ajuste' placeholder="Data de Lançamento">
                             </div>
                         </div>
                         <label class="checkbox label">
@@ -26,7 +34,7 @@
         </section>
         <footer class="modal-card-foot">
             <div>
-                <button class="button is-link btn_salvar">Salvar</button>
+                <button class="button is-link btn_salvar_ajuste">Salvar</button>
                 <button class="button is-light btn_cancelar">Cancelar</button>
                 <label class='label_progresso'></label>
             </div>
