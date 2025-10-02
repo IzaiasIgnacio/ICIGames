@@ -6,9 +6,45 @@ use App\Http\Controllers\Controller;
 use App\Models;
 use App\Models\Import;
 use App\Http\Controllers\IgdbController;
+use App\Models\_Import;
+use App\Models\Acervo;
+use App\Models\Jogo;
+use App\Models\Loja;
+use App\Models\Plataforma;
+use App\Models\Situacao;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 class ImportController extends Controller {
+
+    public function importarTabela() {
+        $import = _Import::where('importado', false)->get();
+
+        foreach ($import as $game) {
+            $jogo = Jogo::where('titulo', $game->titulo)->firstOrCreate(['titulo' => ucwords($game->titulo)]);
+
+            $acervo = new Acervo();
+            $acervo->id_jogo = $jogo->id;
+            $acervo->id_plataforma = Plataforma::where('sigla', $game->plataforma)->first()->id;
+            $acervo->id_situacao = Situacao::where('pagina', $game->situacao)->first()->id;
+            if (!empty($game->data)) {
+                $acervo->data_compra = $game->data;
+            }
+            if (!empty($game->preco) || $game->preco === '0') {
+                $acervo->preco = $game->preco;
+            }
+            if (!empty($game->formato)) {
+                $acervo->formato = $game->formato;
+            }
+            $loja = Loja::where('nome', $game->loja);
+            if (!empty($game->loja) && $loja->exists()) {
+                $acervo->id_loja = $loja->first()->id;
+            }
+            $acervo->save();
+
+            $game->importado = true;
+            $game->save();
+        }
+    }
 
     public function capas() {
         ini_set('max_execution_time', 0);

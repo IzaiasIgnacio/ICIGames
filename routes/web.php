@@ -49,11 +49,40 @@ Route::prefix('/legado')->group(function () {
 Route::prefix('/import')->group(function () {
     Route::get('/importar', 'ImportController@importar');
     Route::get('/capas', 'ImportController@capas');
+    Route::get('/tabela', 'ImportController@importarTabela');
 });
 
 Route::any('exportar', 'ExportarController@exportar')->name('exportar');
 
 Route::get('/teste', function () {
+    // create curl resource
+    $ch = curl_init();
+
+    $cadeira = '44792921882923';// p
+    // $cadeira = '44792921915691';// s
+    
+    // set url
+    curl_setopt($ch, CURLOPT_URL, "https://loja.elements.com.br/products/cadeira-gamer-elements-magna?variant=44792921915691");
+    // curl_setopt($ch, CURLOPT_URL, "https://loja.elements.com.br/products/cadeira-gamer-elements-magna?variant=44792921882923");
+    
+    //return the transfer as a string
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch,CURLOPT_USERAGENT,'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13) Gecko/20080311 Firefox/2.0.0.13');
+
+    // $output contains the output string
+    $html = curl_exec($ch);
+
+    // close curl resource to free up system resources
+    curl_close($ch); 
+    // $html = file_get_contents('https://loja.elements.com.br/products/cadeira-gamer-elements-magna?variant=44792921915691');
+    echo $add = strpos($html, '['.$cadeira.']},"available":false');
+    if (!$add) {
+        echo 'tem';
+    }
+    else {
+        echo 'esgotado';        
+    }
+    die;
     echo Storage::disk('public')->url('a');echo env('APP_URL');die;
     $jogos = \App\Models\Keyshop::get();
 
