@@ -274,4 +274,25 @@ class AjaxController extends Controller {
         return 'ok';
     }
 
+    public function atualizarIdIgdb(Request $request) {
+        try {
+            DB::connection('icigames')->beginTransaction();
+
+            $jogo = Jogo::find($request->id_jogo);
+            $jogo->id_igdb = $request->id_igdb;
+
+            $game = Game::find($request->id_igdb);
+            if (!empty($game) && !empty($game->cover)) {
+                $jogo->id_igdb_cover = Cover::find($game->cover)->image_id;
+                Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
+            }
+            $jogo->save();
+
+            DB::connection('icigames')->commit();
+            return response()->json(['status' => 'ok']);
+        } catch (\Exception $e) {
+            DB::connection('icigames')->rollBack();
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+        }
+    }
 }

@@ -99,6 +99,7 @@ $().ready(function() {
         $("#modal_formulario_jogo").removeClass('is-active');
         $(".modal_linha_acervo").removeClass('is-active');
         $(".modal_ajuste").removeClass('is-active');
+        $("#modal_busca_igdb").removeClass('is-active');
     });
 
     $('.tabela_acervo').on('click', '.btn_remover_linha', function() {
@@ -121,6 +122,7 @@ $().ready(function() {
             $("#modal_formulario_jogo").removeClass('is-active');
             $(".modal_linha_acervo").removeClass('is-active');
             $(".modal_ajuste").removeClass('is-active');
+            $("#modal_busca_igdb").removeClass('is-active');
         }
     });
 
@@ -239,6 +241,49 @@ $().ready(function() {
 
     $(".div_jogos_index").on('click', ".div_grid .coluna_thumb", function() {
         exibir_jogo($(this).attr('jogo'), 'grid');
+    });
+
+    $(".div_jogos_index").on('click', '.icone_atualizar_grid', function(e) {
+        e.stopPropagation();
+        var id_jogo = $(this).data('id-jogo');
+        var titulo = $(this).data('titulo');
+        
+        $('#modal_busca_igdb').data('id-jogo', id_jogo);
+
+        $.get('/ICIGames/public/igdb/buscar_jogos/' + titulo, function(jogos) {
+            var lista = $('#modal_busca_igdb .lista_jogos_igdb');
+            lista.empty();
+
+            if (jogos.length > 0) {
+                jogos.slice(0, 20).forEach(function(jogo) {
+                    var item = `
+                        <li class="item_jogo_igdb" data-id-igdb="${jogo.id}">
+                            <div class="columns is-gapless is-vcentered">
+                                <div class="column is-1">
+                                    <figure class="image is-3by4"><img src="${jogo.cover}"/></figure>
+                                </div>
+                                <div class="column is-11" style="padding-left: 10px;">
+                                    ${jogo.name} (${jogo.year})<br>
+                                    <small>${jogo.platforms}</small>
+                                </div>
+                            </div>
+                        </li>`;
+                    lista.append(item);
+                });
+            } else {
+                lista.append('<li>Nenhum jogo encontrado.</li>');
+            }
+            $("#modal_busca_igdb").addClass('is-active');
+        });
+    });
+
+    $('#modal_busca_igdb').on('click', '.item_jogo_igdb', function() {
+        var id_igdb = $(this).data('id-igdb');
+        var id_jogo = $('#modal_busca_igdb').data('id-jogo');
+
+        $.post('/ICIGames/public/ajax/atualizar_id_igdb', { id_jogo: id_jogo, id_igdb: id_igdb }, function(response) {
+            location.reload();
+        });
     });
 
     $(".div_jogos_index").on('click', '.icones_dados_jogo .fa-images', function() {

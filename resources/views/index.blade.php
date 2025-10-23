@@ -8,6 +8,7 @@
         <div class="columns div_menu">
             @include('modal_linha_acervo')
             @include('modal_ajuste')
+            @include('modal_busca_igdb')
             @include('menu')
             <div class="column is-11 div_jogos_index">
                 @if (isset($pagina))

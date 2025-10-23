@@ -13,7 +13,7 @@ class Acervo extends Model {
 	protected $guarded = [];
 
 	public static function buscarAcervoSituacao($situacao) {
-		$busca = Acervo::select('jogo.id', 'jogo.id_igdb_cover', 'jogo.titulo', DB::connection('icigames')->raw('group_concat(plataforma.sigla) as siglas'), 'acervo.data_lancamento')
+		$busca = Acervo::select('jogo.id', 'jogo.id_igdb', 'jogo.id_igdb_cover', 'jogo.titulo', DB::connection('icigames')->raw('group_concat(plataforma.sigla) as siglas'), 'acervo.data_lancamento')
                 ->join('jogo', 'acervo.id_jogo', 'jogo.id')
                 ->join('plataforma', 'acervo.id_plataforma', 'plataforma.id')
                     ->where('acervo.id_situacao', $situacao)

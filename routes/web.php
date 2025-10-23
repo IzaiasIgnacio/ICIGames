@@ -23,6 +23,7 @@ Route::prefix('/ajax')->group(function () {
     Route::get('/excluir_jogo/{jogo}', 'AjaxController@excluirJogo')->name('excluir_jogo');
     Route::post('/atualizar_jogo', 'AjaxController@atualizarJogo')->name('atualizar_jogo');
     Route::post('/ordenar_wishlist', 'AjaxController@ordenarWishlist')->name('ordenar_wishlist');
+    Route::post('/atualizar_id_igdb', 'AjaxController@atualizarIdIgdb')->name('atualizar_id_igdb');
 });
 
 Route::get('/graficos', 'DashboardController@graficos')->name('grafico_plataformas');
