@@ -1,4 +1,4 @@
-FROM php:8.2-apache
+FROM php:8.4-apache
 
 # 1. Instala dependências do sistema
 # git: necessário para o composer baixar pacotes de repositórios git

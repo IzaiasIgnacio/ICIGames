@@ -10,9 +10,9 @@
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.0.1",
-        "laravel/framework": "^11.0",
+        "laravel/framework": "^12.0",
         "laravel/tinker": "^2.9",
-        "marcreichel/igdb-laravel": "^4.0"
+        "marcreichel/igdb-laravel": "^5.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
