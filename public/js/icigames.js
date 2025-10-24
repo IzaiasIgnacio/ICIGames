@@ -69,7 +69,7 @@ $().ready(function() {
     });
 
     $('.div_jogos_index').on('click', '.btn_editar_acervo', function() {
-        $.post('/ICIGames/public/ajax/carregar_acervo', {acervo: $(this).parent().find('.id_acervo').val()},
+        $.post('public/ajax/carregar_acervo', {acervo: $(this).parent().find('.id_acervo').val()},
         function(resposta) {
             $("select[name='plataforma[]'").val(resposta.id_plataforma);
             $("select[name='situacao[]']").val(resposta.id_situacao);
@@ -88,7 +88,7 @@ $().ready(function() {
     });
 
     $('.div_menu').on('click', '.btn_salvar_acervo', function() {
-        $.post('/ICIGames/public/ajax/salvar_acervo', {dados: $("#form_acervo").serialize(), jogo: $("#id_jogo_exibido").val(), acervo: id_acervo},
+        $.post('public/ajax/salvar_acervo', {dados: $("#form_acervo").serialize(), jogo: $("#id_jogo_exibido").val(), acervo: id_acervo},
         function(resposta) {
             exibir_jogo($("#id_jogo_exibido").val(), 'grid');
             $(".modal_linha_acervo").removeClass('is-active');
@@ -111,7 +111,7 @@ $().ready(function() {
     });
 
     $('.btn_adicionar_linha').click(function() {
-        $.get('/ICIGames/public/ajax/html', function(html) {
+        $.get('public/ajax/html', function(html) {
             $("#modal_formulario_jogo .tabela_acervo tbody").append(html);
         });
     });
@@ -133,7 +133,7 @@ $().ready(function() {
 
     $(".modal_ajuste .btn_excluir").click(function() {
         if (confirm('Excluir jogo?')) {
-            $.get('/ICIGames/public/ajax/excluir_jogo/'+$("#id_jogo_exibido").val(), function(resposta) {
+            $.get('public/ajax/excluir_jogo/'+$("#id_jogo_exibido").val(), function(resposta) {
                 if (resposta == 'ok') {
                     $(".modal_ajuste").removeClass('is-active');
                 }
@@ -142,7 +142,7 @@ $().ready(function() {
     });
 
     $(".modal_ajuste .btn_salvar_ajuste").click(function() {
-        $.post('/ICIGames/public/ajax/atualizar_jogo', {jogo: $("#id_jogo_exibido").val(), dados: $("#form_ajuste").serialize()},
+        $.post('public/ajax/atualizar_jogo', {jogo: $("#id_jogo_exibido").val(), dados: $("#form_ajuste").serialize()},
         function(resposta) {
             if (resposta == 'ok') {
                 $(".modal_ajuste").removeClass('is-active');
@@ -155,7 +155,7 @@ $().ready(function() {
 
     var options = {
         url: function(phrase) {
-            return "/ICIGames/public/igdb/buscar_jogos/"+phrase;
+            return "public/igdb/buscar_jogos/"+phrase;
         },
         getValue: "id",
         template: {
@@ -219,7 +219,7 @@ $().ready(function() {
     $("#campo_busca").easyAutocomplete(options);
 
     $(".btn_salvar").click(function() {
-        $.post('/ICIGames/public/ajax/salvar_jogo', {dados: $("#form_jogo").serialize()},
+        $.post('public/ajax/salvar_jogo', {dados: $("#form_jogo").serialize()},
         function(resposta) {
             if (resposta == 'ok') {
                 exibir_jogos('grid');
@@ -232,7 +232,7 @@ $().ready(function() {
     });
 
     $(".div_jogos_index").on('click', '.li_jogo', function() {
-        $.post('/ICIGames/public/ajax/exibir_dados_jogo', {jogo: $(this).attr('jogo'), 'tipo': 'lista'},
+        $.post('public/ajax/exibir_dados_jogo', {jogo: $(this).attr('jogo'), 'tipo': 'lista'},
         function(resposta) {
             $(".coluna_dados_jogo").html(resposta.html);
             $(".coluna_dados_jogo").fadeIn();
@@ -250,7 +250,7 @@ $().ready(function() {
         
         $('#modal_busca_igdb').data('id-jogo', id_jogo);
 
-        $.get('/ICIGames/public/igdb/buscar_jogos/' + titulo, function(jogos) {
+        $.get('public/igdb/buscar_jogos/' + titulo, function(jogos) {
             var lista = $('#modal_busca_igdb .lista_jogos_igdb');
             lista.empty();
 
@@ -281,13 +281,13 @@ $().ready(function() {
         var id_igdb = $(this).data('id-igdb');
         var id_jogo = $('#modal_busca_igdb').data('id-jogo');
 
-        $.post('/ICIGames/public/ajax/atualizar_id_igdb', { id_jogo: id_jogo, id_igdb: id_igdb }, function(response) {
+        $.post('public/ajax/atualizar_id_igdb', { id_jogo: id_jogo, id_igdb: id_igdb }, function(response) {
             location.reload();
         });
     });
 
     $(".div_jogos_index").on('click', '.icones_dados_jogo .fa-images', function() {
-        $.post('/ICIGames/public/ajax/atualizar_imagens', {id: $(this).parent().attr('id')},
+        $.post('public/ajax/atualizar_imagens', {id: $(this).parent().attr('id')},
         function(resposta) {
             $('.icones_dados_jogo .label_progresso').html(resposta);
         });
@@ -326,7 +326,7 @@ function mascaras() {
 }
 
 function preencherFormularioIgdb(id_igdb) {
-    $.get('/ICIGames/public/igdb/buscar_dados_jogo/'+id_igdb, function(dados) {
+    $.get('public/igdb/buscar_dados_jogo/'+id_igdb, function(dados) {
         $(".tabela_acervo tbody").html(dados.acervo.html);
         $("#id_igdb").val(id_igdb);
         $('#campo_busca').val(dados.name);
@@ -355,7 +355,7 @@ function preencherFormularioIgdb(id_igdb) {
 }
 
 function exibir_jogos(tipo) {
-    $.post('/ICIGames/public/ajax/exibir_jogos', {situacao: location.href.split('/').pop(), tipo: tipo},
+    $.post('public/ajax/exibir_jogos', {situacao: location.href.split('/').pop(), tipo: tipo},
     function(resposta) {
         $(".div_jogos_index").html(resposta.html);
     });
@@ -363,7 +363,7 @@ function exibir_jogos(tipo) {
 
 function exibir_jogo(jogo, tipo) {
     scroll = $(window).scrollTop();
-    $.post('/ICIGames/public/ajax/exibir_dados_jogo', {jogo: jogo, tipo: tipo},
+    $.post('public/ajax/exibir_dados_jogo', {jogo: jogo, tipo: tipo},
     function(resposta) {
         $(".div_jogos_index").fadeOut(function() {
             $(".div_jogos_index").html(resposta.html);
@@ -377,7 +377,7 @@ function exibir_jogo(jogo, tipo) {
 }
 
 function exibir_screenshots(id_igdb) {
-    $.post('/ICIGames/public/ajax/exibir_screenshots', {id: id_igdb},
+    $.post('public/ajax/exibir_screenshots', {id: id_igdb},
     function(resposta) {
         $('.div_screenshots').html(resposta.html);
         $('.div_screenshots').fadeIn('slow');

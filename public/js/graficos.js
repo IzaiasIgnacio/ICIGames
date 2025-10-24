@@ -25,7 +25,7 @@ $().ready(function() {
     var lancamentos = document.getElementById('grafico_lancamentos').getContext('2d');
     var aquisicoes = document.getElementById('grafico_aquisicoes').getContext('2d');
 
-    $.get('/ICIGames/public/graficos',
+    $.get('/public/graficos',
     function(resposta) {
         exibir_grafico('pie', plataformas, resposta.plataformas.rotulos, resposta.plataformas.valores, 'Coleção por Plataforma')
         exibir_grafico('pie', situacoes, resposta.situacoes.rotulos, resposta.situacoes.valores, 'Jogos por Situação')
