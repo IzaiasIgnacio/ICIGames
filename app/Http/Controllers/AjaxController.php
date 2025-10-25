@@ -42,7 +42,7 @@ class AjaxController extends Controller {
 
             $game = null;
             if (!empty($dados['id_igdb'])) {
-                $game = Game::find($dados['id_igdb']);
+                $game = Game::find((int) $dados['id_igdb']);
             }
     
             DB::connection('icigames')->beginTransaction();
