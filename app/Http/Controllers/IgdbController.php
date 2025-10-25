@@ -54,6 +54,7 @@ class IgdbController extends Controller {
             return [
                 'id' => $game->id,
                 'name' => $game->name,
+                'summary' => $game->summary,
                 "year" => $year,
                 "platforms" => $this->filtrarPlataformas($game->platforms->pluck('id')->toArray()),
                 'cover' => empty($hash) ? null : $this->buscarUrlImagem('thumb', $hash)

@@ -261,7 +261,7 @@ $().ready(function() {
             if (jogos.length > 0) {
                 jogos.slice(0, 20).forEach(function(jogo) {
                     var item = `
-                        <li class="item_jogo_igdb" data-id-igdb="${jogo.id}">
+                        <li class="item_jogo_igdb" data-id-igdb="${jogo.id}" data-titulo="${jogo.name}" data-descricao="${jogo.summary}">
                             <div class="columns is-gapless is-vcentered">
                                 <div class="column is-1">
                                     <figure class="image is-3by4"><img src="${jogo.cover}"/></figure>
@@ -284,9 +284,19 @@ $().ready(function() {
     $('#modal_busca_igdb').on('click', '.item_jogo_igdb', function() {
         var id_igdb = $(this).data('id-igdb');
         var id_jogo = $('#modal_busca_igdb').data('id-jogo');
+        var titulo = $(this).data('titulo');
+        var descricao = $(this).data('descricao');
 
-        $.post('public/ajax/atualizar_id_igdb', { id_jogo: id_jogo, id_igdb: id_igdb }, function(response) {
-            location.reload();
+        $.post('public/ajax/salvar_jogo', {id_jogo: id_jogo, id_igdb: id_igdb, titulo: titulo, descricao: descricao, editar_igdb: 1},
+        function(resposta) {
+            if (resposta == 'ok') {
+                exibir_jogos('grid', function() {
+                    $("#modal_busca_igdb").removeClass('is-active');
+                });
+            }
+            else {
+                alert(resposta);
+            }
         });
     });
 

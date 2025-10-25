@@ -32,7 +32,11 @@ class AjaxController extends Controller {
     public function salvarJogo(Request $request) {
         try {
             parse_str($request->dados, $dados);
-            
+
+            if ($request->editar_igdb) {
+                $dados = $request;
+            }
+
             if (!empty($dados['id_jogo'])) {
                 $jogo = Jogo::find($dados['id_jogo']);
             }
@@ -51,25 +55,27 @@ class AjaxController extends Controller {
             $jogo->id_igdb_cover = !empty($game) && !empty($game->cover) ? Cover::find($game->cover)->image_id : null;
             $jogo->titulo = $dados['titulo'];
             $jogo->descricao = $dados['descricao'];
-            $jogo->nota = $dados['nota'];
+            $jogo->nota = !empty($dados['nota']) ? $dados['nota'] : null;
             $jogo->completo = (!empty($dados['completo']));
     
             $jogo->save();
 
-            foreach ($dados['plataforma'] as $i => $plataforma) {
-                $acervo = new Acervo();
-                $acervo->id_jogo = $jogo->id;
-                $acervo->id_plataforma = $plataforma;
-                $acervo->id_situacao = $dados['situacao'][$i];
-                $acervo->data_lancamento = empty($dados['data_lancamento'][$i]) ? null : Carbon::createFromFormat('d/m/Y', $dados['data_lancamento'][$i])->format('Y-m-d');
-                $acervo->data_compra = empty($dados['data_compra'][$i]) ? null : Carbon::createFromFormat('d/m/Y', $dados['data_compra'][$i])->format('Y-m-d');
-                $acervo->id_regiao = $dados['regiao'][$i];
-                $acervo->id_classificacao = $dados['classificacao'][$i];
-                $acervo->metacritic = $dados['metacritic'][$i];
-                $acervo->preco = $dados['preco'][$i] == '' ? null : $dados['preco'][$i];
-                $acervo->formato = $dados['formato'][$i];
-                $acervo->id_loja = $dados['loja'][$i];
-                $acervo->save();
+            if (!empty($dados['plataforma'])) {
+                foreach ($dados['plataforma'] as $i => $plataforma) {
+                    $acervo = new Acervo();
+                    $acervo->id_jogo = $jogo->id;
+                    $acervo->id_plataforma = $plataforma;
+                    $acervo->id_situacao = $dados['situacao'][$i];
+                    $acervo->data_lancamento = empty($dados['data_lancamento'][$i]) ? null : Carbon::createFromFormat('d/m/Y', $dados['data_lancamento'][$i])->format('Y-m-d');
+                    $acervo->data_compra = empty($dados['data_compra'][$i]) ? null : Carbon::createFromFormat('d/m/Y', $dados['data_compra'][$i])->format('Y-m-d');
+                    $acervo->id_regiao = $dados['regiao'][$i];
+                    $acervo->id_classificacao = $dados['classificacao'][$i];
+                    $acervo->metacritic = $dados['metacritic'][$i];
+                    $acervo->preco = $dados['preco'][$i] == '' ? null : $dados['preco'][$i];
+                    $acervo->formato = $dados['formato'][$i];
+                    $acervo->id_loja = $dados['loja'][$i];
+                    $acervo->save();
+                }
             }
 
             if (!is_null($game)) {
@@ -274,25 +280,25 @@ class AjaxController extends Controller {
         return 'ok';
     }
 
-    public function atualizarIdIgdb(Request $request) {
-        try {
-            DB::connection('icigames')->beginTransaction();
+    // public function atualizarIdIgdb(Request $request) {
+    //     try {
+    //         DB::connection('icigames')->beginTransaction();
 
-            $jogo = Jogo::find($request->id_jogo);
-            $jogo->id_igdb = $request->id_igdb;
+    //         $jogo = Jogo::find($request->id_jogo);
+    //         $jogo->id_igdb = $request->id_igdb;
 
-            $game = Game::find($request->id_igdb);
-            if (!empty($game) && !empty($game->cover)) {
-                $jogo->id_igdb_cover = Cover::find($game->cover)->image_id;
-                Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
-            }
-            $jogo->save();
+    //         $game = Game::find($request->id_igdb);
+    //         if (!empty($game) && !empty($game->cover)) {
+    //             $jogo->id_igdb_cover = Cover::find($game->cover)->image_id;
+    //             Storage::disk('public')->put('capas/'.$jogo->id_igdb_cover.'_cover_big.png', file_get_contents(IgdbController::buscarUrlImagem('cover_big', $jogo->id_igdb_cover)));
+    //         }
+    //         $jogo->save();
 
-            DB::connection('icigames')->commit();
-            return response()->json(['status' => 'ok']);
-        } catch (\Exception $e) {
-            DB::connection('icigames')->rollBack();
-            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
-        }
-    }
+    //         DB::connection('icigames')->commit();
+    //         return response()->json(['status' => 'ok']);
+    //     } catch (\Exception $e) {
+    //         DB::connection('icigames')->rollBack();
+    //         return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
+    //     }
+    // }
 }
