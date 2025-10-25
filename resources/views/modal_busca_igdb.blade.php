@@ -16,7 +16,3 @@
         </footer>
     </div>
 </div>
-<style>
-    .item_jogo_igdb { color: #fff; border-bottom: 1px solid #444; padding: 5px; cursor: pointer; }
-    .item_jogo_igdb:hover { background-color: #4a4a4a; }
-</style>

@@ -375,3 +375,22 @@ fieldset legend {
 .container_graficos {
     max-width: 90%;
 }
+
+.card-image .icone_atualizar_grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem; /* Tamanho do ícone */
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semitransparente */
+    transition: background-color 0.3s ease;
+}
+.card-image .icone_atualizar_grid:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo mais escuro no hover */
+}
+.item_jogo_igdb { color: #fff; border-bottom: 1px solid #444; padding: 5px; cursor: pointer; }
+.item_jogo_igdb:hover { background-color: #4a4a4a; }

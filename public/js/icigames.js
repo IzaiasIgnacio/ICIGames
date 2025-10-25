@@ -239,12 +239,16 @@ $().ready(function() {
         });
     });
 
-    $(".div_jogos_index").on('click', ".div_grid .coluna_thumb", function() {
+    $(".div_jogos_index").on('click', ".div_grid .coluna_thumb", function(e) {
+        // Verifica se o elemento clicado (ou um de seus pais) é o ícone de atualização.
+        // Se for, interrompe a execução para dar prioridade ao evento do ícone.
+        if ($(e.target).closest('.icone_atualizar_grid').length) {
+            return;
+        }
         exibir_jogo($(this).attr('jogo'), 'grid');
     });
 
-    $(".div_jogos_index").on('click', '.icone_atualizar_grid', function(e) {
-        e.stopPropagation();
+    $(".div_jogos_index").on('click', '.icone_atualizar_grid', function() {
         var id_jogo = $(this).data('id-jogo');
         var titulo = $(this).data('titulo');
         
