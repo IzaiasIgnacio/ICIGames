@@ -10,9 +10,7 @@ use MarcReichel\IGDBLaravel\Models\Genre;
 use MarcReichel\IGDBLaravel\Models\ReleaseDate;
 use MarcReichel\IGDBLaravel\Models\Cover;
 use MarcReichel\IGDBLaravel\Models\PLatform;
-use MarcReichel\IGDBLaravel\Models\Screenshot;
 use App\Models\Plataforma;
-use App\Models\Metacritic;
 use Carbon\Carbon;
 
 class IgdbController extends Controller {
@@ -39,17 +37,15 @@ class IgdbController extends Controller {
     public function buscarJogosIgdb($busca) {
         // para teste return $this->mock();
         $games = Game::search($busca)
-                        ->with(['cover', 'platforms']) // Eager load cover and platforms relationships
+                        ->with(['cover', 'platforms'])
                             ->whereIn('platforms', $this->plataformas)
-                            #TODO: mudar para game_type
-                            // ->where('category', '!=', 1)
+                            ->where('game_type', 0)
                                 ->take(10)
                                     ->get();
 
         if ($games->isEmpty()) {
             return ['não encontrado'];
         }
-        // return $games;
         
         $resultado = $games->map(function ($game) {
             $year = $game->first_release_date ? date('Y', strtotime($game->first_release_date)) : null;
@@ -68,7 +64,6 @@ class IgdbController extends Controller {
     }
 
     public function buscarDadosJogo($id) {
-        // $game = Game::find((int) $id);
         $game = Game::with([
             'involved_companies',
             'involved_companies.company',
@@ -96,89 +91,28 @@ class IgdbController extends Controller {
                 'region' => $lancamento->release_region
             ];
         }
-// return $game;
+        
         return [
             'id' => $game->id,
             'name' => $game->name,
             'summary' => $game->summary,
-            'screenshots' => $game->screenshots->pluck('url'),
+            'screenshots' => $this->buscarUrlScreenshots($game->screenshots),
             'developers' => $game->involved_companies->where('developer', true)->pluck('company.name'),
-            'publishers' => $publishers = $game->involved_companies->where('publisher', true)->pluck('company.name'),
+            'publishers' => $game->involved_companies->where('publisher', true)->pluck('company.name'),
             'genres' => $game->genres->pluck('name'),
             'release_dates' => $releases,
             'acervo' => $this->getHtmlAcervo($releases),
-            'cover' => $game->cover->url
+            'cover' => $this->buscarUrlImagem('cover_big', $game->cover->image_id)
         ];
-
-        // return $game->cover->image_id;
-        // return $game->genres->pluck('name');
-        // $developers = null;
-        // $publishers = null;
-        // $lancamentos = null;
-        // $genres = null;
-
-        // if ($game->involved_companies != null) {
-        //     $developers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('developer', true)->get()->pluck('company')->toArray())->get()->pluck('name');
-        //     $publishers = Company::whereIn('id', InvolvedCompany::whereIn('id', $game->involved_companies)->where('publisher', true)->get()->pluck('company')->toArray())->get()->pluck('name');
-        // }
-        // if ($game->release_dates != null) {
-        //     $lancamentos = ReleaseDate::whereIn('id', $game->release_dates)->get();
-            
-        //     $metacritic = new Metacritic();
-        //     $lancamentos = $metacritic->buscarNotas($game->name, $lancamentos);
-        // }
-        // if ($game->genres != null) {
-        //     $genres = Genre::whereIn('id', $game->genres)->get()->pluck('name');
-        // }
-
-        // $releases = [];
-        // foreach ($lancamentos as $lancamento) {
-        //     if (!in_array($lancamento->platform, $this->plataformas)) {
-        //         continue;
-        //     }
-
-        //     if (in_array($lancamento->platform, ['163', '162', '384', '385'])) {
-        //         $lancamento->platform = '386';
-        //     }
-
-        //     $releases[] = [
-        //         'id' => $lancamento->id,
-        //         'category' => $lancamento->category,
-        //         'platform' => $lancamento->platform,
-        //         'date' => $lancamento->date,
-        //         'region' => $lancamento->region,
-        //         'metacritic' => $lancamento->metacritic
-        //     ];
-        // }
-
-        // if (!empty($game->cover)) {
-        //     $cover = Cover::find($game->cover)->image_id;
-        // }
-
-        // return [
-        //     'id' => $game->id,
-        //     'name' => $game->name,
-        //     'summary' => $game->summary,
-        //     'screenshots' => $this->buscarUrlScreenshots($game->screenshots),
-        //     'developers' => $developers,
-        //     'publishers' => $publishers,
-        //     'genres' => $genres,
-        //     'release_dates' => $releases,
-        //     'acervo' => $this->getHtmlAcervo($releases),
-        //     'cover' => empty($cover) ? null : $this->buscarUrlImagem('cover_big', $cover),
-        //     'dlcs' => $game->dlcs,
-        //     'expansions' => $game->expansions
-        // ];
     }
 
     private function getHtmlAcervo($releases) {
         $html = null;
         foreach ($releases as $release) {
             $html .= view('linha_acervo',\array_merge([
-                'plataforma_selecionada' => @Plataforma::where('id_igdb', $release['platform'])->first()->id,
-                'data_lancamento' => Carbon::createFromTimestamp($release['date'])->format('d/m/Y'),
-                'regiao_selecionada' => $release['region'],
-                // 'metacritic' => $release['metacritic']
+                    'plataforma_selecionada' => @Plataforma::where('id_igdb', $release['platform'])->first()->id,
+                    'data_lancamento' => Carbon::createFromTimestamp($release['date'])->format('d/m/Y'),
+                    'regiao_selecionada' => $release['region']
                 ],
                 \App\Util\Helper::getDadosFormulario()))->render();
         }
@@ -186,25 +120,23 @@ class IgdbController extends Controller {
         return ['html' => $html];
     }
 
-    // public function buscarUrlScreenshots($screenshots) {
-    //     if (empty($screenshots)) {
-    //         return [];
-    //     }
+    public function buscarUrlScreenshots($screenshots) {
+        if (empty($screenshots)) {
+            return [];
+        }
 
-    //     $screen = array();
+        $screen = array();
         
-    //     foreach ($screenshots as $s) {
-    //         $sc = Screenshot::find($s);
-    //         $screen[] = $this->buscarUrlImagem('cover_big', $sc->image_id);
-    //     }
+        foreach ($screenshots as $s) {
+            $screen[] = $this->buscarUrlImagem('cover_big', $s->image_id);
+        }
 
-    //     return $screen;
-    // }
+        return $screen;
+    }
 
     public static function buscarScreenshotsGame($id_igdb) {
-        return Game::with(['screenshots'])->find((int) $id_igdb)->screenshots->pluck('url');
         $igdb = new IgdbController();
-        return $igdb->buscarUrlScreenshots(Game::with('screenshots')->find((int) $id_igdb)->screenshots->pluck('url'));
+        return $igdb->buscarUrlScreenshots(Game::with(['screenshots'])->find((int) $id_igdb)->screenshots);
     }
 
     public static function buscarUrlImagem($tamanho, $hash) {
